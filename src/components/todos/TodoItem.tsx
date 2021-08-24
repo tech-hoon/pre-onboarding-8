@@ -1,22 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-
-interface TodoProps {
-  id: number;
-  taskName: string;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
+import { Todo } from './TodoTypes';
+interface TodoItemProps {
+  item: Todo;
 }
 
-interface Item {
-  item: TodoProps;
-}
-
-const TodoItem: React.FC<Item> = ({ item }) => {
+const TodoItem: React.FC<TodoItemProps> = ({ item }) => {
   return (
     <Wrapper>
       <p>{item.taskName}</p>
+      <p>{item.creator}</p>
     </Wrapper>
   );
 };

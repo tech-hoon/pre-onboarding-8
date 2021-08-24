@@ -2,19 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import TodoItem from './TodoItem';
 import todoItems from 'utils/data.json';
-
-interface TodoProps {
-  id: number;
-  taskName: string;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import { Todo } from './TodoTypes';
 
 const TodoList: React.FC = () => {
   return (
     <Wrapper>
-      {todoItems.map((todo: TodoProps) => (
+      {todoItems.map((todo: Todo) => (
         <TodoItem key={todo.id} item={todo} />
       ))}
     </Wrapper>
