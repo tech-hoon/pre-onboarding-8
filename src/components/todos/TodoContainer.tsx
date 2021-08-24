@@ -6,14 +6,14 @@ import TodoHeader from './TodoHeader';
 import Form from 'components/common/Form';
 
 interface TodoContainerProps {
-  title: string;
+  status: string;
   todoItems: TodoTypes[];
 }
 
-const TodoContainer: React.FC<TodoContainerProps> = ({ title, todoItems }) => {
+const TodoContainer: React.FC<TodoContainerProps> = ({ status, todoItems }) => {
   return (
     <Wrapper>
-      <TodoHeader title={title} />
+      <TodoHeader status={status} />
       <Form />
       <TodoList todoItems={todoItems} />
     </Wrapper>

@@ -1,17 +1,17 @@
-import Button from 'components/common/CreateButton';
+import CreateButton from 'components/common/CreateButton';
 import Filter from 'components/common/Filter';
 import React from 'react';
 import styled from 'styled-components';
 
 interface TodoHeaderProps {
-  title: string;
+  status: string;
 }
 
-const TodoHeader: React.FC<TodoHeaderProps> = ({ title }) => {
+const TodoHeader: React.FC<TodoHeaderProps> = ({ status }) => {
   return (
     <Wrapper>
-      <Title>{title}</Title>
-      <Button />
+      <Title>{status}</Title>
+      <CreateButton status={status} />
       <Filter />
     </Wrapper>
   );

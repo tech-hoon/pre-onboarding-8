@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CreateButton: React.FC = () => {
+interface CreateButtonProps {
+  status: string;
+}
+
+const CreateButton: React.FC<CreateButtonProps> = ({ status }) => {
   return (
     <ButtonWrapper>
       <ButtonStyled>+</ButtonStyled>

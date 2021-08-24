@@ -1,11 +1,11 @@
 interface Status {
-  ToDo: string;
+  Todo: string;
   InProgress: string;
   Done: string;
 }
 
 export const status: Status = {
-  ToDo: '할 일',
+  Todo: '할 일',
   InProgress: '진행 중',
   Done: '완료',
 };
