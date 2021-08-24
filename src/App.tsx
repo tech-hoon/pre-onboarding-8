@@ -1,24 +1,33 @@
+import { status } from './utils/config';
+import mockData from './utils/data.json';
 import React from 'react';
 import styled from 'styled-components';
+import Header from 'components/common/Header';
 import TodoContainer from 'components/todos/TodoContainer';
 
 const App: React.FC = () => {
   return (
     <Wrapper>
-      <TodoContainer />
-      <TodoContainer />
-      <TodoContainer />
+      <Header />
+      <ContainerWrapper>
+        <TodoContainer title={status.ToDo} todoItems={mockData} />
+        <TodoContainer title={status.InProgress} todoItems={mockData} />
+        <TodoContainer title={status.Done} todoItems={mockData} />
+      </ContainerWrapper>
     </Wrapper>
   );
 };
 
-export default App;
-
 const Wrapper = styled.div`
+  width: 100%;
+`;
+
+const ContainerWrapper = styled.div`
+  width: 90%;
   display: flex;
   justify-content: center;
-  gap: 0 30px;
-  width: 1280px;
+  gap: 4px 30px;
   margin: 50px auto;
-  border: 1px solid #333;
 `;
+
+export default App;

@@ -1,21 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Todo } from './TodoTypes';
+import { TodoTypes } from './TodoTypes';
+
 interface TodoItemProps {
-  item: Todo;
+  todoItem: TodoTypes;
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ item }) => {
+const TodoItem: React.FC<TodoItemProps> = ({
+  todoItem: { taskName, creator, createdAt, updatedAt },
+}) => {
   return (
     <Wrapper>
-      <p>{item.taskName}</p>
-      <p>{item.creator}</p>
+      <TaskName>{taskName}</TaskName>
+      <p>{creator}</p>
+      <p>생성일 {createdAt}</p>
+      <p>수정일 {updatedAt}</p>
     </Wrapper>
   );
 };
 
-export default TodoItem;
-
 const Wrapper = styled.li`
   border: 1px solid blue;
 `;
+
+const TaskName = styled.h3`
+  font-size: 18px;
+  font-weight: 500;
+`;
+
+export default TodoItem;
