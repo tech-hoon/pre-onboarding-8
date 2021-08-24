@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "taskName": "자소서 쓰기",
+    "status": "진행중",
+    "createdAt": "2021-02-03",
+    "updatedAt": "2021-07-07"
+  },
+  {
+    "id": 2,
+    "taskName": "자소서 쓰기",
+    "status": "진행중",
+    "createdAt": "2021-02-03",
+    "updatedAt": "2021-07-06"
+  },
+  {
+    "id": 3,
+    "taskName": "자소서 쓰기",
+    "status": "시작안함",
+    "createdAt": "2021-02-03",
+    "updatedAt": "2021-07-05"
+  },
+  {
+    "id": 4,
+    "taskName": "자소서 쓰기",
+    "status": "완료",
+    "createdAt": "2021-02-03",
+    "updatedAt": "2021-07-04"
+  }
+]
