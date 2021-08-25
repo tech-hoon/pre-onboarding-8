@@ -1,7 +1,7 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import { status } from './utils/config';
 import mockData from './utils/data.json';
-import React from 'react';
-import styled from 'styled-components';
 import Header from 'components/common/Header';
 import TodoContainer from 'components/todos/TodoContainer';
 

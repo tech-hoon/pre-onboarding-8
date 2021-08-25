@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface CreateButtonProps {
   status: string;
+  setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
 }
 
-const CreateButton: React.FC<CreateButtonProps> = ({ status }) => {
+const CreateButton: React.FC<CreateButtonProps> = ({
+  status,
+  setIsVisibleForm,
+}) => {
+  const handleButtonClick = () => {
+    setIsVisibleForm((prevVisible) => !prevVisible);
+  };
+
   return (
     <ButtonWrapper>
-      <ButtonStyled>+</ButtonStyled>
+      <ButtonStyled onClick={handleButtonClick}>+</ButtonStyled>
     </ButtonWrapper>
   );
 };
