@@ -5,9 +5,10 @@ import RadioBox from './RadioBox';
 interface FormProps {
   status: string;
   setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
+  handleTodoCreate: () => void;
 }
 
-const Form: React.FC<FormProps> = ({ status, setIsVisibleForm }) => {
+const Form: React.FC<FormProps> = ({ status, setIsVisibleForm, handleTodoCreate }) => {
   const [text, setText] = useState('');
   const [creator, setCreator] = useState('');
 
@@ -26,7 +27,9 @@ const Form: React.FC<FormProps> = ({ status, setIsVisibleForm }) => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // 데이터 끌어올리는 로직
+    console.log(text, creator);
+    // 투두생성
+    // handleTodoCreate()
 
     setIsVisibleForm((prevVisible) => !prevVisible);
   };
@@ -34,22 +37,14 @@ const Form: React.FC<FormProps> = ({ status, setIsVisibleForm }) => {
   return (
     <Wrapper>
       <FormStyled onSubmit={handleFormSubmit}>
-        <TextArea
-          placeholder="Enter a note"
-          value={text}
-          onChange={handleTextAreaChange}
-        />
+        <TextArea placeholder="Enter a note" value={text} onChange={handleTextAreaChange} />
         <RadioBox
           values={['남주', '택훈', '진수', '삭']}
           handleRadioChange={handleRadioChange}
           status={status}
         />
         <ButtonBox>
-          <AddButton
-            type="submit"
-            disabled={!text || !creator}
-            transparent={!text || !creator}
-          >
+          <AddButton type="submit" disabled={!text || !creator} transparent={!text || !creator}>
             Add
           </AddButton>
           <CancelButton type="button" onClick={handleButtonClick}>

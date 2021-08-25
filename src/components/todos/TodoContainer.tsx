@@ -1,25 +1,43 @@
 import React, { useState } from 'react';
-import { TodoTypes } from './TodoTypes';
 import styled from 'styled-components';
 import TodoList from './TodoList';
 import TodoHeader from './TodoHeader';
 import Form from 'components/common/Form';
+import { TodoTypes } from 'components/todos/TodoTypes';
 
 interface TodoContainerProps {
   status: string;
   todoItems: TodoTypes[];
+  handleTodoCreate: () => void;
+  handleTodoDelete: () => void;
+  handleTodoUpdate: () => void;
 }
 
-const TodoContainer: React.FC<TodoContainerProps> = ({ status, todoItems }) => {
+const TodoContainer: React.FC<TodoContainerProps> = ({
+  status,
+  todoItems,
+  handleTodoCreate,
+  handleTodoDelete,
+  handleTodoUpdate,
+}) => {
   const [isVisibleForm, setIsVisibleForm] = useState(false);
 
   return (
     <Wrapper>
       <TodoHeader status={status} setIsVisibleForm={setIsVisibleForm} />
       {isVisibleForm && (
-        <Form status={status} setIsVisibleForm={setIsVisibleForm} />
+        <Form
+          status={status}
+          setIsVisibleForm={setIsVisibleForm}
+          handleTodoCreate={handleTodoCreate}
+        />
       )}
-      <TodoList todoItems={todoItems} />
+      <TodoList
+        status={status}
+        todoItems={todoItems}
+        handleTodoDelete={handleTodoDelete}
+        handleTodoUpdate={handleTodoUpdate}
+      />
     </Wrapper>
   );
 };

@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { status } from './utils/config';
-import mockData from './utils/data.json';
+import { STATUS } from './utils/config';
 import Header from 'components/common/Header';
 import TodoContainer from 'components/todos/TodoContainer';
+import { TodoTypes } from 'components/todos/TodoTypes';
+import useTodo from 'hooks/useTodo';
 
 const App: React.FC = () => {
+  const { items, handleTodoCreate, handleTodoDelete, handleTodoUpdate } = useTodo();
+
   return (
     <Wrapper>
       <Header />
       <ContainerWrapper>
-        <TodoContainer status={status.Todo} todoItems={mockData} />
-        <TodoContainer status={status.InProgress} todoItems={mockData} />
-        <TodoContainer status={status.Done} todoItems={mockData} />
+        {Object.values(STATUS).map((status: string, index: number) => (
+          <TodoContainer
+            key={index}
+            status={status}
+            todoItems={currentTodos(status, items)}
+            handleTodoCreate={handleTodoCreate}
+            handleTodoDelete={handleTodoDelete}
+            handleTodoUpdate={handleTodoUpdate}
+          />
+        ))}
       </ContainerWrapper>
     </Wrapper>
   );
 };
+
+const currentTodos = (status: string, items: TodoTypes[]) =>
+  items.filter((item) => item.status === status);
 
 const Wrapper = styled.div`
   width: 100%;

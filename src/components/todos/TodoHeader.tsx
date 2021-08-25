@@ -8,10 +8,7 @@ interface TodoHeaderProps {
   setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
 }
 
-const TodoHeader: React.FC<TodoHeaderProps> = ({
-  status,
-  setIsVisibleForm,
-}) => {
+const TodoHeader: React.FC<TodoHeaderProps> = ({ status, setIsVisibleForm }) => {
   return (
     <Wrapper>
       <Title>{status}</Title>

@@ -6,10 +6,7 @@ interface CreateButtonProps {
   setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
 }
 
-const CreateButton: React.FC<CreateButtonProps> = ({
-  status,
-  setIsVisibleForm,
-}) => {
+const CreateButton: React.FC<CreateButtonProps> = ({ status, setIsVisibleForm }) => {
   const handleButtonClick = () => {
     setIsVisibleForm((prevVisible) => !prevVisible);
   };
