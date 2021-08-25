@@ -3,14 +3,24 @@ import styled from 'styled-components';
 import { TodoTypes } from './TodoTypes';
 
 interface TodoItemProps {
+  status: string;
   todoItem: TodoTypes;
+  handleTodoUpdate: () => void;
+  handleTodoDelete: () => void;
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({
   todoItem: { taskName, creator, createdAt, updatedAt },
+  status,
+  handleTodoUpdate,
+  handleTodoDelete,
 }) => {
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={() => {
+        console.log(`"${status}" 컨테이너`);
+      }}
+    >
       <TaskName>{taskName}</TaskName>
       <p>{creator}</p>
       <p>생성일 {createdAt}</p>

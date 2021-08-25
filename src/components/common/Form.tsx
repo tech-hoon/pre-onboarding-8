@@ -2,10 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import Input from './Input';
 
-const Form: React.FC = () => {
+interface FormProps {
+  clickedForm: string;
+  handleTodoCreate: () => void;
+}
+
+const Form: React.FC<FormProps> = ({ clickedForm, handleTodoCreate }) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(clickedForm);
+  };
+
+  const onCreate = () => {
+    // handleTodoCreate();
+  };
+
   return (
     <Wrapper>
-      <FormStyled>
+      <FormStyled onSubmit={onSubmit}>
         <Input />
         <h3>생성자 선택</h3>
       </FormStyled>
