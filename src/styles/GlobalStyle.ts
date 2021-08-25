@@ -3,6 +3,10 @@ import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
+  * {
+    box-sizing: border-box;
+  }
+
   a {
     color:#333
   }

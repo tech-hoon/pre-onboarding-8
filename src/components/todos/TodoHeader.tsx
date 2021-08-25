@@ -1,18 +1,18 @@
 import CreateButton from 'components/common/CreateButton';
 import Filter from 'components/common/Filter';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface TodoHeaderProps {
   status: string;
-  handleFormOpen: (status: string) => void;
+  setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
 }
 
-const TodoHeader: React.FC<TodoHeaderProps> = ({ status, handleFormOpen }) => {
+const TodoHeader: React.FC<TodoHeaderProps> = ({ status, setIsVisibleForm }) => {
   return (
     <Wrapper>
       <Title>{status}</Title>
-      <CreateButton status={status} handleFormOpen={handleFormOpen} />
+      <CreateButton status={status} setIsVisibleForm={setIsVisibleForm} />
       <Filter />
     </Wrapper>
   );
