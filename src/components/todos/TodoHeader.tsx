@@ -5,13 +5,14 @@ import styled from 'styled-components';
 
 interface TodoHeaderProps {
   status: string;
+  handleFormOpen: (status: string) => void;
 }
 
-const TodoHeader: React.FC<TodoHeaderProps> = ({ status }) => {
+const TodoHeader: React.FC<TodoHeaderProps> = ({ status, handleFormOpen }) => {
   return (
     <Wrapper>
       <Title>{status}</Title>
-      <CreateButton status={status} />
+      <CreateButton status={status} handleFormOpen={handleFormOpen} />
       <Filter />
     </Wrapper>
   );
