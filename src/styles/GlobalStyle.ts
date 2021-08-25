@@ -6,7 +6,9 @@ const GlobalStyle = createGlobalStyle`
   a {
     color:#333
   }
-
+  ul {
+    list-style:none;
+  }
 `;
 
 export default GlobalStyle;

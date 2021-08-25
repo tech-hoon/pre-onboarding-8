@@ -1,19 +1,27 @@
+import { TodoTypes } from './TodoTypes';
 import React from 'react';
 import styled from 'styled-components';
 import TodoList from './TodoList';
 import TodoHeader from './TodoHeader';
+import Form from 'components/common/Form';
 
-const TodoContainer = () => {
+interface TodoContainerProps {
+  status: string;
+  todoItems: TodoTypes[];
+}
+
+const TodoContainer: React.FC<TodoContainerProps> = ({ status, todoItems }) => {
   return (
     <Wrapper>
-      <TodoHeader />
-      <TodoList />
+      <TodoHeader status={status} />
+      <Form />
+      <TodoList todoItems={todoItems} />
     </Wrapper>
   );
 };
 
-export default TodoContainer;
-
 const Wrapper = styled.div`
   width: 100%;
 `;
+
+export default TodoContainer;

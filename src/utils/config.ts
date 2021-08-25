@@ -1,11 +1,11 @@
 interface Status {
-  FINISHED: string;
-  ONGOING: string;
-  NOT_STARTED: string;
+  Todo: string;
+  InProgress: string;
+  Done: string;
 }
 
 export const status: Status = {
-  FINISHED: '완료',
-  ONGOING: '진행중',
-  NOT_STARTED: '시작안함',
+  Todo: '할 일',
+  InProgress: '진행 중',
+  Done: '완료',
 };

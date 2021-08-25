@@ -1,12 +1,31 @@
+import CreateButton from 'components/common/CreateButton';
+import Filter from 'components/common/Filter';
 import React from 'react';
 import styled from 'styled-components';
 
-const TodoHeader = () => {
-  return <Wrapper>헤더</Wrapper>;
+interface TodoHeaderProps {
+  status: string;
+}
+
+const TodoHeader: React.FC<TodoHeaderProps> = ({ status }) => {
+  return (
+    <Wrapper>
+      <Title>{status}</Title>
+      <CreateButton status={status} />
+      <Filter />
+    </Wrapper>
+  );
 };
 
-export default TodoHeader;
-
 const Wrapper = styled.div`
-  border: 1px solid green;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
+
+const Title = styled.h2`
+  flex: 1;
+`;
+
+export default TodoHeader;
