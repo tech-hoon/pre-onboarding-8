@@ -1,5 +1,4 @@
 import { STATUS } from './utils/config';
-import mockData from './utils/data.json';
 import React from 'react';
 import styled from 'styled-components';
 import Header from 'components/common/Header';
@@ -10,9 +9,9 @@ const App: React.FC = () => {
     <Wrapper>
       <Header />
       <ContainerWrapper>
-        <TodoContainer status={STATUS.Todo} todoItems={mockData} />
-        <TodoContainer status={STATUS.InProgress} todoItems={mockData} />
-        <TodoContainer status={STATUS.Done} todoItems={mockData} />
+        <TodoContainer initialStatus={STATUS.Todo} />
+        <TodoContainer initialStatus={STATUS.InProgress} />
+        <TodoContainer initialStatus={STATUS.Done} />
       </ContainerWrapper>
     </Wrapper>
   );
