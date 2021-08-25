@@ -1,7 +1,6 @@
-import CreateButton from 'components/common/CreateButton';
-import Filter from 'components/common/Filter';
 import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
+import { Filter, CreateButton } from 'components';
 
 interface TodoHeaderProps {
   status: string;

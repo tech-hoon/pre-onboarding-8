@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
-import RadioBox from './RadioBox';
+import { RadioBox } from 'components';
 
 interface FormProps {
   status: string;
