@@ -9,9 +9,9 @@ const App: React.FC = () => {
     <Wrapper>
       <Header />
       <ContainerWrapper>
-        <TodoContainer initialStatus={STATUS.Todo} />
-        <TodoContainer initialStatus={STATUS.InProgress} />
-        <TodoContainer initialStatus={STATUS.Done} />
+        <TodoContainer status={STATUS.Todo} />
+        <TodoContainer status={STATUS.InProgress} />
+        <TodoContainer status={STATUS.Done} />
       </ContainerWrapper>
     </Wrapper>
   );

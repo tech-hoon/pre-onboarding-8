@@ -7,24 +7,19 @@ import Form from 'components/common/Form';
 import mockData from '../../utils/data.json';
 
 interface TodoContainerProps {
-  initialStatus: string;
+  status: string;
 }
 
-const TodoContainer: React.FC<TodoContainerProps> = ({ initialStatus }) => {
-  const [todoItems, setTodoItems] = useState<TodoTypes[]>(mockData);
-  const [clickedForm, setClickedForm] = useState<string>(); // form toggle용
-  const [status, setStatus] = useState<string>(initialStatus);
+const TodoContainer: React.FC<TodoContainerProps> = ({ status }) => {
+  const [todoItems, setTodoItems] = useState<TodoTypes[]>(currentTodos(status, mockData));
+  const [clickedForm, setClickedForm] = useState<string>(); // 폼이 클릭된 컨테이너 -> form toggle용
 
-  // 입력폼 열고 닫는 함수
-  const handleFormOpen = (clickedContainer: string) => {
-    setClickedForm(clickedForm ? '' : clickedContainer);
-  };
+  const handleFormOpen = (target: string) => setClickedForm(clickedForm ? '' : target); // 입력폼 열고 닫는 함수
+  const handleTodoCreate = () => console.log(status); // 입력폼 submit 후, todoItem 생성하는 함수 (미완)
+  const handleTodoDelete = () => console.log(status); // x 버튼(만들어야함)누르면, todoItem 삭제하는 함수 (미완)
+  const handleTodoUpdate = () => console.log(status); // 드래그앤 드랍 등 todoItem 변경하는 함수 (미완)
 
-  const handleTodoCreate = () => console.log(status); // 입력폼 submit 후, todoItem 생성하는 함수
-  const handleTodoDelete = () => console.log(status); // x 버튼(만들어야함)누르면, todoItem 삭제하는 함수
-  const handleTodoUpdate = () => console.log(status); // 드래그앤 드랍 등 todoItem 변경하는 함수
-
-  // 클릭된 form과 현재 컨테이너의 status와 일치하는 컨테이너의 Form 오픈
+  // 클릭된 form과 현재 컨테이너의 status와 일치하는 컨테이너의 Form 오픈한다
   return (
     <Wrapper>
       <TodoHeader status={status} handleFormOpen={handleFormOpen} />
@@ -40,6 +35,9 @@ const TodoContainer: React.FC<TodoContainerProps> = ({ initialStatus }) => {
     </Wrapper>
   );
 };
+
+const currentTodos = (status: string, items: TodoTypes[]) =>
+  items.filter((item) => item.status === status);
 
 const Wrapper = styled.div`
   width: 100%;
