@@ -3,7 +3,14 @@ import { useState } from 'react';
 import { currentDate } from 'utils/date';
 import mockData from 'utils/data.json';
 
-const useTodo = () => {
+type useTodoType = {
+  items: TodoTypes[];
+  handleTodoCreate: (status: string, text: string, creator: string) => void;
+  handleTodoDelete: (taskID: number) => void;
+  handleTodoUpdate: () => void;
+};
+
+const useTodo = (): useTodoType => {
   const [items, setItems] = useState<TodoTypes[]>(mockData);
   const [nextID, setNextID] = useState<number>(items.length);
 
