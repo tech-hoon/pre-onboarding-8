@@ -7,7 +7,7 @@ interface TodoContainerProps {
   todoItems: TodoTypes[];
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
-  handleTodoUpdate: () => void;
+  handleTodoUpdate: (text: string, id: number) => void;
 }
 
 const TodoContainer: React.FC<TodoContainerProps> = ({

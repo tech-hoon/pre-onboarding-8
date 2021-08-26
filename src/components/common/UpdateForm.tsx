@@ -1,16 +1,16 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
-import { RadioBox, FormButtons, FormTextArea } from 'components';
+import { FormButtons, FormTextArea } from 'components';
 import { useForm } from 'hooks/useForm';
 
-interface FormProps {
-  status: string;
+interface UpdateForm {
   setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
-  handleTodoCreate: (status: string, text: string, creator: string) => void;
+  itemId: number;
+  handleTodoUpdate: (text: string, id: number) => void;
 }
 
-const Form: React.FC<FormProps> = ({ status, setIsVisibleForm, handleTodoCreate }) => {
-  const { text, creator, handleRadioChange, handleTextAreaChange } = useForm();
+const UpdateForm: React.FC<UpdateForm> = ({ setIsVisibleForm, handleTodoUpdate, itemId }) => {
+  const { text, handleTextAreaChange } = useForm();
 
   const handleButtonClick = () => {
     setIsVisibleForm((prevVisible) => !prevVisible);
@@ -19,7 +19,7 @@ const Form: React.FC<FormProps> = ({ status, setIsVisibleForm, handleTodoCreate 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    handleTodoCreate(status, text, creator);
+    handleTodoUpdate(text, itemId);
 
     setIsVisibleForm((prevVisible) => !prevVisible);
   };
@@ -32,12 +32,7 @@ const Form: React.FC<FormProps> = ({ status, setIsVisibleForm, handleTodoCreate 
           text={text}
           handleTextAreaChange={handleTextAreaChange}
         />
-        <RadioBox
-          values={['남주', '택훈', '진수', '삭']}
-          handleRadioChange={handleRadioChange}
-          status={status}
-        />
-        <FormButtons text={text} creator={creator} handleButtonClick={handleButtonClick} />
+        <FormButtons text={text} handleButtonClick={handleButtonClick} />
       </FormStyled>
     </Wrapper>
   );
@@ -52,4 +47,4 @@ const Wrapper = styled.div`
 
 const FormStyled = styled.form``;
 
-export default Form;
+export default UpdateForm;

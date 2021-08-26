@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { TodoItem, TodoTypes } from 'components';
 
 interface TodoListProps {
   status: string;
   todoItems: TodoTypes[];
-  handleTodoUpdate: () => void;
+  handleTodoUpdate: (text: string, id: number) => void;
   handleTodoDelete: (taskID: number) => void;
 }
 

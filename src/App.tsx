@@ -6,6 +6,7 @@ import { Header, TodoContainer, TodoTypes } from 'components';
 
 const App: React.FC = () => {
   const { items, handleTodoCreate, handleTodoDelete, handleTodoUpdate } = useTodo();
+  console.log(items);
 
   return (
     <Wrapper>
