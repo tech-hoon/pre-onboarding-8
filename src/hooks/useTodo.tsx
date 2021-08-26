@@ -18,14 +18,13 @@ const useTodo = (): useTodoType => {
     setItems([
       ...items,
       {
-        id: nextID,
+        id: nextID + 1,
         taskName: text,
         status: status,
         creator: creator,
         createdAt: currentDate(),
       },
     ]);
-
     setNextID((prevID) => prevID + 1);
   };
 
@@ -36,7 +35,6 @@ const useTodo = (): useTodoType => {
       1,
     );
     setItems(newItems);
-    setNextID((prevID) => prevID - 1);
   };
 
   const handleTodoUpdate = () => {
