@@ -16,12 +16,27 @@ const TodoItem: React.FC<TodoItemProps> = ({
 }) => {
   const [isDoubleClicked, setIsDoubleClicked] = useState(false);
 
+  const handleDragStart = (e: React.DragEvent<HTMLElement>) => {
+    const target = e.target as HTMLElement;
+    e.dataTransfer.setData('card', target.id);
+  };
+
+  const handleDragOverOnCard = (e: React.DragEvent<HTMLElement>) => {
+    e.preventDefault();
+  };
+
   const handleDoubleClick = () => {
     setIsDoubleClicked((prev) => !prev);
   };
 
   return (
-    <Wrapper>
+    <Wrapper
+      id={`card${id}`}
+      className="card"
+      draggable={true}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOverOnCard}
+    >
       {isDoubleClicked ? (
         <UpdateForm
           setIsVisibleForm={setIsDoubleClicked}
@@ -50,6 +65,11 @@ const Item = styled.li``;
 const TaskName = styled.h3`
   font-size: 18px;
   font-weight: 500;
+`;
+
+const DroppablePlace = styled.div`
+  height: 3px;
+  background-color: aquamarine;
 `;
 
 export default TodoItem;

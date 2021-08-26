@@ -4,7 +4,7 @@ import TodoItem from './todos/TodoItem';
 import TodoList from './todos/TodoList';
 import CreateButton from './common/CreateButton';
 import Filter from './common/Filter';
-import Form from './common/Form';
+import CreateForm from './common/CreateForm';
 import FormButtons from './common/FormButtons';
 import FormTextArea from './common/FormTextArea';
 import UpdateForm from './common/UpdateForm';
@@ -21,7 +21,7 @@ export {
   CreateButton,
   DeleteButton,
   Filter,
-  Form,
+  CreateForm,
   FormButtons,
   FormTextArea,
   UpdateForm,

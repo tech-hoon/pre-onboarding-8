@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { RadioBox, FormButtons, FormTextArea } from 'components';
 import { useForm } from 'hooks/useForm';
 
-interface FormProps {
+interface CreateFormProps {
   status: string;
   setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
   handleTodoCreate: (status: string, text: string, creator: string) => void;
 }
 
-const Form: React.FC<FormProps> = ({ status, setIsVisibleForm, handleTodoCreate }) => {
+const CreateForm: React.FC<CreateFormProps> = ({ status, setIsVisibleForm, handleTodoCreate }) => {
   const { text, creator, handleRadioChange, handleTextAreaChange } = useForm();
 
   const handleButtonClick = () => {
@@ -52,4 +52,4 @@ const Wrapper = styled.div`
 
 const FormStyled = styled.form``;
 
-export default Form;
+export default CreateForm;
