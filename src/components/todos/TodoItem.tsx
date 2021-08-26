@@ -1,27 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TodoTypes } from './TodoTypes';
+import { DeleteButton, TodoTypes } from 'components';
 
 interface TodoItemProps {
   status: string;
   todoItem: TodoTypes;
   handleTodoUpdate: () => void;
-  handleTodoDelete: () => void;
+  handleTodoDelete: (taskID: number) => void;
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({
-  todoItem: { taskName, creator, createdAt, updatedAt },
-  status,
+  todoItem: { id, taskName, creator, createdAt, updatedAt },
   handleTodoUpdate,
   handleTodoDelete,
 }) => {
   return (
-    <Wrapper
-      onClick={() => {
-        console.log(`"${status}" 컨테이너`);
-      }}
-    >
+    <Wrapper>
       <TaskName>{taskName}</TaskName>
+      <DeleteButton taskID={id} handleTodoDelete={handleTodoDelete} />
       <p>{creator}</p>
       <p>생성일 {createdAt}</p>
       <p>수정일 {updatedAt}</p>

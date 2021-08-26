@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import TodoList from './TodoList';
-import TodoHeader from './TodoHeader';
-import Form from 'components/common/Form';
-import { TodoTypes } from 'components/todos/TodoTypes';
+import { TodoHeader, TodoList, Form, TodoTypes } from 'components';
 
 interface TodoContainerProps {
   status: string;
   todoItems: TodoTypes[];
-  handleTodoCreate: () => void;
-  handleTodoDelete: () => void;
+  handleTodoCreate: (status: string, text: string, creator: string) => void;
+  handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: () => void;
 }
 

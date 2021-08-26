@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import TodoItem from './TodoItem';
-import { TodoTypes } from './TodoTypes';
+import { TodoItem, TodoTypes } from 'components';
 
 interface TodoListProps {
   status: string;
   todoItems: TodoTypes[];
   handleTodoUpdate: () => void;
-  handleTodoDelete: () => void;
+  handleTodoDelete: (taskID: number) => void;
 }
 
 const TodoList: React.FC<TodoListProps> = ({

@@ -4,5 +4,5 @@ export interface TodoTypes {
   status: string;
   creator: string;
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
 }

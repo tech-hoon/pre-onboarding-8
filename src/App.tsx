@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { STATUS } from './utils/config';
-import Header from 'components/common/Header';
-import TodoContainer from 'components/todos/TodoContainer';
-import { TodoTypes } from 'components/todos/TodoTypes';
 import useTodo from 'hooks/useTodo';
+import { STATUS } from './utils/config';
+import { Header, TodoContainer, TodoTypes } from 'components';
 
 const App: React.FC = () => {
   const { items, handleTodoCreate, handleTodoDelete, handleTodoUpdate } = useTodo();
@@ -17,7 +15,7 @@ const App: React.FC = () => {
           <TodoContainer
             key={index}
             status={status}
-            todoItems={currentTodos(status, items)}
+            todoItems={targetItems(status, items)}
             handleTodoCreate={handleTodoCreate}
             handleTodoDelete={handleTodoDelete}
             handleTodoUpdate={handleTodoUpdate}
@@ -28,7 +26,7 @@ const App: React.FC = () => {
   );
 };
 
-const currentTodos = (status: string, items: TodoTypes[]) =>
+const targetItems = (status: string, items: TodoTypes[]) =>
   items.filter((item) => item.status === status);
 
 const Wrapper = styled.div`

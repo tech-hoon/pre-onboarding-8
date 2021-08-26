@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Radio from './Radio';
+import { Radio } from 'components';
 
 interface RadioBoxProps {
   values: string[];
@@ -8,20 +8,11 @@ interface RadioBoxProps {
   handleRadioChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const RadioBox: React.FC<RadioBoxProps> = ({
-  values,
-  status,
-  handleRadioChange,
-}) => {
+const RadioBox: React.FC<RadioBoxProps> = ({ values, status, handleRadioChange }) => {
   return (
     <RadioBoxWrapper>
       {values.map((value: string, index: number) => (
-        <Radio
-          key={index}
-          value={value}
-          status={status}
-          handleRadioChange={handleRadioChange}
-        />
+        <Radio key={index} value={value} status={status} handleRadioChange={handleRadioChange} />
       ))}
     </RadioBoxWrapper>
   );

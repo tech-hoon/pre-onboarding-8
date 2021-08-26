@@ -1,7 +1,6 @@
-import CreateButton from 'components/common/CreateButton';
-import Filter from 'components/common/Filter';
 import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
+import { Filter, CreateButton } from 'components';
 
 interface TodoHeaderProps {
   status: string;
@@ -12,7 +11,7 @@ const TodoHeader: React.FC<TodoHeaderProps> = ({ status, setIsVisibleForm }) => 
   return (
     <Wrapper>
       <Title>{status}</Title>
-      <CreateButton status={status} setIsVisibleForm={setIsVisibleForm} />
+      <CreateButton setIsVisibleForm={setIsVisibleForm} />
       <Filter />
     </Wrapper>
   );
