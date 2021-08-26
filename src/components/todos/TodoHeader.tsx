@@ -1,38 +1,52 @@
-import React, { useState } from 'react';
 import CreateButton from 'components/common/CreateButton';
 import Filter from 'components/common/filter/Filter';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
+import { TodoTypes } from './TodoTypes';
 
-const dummyData = ['남주', '택훈', '진수', '삭'];
 interface TodoHeaderProps {
   status: string;
+  setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
+  todoItems: TodoTypes[];
+  val: (value: any) => void;
+  sortTodo: (
+    a: { createdAt: string | number | Date },
+    b: { createdAt: string | number | Date },
+  ) => number;
 }
 
-const TodoHeader: React.FC<TodoHeaderProps> = ({ status }) => {
+const TodoHeader: React.FC<TodoHeaderProps> = ({
+  status,
+  setIsVisibleForm,
+  todoItems,
+  val,
+  sortTodo,
+}) => {
   const [dropOpen, setDropOpen] = useState<boolean>(false);
-  const [selectCreator, setSelectCreator] = useState<any[]>([]);
+  const [selectCreator, setSelectCreator] = useState<(string | number)[]>([]);
 
-  const handleOpenClick = () => setDropOpen(!dropOpen);
+  const onFilterOpenHandler = () => setDropOpen(!dropOpen);
 
-  const onCheckedHandler = (checked: boolean, id: number) => {
+  const onCreatorNameCheckedHandler = (checked: boolean, value: string) => {
     if (checked) {
-      setSelectCreator([...selectCreator, id]);
-      console.log('add', selectCreator);
+      setSelectCreator([...selectCreator, value]);
     } else {
-      setSelectCreator(selectCreator.filter((check) => check !== id));
-      console.log('remove', selectCreator);
+      setSelectCreator(selectCreator.filter((check) => check !== value));
     }
   };
 
   return (
     <Wrapper>
       <Title>{status}</Title>
-      <CreateButton status={status} />
+      <CreateButton status={status} setIsVisibleForm={setIsVisibleForm} />
       <Filter
         dropOpen={dropOpen}
-        handleOpenClick={handleOpenClick}
-        onCheckedHandler={onCheckedHandler}
+        filterOpen={onFilterOpenHandler}
+        creatorChecked={onCreatorNameCheckedHandler}
         selectCreator={selectCreator}
+        todoItems={todoItems}
+        val={val}
+        sortTodo={sortTodo}
       />
     </Wrapper>
   );

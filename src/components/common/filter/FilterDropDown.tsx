@@ -1,28 +1,44 @@
+import { TodoTypes } from 'components/todos/TodoTypes';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import CreatorModal from './FilterModal';
 
 interface DropDownProps {
-  onCheckedHandler: (checked: boolean, id: number) => void;
-  selectCreator: any[];
+  creatorChecked: (checked: boolean, value: string) => void;
+  selectCreator: (string | number)[];
+  todoItems: TodoTypes[];
+  val: (value: any) => void;
+  sortTodo: (
+    a: { createdAt: string | number | Date },
+    b: { createdAt: string | number | Date },
+  ) => number;
 }
 
 const DropDown: React.FC<DropDownProps> = ({
-  onCheckedHandler,
+  creatorChecked,
   selectCreator,
+  todoItems,
+  val,
+  sortTodo,
 }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const handleModalClick = () => setModalOpen(!modalOpen);
 
+  const handleSortClick = () => {
+    todoItems.sort(sortTodo);
+  };
+
   return (
     <FilterOptions>
-      <Value>생성일</Value>
+      <Value onClick={handleSortClick}>생성일</Value>
       <Value onClick={handleModalClick}>생성자</Value>
       {modalOpen && (
         <CreatorModal
-          onCheckedHandler={onCheckedHandler}
+          creatorChecked={creatorChecked}
           selectCreator={selectCreator}
+          close={handleModalClick}
+          val={val}
         />
       )}
     </FilterOptions>

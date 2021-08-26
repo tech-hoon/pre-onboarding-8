@@ -3,6 +3,6 @@ export interface TodoTypes {
   taskName: string;
   status: string;
   creator: string;
-  createdAt: string;
+  createdAt: string | number | Date;
   updatedAt: string;
 }
