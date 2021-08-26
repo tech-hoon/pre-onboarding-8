@@ -16,6 +16,8 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ taskID, handleTodoDelete })
 
 const Wrapper = styled.div``;
 
-const Button = styled.button``;
+const Button = styled.button`
+  font-size: 1em;
+`;
 
 export default DeleteButton;

@@ -18,6 +18,8 @@ const CreateButton: React.FC<CreateButtonProps> = ({ setIsVisibleForm }) => {
 };
 
 const ButtonWrapper = styled.div``;
-const ButtonStyled = styled.button``;
+const ButtonStyled = styled.button`
+  font-size: 1em;
+`;
 
 export default CreateButton;

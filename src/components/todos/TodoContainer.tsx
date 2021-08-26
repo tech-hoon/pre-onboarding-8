@@ -21,7 +21,7 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
 
   return (
     <Wrapper>
-      <TodoHeader status={status} setIsVisibleForm={setIsVisibleForm} />
+      <TodoHeader todoItems={todoItems} status={status} setIsVisibleForm={setIsVisibleForm} />
       {isVisibleForm && (
         <Form
           status={status}
