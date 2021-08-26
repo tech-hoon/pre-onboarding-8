@@ -6,7 +6,7 @@ interface TodoListProps {
   status: string;
   todoItems: TodoTypes[];
   handleTodoUpdate: () => void;
-  handleTodoDelete: () => void;
+  handleTodoDelete: (taskID: number) => void;
 }
 
 const TodoList: React.FC<TodoListProps> = ({

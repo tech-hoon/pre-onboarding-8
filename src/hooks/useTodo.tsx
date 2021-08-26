@@ -1,13 +1,13 @@
 import { TodoTypes } from 'components';
-import { useCallback, useState } from 'react';
-import mockData from 'utils/data.json';
+import { useState } from 'react';
 import { currentDate } from 'utils/date';
+import mockData from 'utils/data.json';
 
 const useTodo = () => {
   const [items, setItems] = useState<TodoTypes[]>(mockData);
   const [nextID, setNextID] = useState<number>(items.length);
 
-  const handleTodoCreate = useCallback((status: string, text: string, creator: string) => {
+  const handleTodoCreate = (status: string, text: string, creator: string) => {
     setItems([
       ...items,
       {
@@ -20,9 +20,21 @@ const useTodo = () => {
     ]);
 
     setNextID((prevID) => prevID + 1);
-  }, []);
-  const handleTodoDelete = useCallback(() => console.log(status), []); // x 버튼(만들어야함)누르면, todoItem 삭제하는 함수 (미완)
-  const handleTodoUpdate = useCallback(() => console.log(status), []); // 드래그앤 드랍 등 todoItem 변경하는 함수 (미완)
+  };
+
+  const handleTodoDelete = (taskID: number) => {
+    const newItems = [...items];
+    newItems.splice(
+      newItems.findIndex(({ id }) => id === taskID),
+      1,
+    );
+    setItems(newItems);
+    setNextID((prevID) => prevID - 1);
+  };
+
+  const handleTodoUpdate = () => {
+    // 드래그앤 드랍 등 todoItem 변경하는 함수
+  };
 
   return { items, handleTodoCreate, handleTodoDelete, handleTodoUpdate };
 };

@@ -8,6 +8,7 @@ import Form from './common/Form';
 import Header from './common/Header';
 import Radio from './common/Radio';
 import RadioBox from './common/RadioBox';
+import DeleteButton from './common/DeleteButton';
 
 export {
   TodoContainer,
@@ -15,6 +16,7 @@ export {
   TodoItem,
   TodoList,
   CreateButton,
+  DeleteButton,
   Filter,
   Form,
   Header,

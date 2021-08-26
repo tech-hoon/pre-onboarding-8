@@ -6,7 +6,7 @@ interface TodoContainerProps {
   status: string;
   todoItems: TodoTypes[];
   handleTodoCreate: (status: string, text: string, creator: string) => void;
-  handleTodoDelete: () => void;
+  handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: () => void;
 }
 

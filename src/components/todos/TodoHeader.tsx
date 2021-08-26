@@ -11,7 +11,7 @@ const TodoHeader: React.FC<TodoHeaderProps> = ({ status, setIsVisibleForm }) => 
   return (
     <Wrapper>
       <Title>{status}</Title>
-      <CreateButton status={status} setIsVisibleForm={setIsVisibleForm} />
+      <CreateButton setIsVisibleForm={setIsVisibleForm} />
       <Filter />
     </Wrapper>
   );
