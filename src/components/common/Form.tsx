@@ -5,7 +5,7 @@ import { RadioBox } from 'components';
 interface FormProps {
   status: string;
   setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
-  handleTodoCreate: () => void;
+  handleTodoCreate: (status: string, text: string, creator: string) => void;
 }
 
 const Form: React.FC<FormProps> = ({ status, setIsVisibleForm, handleTodoCreate }) => {
@@ -27,9 +27,7 @@ const Form: React.FC<FormProps> = ({ status, setIsVisibleForm, handleTodoCreate 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(text, creator);
-    // 투두생성
-    // handleTodoCreate()
+    handleTodoCreate(status, text, creator);
 
     setIsVisibleForm((prevVisible) => !prevVisible);
   };

@@ -15,7 +15,7 @@ const App: React.FC = () => {
           <TodoContainer
             key={index}
             status={status}
-            todoItems={currentTodos(status, items)}
+            todoItems={targetItems(status, items)}
             handleTodoCreate={handleTodoCreate}
             handleTodoDelete={handleTodoDelete}
             handleTodoUpdate={handleTodoUpdate}
@@ -26,7 +26,7 @@ const App: React.FC = () => {
   );
 };
 
-const currentTodos = (status: string, items: TodoTypes[]) =>
+const targetItems = (status: string, items: TodoTypes[]) =>
   items.filter((item) => item.status === status);
 
 const Wrapper = styled.div`

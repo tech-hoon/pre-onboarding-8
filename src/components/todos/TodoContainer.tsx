@@ -5,7 +5,7 @@ import { TodoHeader, TodoList, Form, TodoTypes } from 'components';
 interface TodoContainerProps {
   status: string;
   todoItems: TodoTypes[];
-  handleTodoCreate: () => void;
+  handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: () => void;
   handleTodoUpdate: () => void;
 }
