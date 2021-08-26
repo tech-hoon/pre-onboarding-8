@@ -17,8 +17,8 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
   handleTodoDelete,
   handleTodoUpdate,
 }) => {
+  //인풋창visible
   const [isVisibleForm, setIsVisibleForm] = useState(false);
-
   return (
     <Wrapper>
       <TodoHeader status={status} setIsVisibleForm={setIsVisibleForm} />
