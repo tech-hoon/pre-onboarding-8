@@ -99,16 +99,6 @@ const useTodo = (): useTodoType => {
     [items],
   );
 
-  // const handleTodoCreator = useCallback((creators: string[], status: string) => {
-  //   const result: TodoTypes[][] = [];
-  //   creators.forEach((creator) => {
-  //     const data = items.filter((item: any) => item.status === status && item.creator === creator);
-  //     result.push(data);
-  //   });
-  //   setCurrentStatus(status);
-  //   setFilterCreatorItems(result.flat());
-  // }, []);
-
   return {
     items,
     setItems,

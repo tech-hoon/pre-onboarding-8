@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { Filter, CreateButton, TodoTypes } from 'components';
+import { STATUS } from 'utils/config';
 
 interface TodoHeaderProps {
   status: string;
@@ -71,8 +72,8 @@ const TodoHeader: React.FC<TodoHeaderProps> = ({
 };
 
 const titleColor = (status: string): string => {
-  if (status === '할 일') return `rgba(255, 0, 26, 0.2)`;
-  else if (status === '진행 중') return `rgba(233, 168, 0, 0.2)`;
+  if (status === STATUS.Todo) return `rgba(255, 0, 26, 0.2)`;
+  else if (status === STATUS.InProgress) return `rgba(233, 168, 0, 0.2)`;
   else return `rgba(0, 135, 107, 0.2)`;
 };
 

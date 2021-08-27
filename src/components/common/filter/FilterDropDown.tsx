@@ -1,6 +1,7 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import FilterModal from './FilterModal';
+import { STATUS } from 'utils/config';
 interface DropDownProps {
   status: string;
   creatorChecked: (checked: boolean, value: string) => void;
@@ -28,8 +29,8 @@ const DropDown: React.FC<DropDownProps> = ({
   };
 
   const valueColor = (status: string): string => {
-    if (status === '할 일') return `rgba(255, 0, 26, 0.2)`;
-    else if (status === '진행 중') return `rgba(233, 167, 0, 0.318)`;
+    if (status === STATUS.Todo) return `rgba(255, 0, 26, 0.2)`;
+    else if (status === STATUS.InProgress) return `rgba(233, 167, 0, 0.318)`;
     else return `rgba(0, 135, 108, 0.318)`;
   };
 
