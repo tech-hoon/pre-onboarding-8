@@ -1,51 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { TodoItem, TodoTypes } from 'components';
+import { getInsertPlace } from 'utils/dragNdrop';
 interface TodoListProps {
   status: string;
+  items: TodoTypes[];
   todoItems: TodoTypes[];
-  handleTodoUpdate: () => void;
+  handleTodoUpdate: (text: string, id: number) => void;
   handleTodoDelete: (taskID: number) => void;
+  handleTodoPosUpdate: (
+    status: string,
+    currentId: string | undefined,
+    clickedId: string,
+    insertPosition?: string,
+  ) => void;
 }
 
 const TodoList: React.FC<TodoListProps> = ({
   status,
+  items,
   todoItems,
   handleTodoDelete,
   handleTodoUpdate,
+  handleTodoPosUpdate,
 }) => {
   const handleDrop = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
     const target = e.target as HTMLElement;
-    const card_id = e.dataTransfer.getData('card');
-
+    const clickedCardID = JSON.parse(e.dataTransfer.getData('card')).id;
     const currentCard = target.closest('.card');
-    const currentColumn = target.closest('.cardlist');
-    const clickedCard = card_id ? document.getElementById(card_id) : null;
+    const insertPosition = getInsertPlace(currentCard, e.clientY);
 
-    if (!clickedCard) return;
-    if (target === currentColumn) currentColumn.appendChild(clickedCard);
-    else currentCard?.insertAdjacentElement(getInsertPlace(e), clickedCard);
+    handleTodoPosUpdate(status, currentCard?.id, clickedCardID, insertPosition);
   };
 
-  const handleDragOverOnColumn = (e: React.DragEvent<HTMLElement>) => {
-    e.preventDefault();
-  };
+  const handleDragOverOnColumn = (e: React.DragEvent<HTMLElement>) => e.preventDefault();
 
-  const getInsertPlace = (e: React.DragEvent<HTMLElement>) => {
-    const target = e.target as HTMLElement;
-    const itemCard = target.closest('.card');
-    if (!itemCard) return 'afterend';
-
-    const placeInfo = itemCard?.getBoundingClientRect();
-    const placeY = placeInfo.bottom - e.clientY;
-    const targetHeight = placeInfo.bottom - placeInfo.top;
-    const insertPlace = placeY > targetHeight / 2 ? 'beforebegin' : 'afterend';
-
-    return insertPlace;
-  };
   return (
-    <Wrapper className="cardlist" onDragOver={handleDragOverOnColumn} onDrop={handleDrop}>
+    <Wrapper
+      className={`cardlist ${status}`}
+      onDragOver={handleDragOverOnColumn}
+      onDrop={handleDrop}
+    >
       {todoItems.map((todoItem, i) => (
         <TodoItem
           key={i}

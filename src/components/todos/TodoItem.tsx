@@ -1,61 +1,91 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
-import { DeleteButton, TodoTypes } from 'components';
+import { DeleteButton, TodoTypes, UpdateForm } from 'components';
 
 interface TodoItemProps {
   status: string;
   todoItem: TodoTypes;
-  handleTodoUpdate: () => void;
+  handleTodoUpdate: (text: string, id: number) => void;
   handleTodoDelete: (taskID: number) => void;
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({
-  todoItem: { id, taskName, creator, createdAt, updatedAt },
+  todoItem: { id, taskName, status, creator, createdAt, updatedAt },
   handleTodoUpdate,
   handleTodoDelete,
 }) => {
+  const [dragStart, setDragStart] = useState(false);
+  const [isDoubleClicked, setIsDoubleClicked] = useState(false);
+
   const handleDragStart = (e: React.DragEvent<HTMLElement>) => {
-    const target = e.target as HTMLElement;
-    e.dataTransfer.setData('card', target.id);
+    e.dataTransfer.setData(
+      'card',
+      JSON.stringify({ id, taskName, status, creator, createdAt, updatedAt }),
+    );
+    setDragStart(true);
   };
 
   const handleDragOverOnCard = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
+    setDragStart(false);
+  };
+
+  const handleDoubleClick = () => {
+    setIsDoubleClicked((prev) => !prev);
   };
 
   return (
     <Wrapper
-      id={`card${id}`}
+      id={`${id}`}
       className="card"
       draggable={true}
+      dragStart={dragStart}
       onDragStart={handleDragStart}
       onDragOver={handleDragOverOnCard}
     >
-      <Top>
-        <DeleteButton taskID={id} handleTodoDelete={handleTodoDelete} />
-      </Top>
-      <Middle>
-        <TaskName>{taskName}</TaskName>
-      </Middle>
-      <Bottom>
-        <Creator>{creator}</Creator>
-        <BottomRight>
-          <Date>
-            <DateLabel>생성일 </DateLabel>
-            {createdAt}
-          </Date>
-          {updatedAt && (
-            <Date>
-              <DateLabel>수정일 </DateLabel>
-              {updatedAt}
-            </Date>
-          )}
-        </BottomRight>
-      </Bottom>
+      {isDoubleClicked ? (
+        <UpdateForm
+          setIsVisibleForm={setIsDoubleClicked}
+          handleTodoUpdate={handleTodoUpdate}
+          itemId={id}
+        />
+      ) : (
+        <Item onDoubleClick={handleDoubleClick}>
+          <Top>
+            <DeleteButton taskID={id} handleTodoDelete={handleTodoDelete} />
+          </Top>
+          <Middle>
+            <TaskName>{taskName}</TaskName>
+          </Middle>
+          <Bottom>
+            <Creator>{creator}</Creator>
+            <BottomRight>
+              <Date>
+                <DateLabel>생성일 </DateLabel>
+                {createdAt}
+              </Date>
+              {updatedAt && (
+                <Date>
+                  <DateLabel>수정일 </DateLabel>
+                  {updatedAt}
+                </Date>
+              )}
+            </BottomRight>
+          </Bottom>
+        </Item>
+      )}
     </Wrapper>
   );
 };
-const Wrapper = styled.li`
+
+interface WrapperProp {
+  dragStart: boolean;
+}
+const Wrapper = styled.div<WrapperProp>`
+  opacity: ${(props) => (props.dragStart ? 0.5 : 1)};
+`;
+
+const Item = styled.li`
   box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
   &:hover {
     background: rgba(55, 53, 47, 0.03);
