@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { WRITER_LIST } from 'utils/config';
 import { MdClose } from 'react-icons/md';
-import { TodoTypes } from 'components';
 
 interface DropDownProps {
   creatorChecked: (checked: boolean, value: string) => void;

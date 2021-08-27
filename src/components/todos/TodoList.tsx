@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { TodoItem, TodoTypes } from 'components';
 import { getInsertPlace } from 'utils/dragNdrop';
@@ -29,6 +29,7 @@ const TodoList: React.FC<TodoListProps> = ({
   selectCreator,
 }) => {
   const [viewItem, setViewItems] = useState(todoItems);
+
   useEffect(() => {
     setViewItems(todoItems);
   }, [todoItems]);

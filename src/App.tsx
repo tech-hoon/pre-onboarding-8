@@ -8,8 +8,6 @@ const App: React.FC = () => {
   const {
     items,
     setItems,
-    currentStatus,
-    filterCreatorItems,
     handleTodoCreate,
     handleTodoDelete,
     handleTodoUpdate,
@@ -25,9 +23,6 @@ const App: React.FC = () => {
             key={index}
             status={status}
             todoItems={targetItems(status, items)}
-            setItems={setItems}
-            currentStatus={currentStatus}
-            filterCreatorItems={filterCreatorItems}
             handleTodoCreate={handleTodoCreate}
             handleTodoDelete={handleTodoDelete}
             handleTodoUpdate={handleTodoUpdate}
@@ -52,7 +47,11 @@ const ContainerWrapper = styled.div`
   display: flex;
   justify-content: center;
   gap: 4px 2%;
-  margin: 38px auto;
+  margin: 24px auto;
+
+  @media ${({ theme }) => theme.size.tablet} {
+    margin: 12px auto;
+  }
 `;
 
 export default App;

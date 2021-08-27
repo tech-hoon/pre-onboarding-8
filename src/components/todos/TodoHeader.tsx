@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { Filter, CreateButton, TodoTypes } from 'components';
 
@@ -11,6 +11,7 @@ interface TodoHeaderProps {
   onCreatorNameCheckedHandler: (checked: boolean, value: string) => void;
   selectFilter: { date: boolean; creator: boolean };
   setSelectFilter: Dispatch<SetStateAction<{ date: boolean; creator: boolean }>>;
+  handleFilterdCreator: (creators: string[]) => TodoTypes[];
 }
 
 const TodoHeader: React.FC<TodoHeaderProps> = ({
@@ -22,15 +23,28 @@ const TodoHeader: React.FC<TodoHeaderProps> = ({
   onCreatorNameCheckedHandler,
   selectFilter,
   setSelectFilter,
+  handleFilterdCreator,
 }) => {
   const [dropOpen, setDropOpen] = useState<boolean>(false);
+  const [viewItems, setViewItems] = useState(todoItems);
   const onFilterOpenHandler = () => setDropOpen(!dropOpen);
+
+  useEffect(() => {
+    setViewItems(todoItems);
+  }, [todoItems]);
+
+  useEffect(() => {
+    if (selectFilter.creator) {
+      const filtered = handleFilterdCreator(selectCreator);
+      setViewItems(filtered);
+    }
+  }, [selectFilter]);
 
   return (
     <Wrapper>
       <Left>
         <Title color={titleColor(status)}>{status}</Title>
-        <Count>{todoItems.length}</Count>
+        <Count>{viewItems.length}</Count>
       </Left>
       <Right>
         <CreateButton handleVisibleForm={handleVisibleForm} />

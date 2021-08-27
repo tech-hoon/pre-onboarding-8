@@ -1,4 +1,3 @@
-import { TodoTypes } from 'components/todos/TodoTypes';
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import FilterModal from './FilterModal';
