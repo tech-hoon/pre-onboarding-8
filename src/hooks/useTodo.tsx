@@ -1,5 +1,5 @@
 import { TodoTypes } from 'components';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, Dispatch, SetStateAction } from 'react';
 import { currentDate } from 'utils/date';
 import { currentId } from 'utils/Id';
 import mockData from 'utils/data.json';
@@ -9,7 +9,12 @@ type useTodoType = {
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: (text: string, id: number) => void;
-  handleTodoPosUpdate: (status: string, currentId: string | undefined, clickedId: string) => void;
+  handleTodoPosUpdate: (
+    status: string,
+    currentId: string | undefined,
+    clickedId: string,
+    insertPosition?: string,
+  ) => void;
 };
 
 const useTodo = (): useTodoType => {
@@ -41,7 +46,8 @@ const useTodo = (): useTodoType => {
   }, []);
 
   const handleTodoPosUpdate = useCallback(
-    (status: string, currentId: string | undefined, clickedId: string) => {
+    (status: string, currentId: string | undefined, clickedId: string, insertPosition?: string) => {
+      console.log(status, currentId, clickedId, insertPosition);
       setItems((prevItems) => updatePosition(prevItems));
 
       const updatePosition = (prevItems: any) => {
@@ -60,8 +66,9 @@ const useTodo = (): useTodoType => {
               continue;
             }
           }
+
           if (excludeTargetCardItems[i].id === Number(currentId)) {
-            index = i;
+            index = insertPosition === 'beforebegin' ? i : i + 1;
             continue;
           }
         }

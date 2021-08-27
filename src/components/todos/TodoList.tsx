@@ -1,20 +1,24 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { TodoItem, TodoTypes } from 'components';
-
-// interface ChildNodeId extends ChildNode {
-//   id: string;
-// }
+import { getInsertPlace } from 'utils/dragNdrop';
 interface TodoListProps {
   status: string;
+  items: TodoTypes[];
   todoItems: TodoTypes[];
   handleTodoUpdate: (text: string, id: number) => void;
   handleTodoDelete: (taskID: number) => void;
-  handleTodoPosUpdate: (status: string, currentId: string | undefined, clickedId: string) => void;
+  handleTodoPosUpdate: (
+    status: string,
+    currentId: string | undefined,
+    clickedId: string,
+    insertPosition?: string,
+  ) => void;
 }
 
 const TodoList: React.FC<TodoListProps> = ({
   status,
+  items,
   todoItems,
   handleTodoDelete,
   handleTodoUpdate,
@@ -23,23 +27,18 @@ const TodoList: React.FC<TodoListProps> = ({
   const handleDrop = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
     const target = e.target as HTMLElement;
-    const card_id = e.dataTransfer.getData('card');
+    const clickedCardID = JSON.parse(e.dataTransfer.getData('card')).id;
     const currentCard = target.closest('.card');
-    const clickedCard = card_id ? document.getElementById(card_id) : null;
+    const insertPosition = getInsertPlace(currentCard, e.clientY);
 
-    if (clickedCard) {
-      handleTodoPosUpdate(status, currentCard?.id, clickedCard.id);
-    }
+    handleTodoPosUpdate(status, currentCard?.id, clickedCardID, insertPosition);
   };
 
-  const handleDragOverOnColumn = (e: React.DragEvent<HTMLElement>) => {
-    e.preventDefault();
-  };
+  const handleDragOverOnColumn = (e: React.DragEvent<HTMLElement>) => e.preventDefault();
 
   return (
     <Wrapper
-      id={status}
-      className="cardlist"
+      className={`cardlist ${status}`}
       onDragOver={handleDragOverOnColumn}
       onDrop={handleDrop}
     >

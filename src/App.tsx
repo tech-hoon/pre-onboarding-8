@@ -17,6 +17,7 @@ const App: React.FC = () => {
           <TodoContainer
             key={index}
             status={status}
+            items={items}
             todoItems={targetItems(status, items)}
             handleTodoCreate={handleTodoCreate}
             handleTodoDelete={handleTodoDelete}
