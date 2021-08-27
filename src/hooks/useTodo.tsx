@@ -40,93 +40,42 @@ const useTodo = (): useTodoType => {
     );
   }, []);
 
-  const handleTodoPosUpdate = (
-    status: string,
-    currentId: string | undefined,
-    clickedId: string,
-  ) => {
-    setItems((prevItems) => updatePosition(prevItems));
+  const handleTodoPosUpdate = useCallback(
+    (status: string, currentId: string | undefined, clickedId: string) => {
+      setItems((prevItems) => updatePosition(prevItems));
 
-    const updatePosition = (prevItems: any) => {
-      const target = prevItems.find((item: TodoTypes) => item.id === Number(clickedId));
-      const targetCard = { ...target, status, updatedAt: currentDate() };
-      const excludeTargetCardItems = prevItems.filter(
-        (item: TodoTypes) => item.id !== Number(clickedId),
-      );
+      const updatePosition = (prevItems: any) => {
+        const target = prevItems.find((item: TodoTypes) => item.id === Number(clickedId));
+        const targetCard = { ...target, status, updatedAt: currentDate() };
+        const excludeTargetCardItems = prevItems.filter(
+          (item: TodoTypes) => item.id !== Number(clickedId),
+        );
 
-      let index = 0;
+        let index = 0;
 
-      for (let i = 0; i < excludeTargetCardItems.length; i++) {
-        if (!currentId) {
-          if (excludeTargetCardItems[i].status === status) {
-            index = i + 1;
+        for (let i = 0; i < excludeTargetCardItems.length; i++) {
+          if (!currentId) {
+            if (excludeTargetCardItems[i].status === status) {
+              index = i + 1;
+              continue;
+            }
+          }
+          if (excludeTargetCardItems[i].id === Number(currentId)) {
+            index = i;
             continue;
           }
         }
-        if (excludeTargetCardItems[i].id === Number(currentId)) {
-          index = i;
-          continue;
-        }
-      }
 
-      const start = excludeTargetCardItems.slice(0, index);
-      const end = excludeTargetCardItems.slice(index);
+        const start = excludeTargetCardItems.slice(0, index);
+        const end = excludeTargetCardItems.slice(index);
 
-      return [...start, targetCard, ...end];
-    };
-  };
+        return [...start, targetCard, ...end];
+      };
+    },
+    [],
+  );
 
   return { items, handleTodoCreate, handleTodoDelete, handleTodoUpdate, handleTodoPosUpdate };
 };
 
 export default useTodo;
-
-// const updatePosition = () => {
-//     const target = items.find((item: TodoTypes) => item.id === Number(clickedId));
-//     const targetCard = { ...target, status, updatedAt: currentDate() };
-//     const excludeTargetCardItems = items.filter((item: TodoTypes) => item.id !== Number(clickedId));
-
-//     if (!currentId) {
-//       let index = 0;
-
-//       for (let i = 0; i < excludeTargetCardItems.length; i++) {
-//         if (excludeTargetCardItems[i].status === status) {
-//           index = i + 1;
-//         }
-//       }
-
-//       const start = excludeTargetCardItems.slice(0, index);
-//       const end = excludeTargetCardItems.slice(index);
-
-//       return [...start, targetCard, ...end];
-//     }
-
-// }
-
-// const updatePosition = (prevItems: any) => {
-//     const target = prevItems.find((item: TodoTypes) => item.id === cardId);
-//     const targetCard = { ...targetCard, status, updatedAt: currentDate() };
-
-//     const excludeTargetCardItems = prevItems.filter((item: TodoTypes) => item.id !== cardId);
-//     let statusCount = 0;
-//     let index = 0;
-
-//     for (let i = 0; i < excludeTargetCardItems.length; i++) {
-//       if (excludeTargetCardItems[i].status === status) {
-//         statusCount++;
-
-//         if (statusCount === insertIndex) {
-//           index = i + 1;
-//           break;
-//         }
-//       }
-//     }
-
-//     const start = excludeTargetCardItems.slice(0, index);
-//     const end = excludeTargetCardItems.slice(index);
-//     const updatedItems = [...start, targetCard, ...end];
-
-//     console.log(updatedItems);
-
-//     return updatedItems;
-//   };
