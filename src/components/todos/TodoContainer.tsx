@@ -6,6 +6,8 @@ interface TodoContainerProps {
   status: string;
   setItems: Dispatch<SetStateAction<TodoTypes[]>>;
   todoItems: TodoTypes[];
+  currentStatus: string;
+  filterCreatorItems: TodoTypes[];
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: (text: string, id: number) => void;
@@ -22,6 +24,8 @@ interface TodoContainerProps {
 const TodoContainer: React.FC<TodoContainerProps> = ({
   status,
   todoItems,
+  currentStatus,
+  filterCreatorItems,
   handleTodoCreate,
   handleTodoDelete,
   handleTodoUpdate,
@@ -43,25 +47,30 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
       setSelectCreator(selectCreator.filter((check) => check !== value));
     }
   };
-
-  const handleFilterd = (creators: string[]) => {
-    const result: TodoTypes[][] = [];
-    creators.forEach((creator) => {
-      const data = todoItems.filter((item: any) => item.creator === creator);
-      result.push(data);
-    });
-    console.log('result', result.flat());
+  const caseSwitchList = () => {
+    switch (currentStatus === status) {
+      case filterCreatorItems.length > 0:
+        filterCreatorItems;
+        break;
+      case filterCreatorItems.length > 0:
+        filterCreatorItems;
+        break;
+      default:
+        todoItems;
+    }
+    return todoItems;
   };
 
   return (
     <Wrapper>
       <TodoHeader
-        todoItems={todoItems}
+        todoItems={
+          currentStatus === status && filterCreatorItems.length > 0 ? filterCreatorItems : todoItems
+        }
         status={status}
         selectCreator={selectCreator}
         handleVisibleForm={handleVisibleForm}
         handleTodoSort={handleTodoSort}
-        handleFilterd={handleFilterd}
         handleTodoCreator={handleTodoCreator}
         onCreatorNameCheckedHandler={onCreatorNameCheckedHandler}
         setSelectFilter={setSelectFilter}
@@ -76,11 +85,12 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
       )}
       <TodoList
         status={status}
-        todoItems={todoItems}
+        todoItems={
+          currentStatus === status && filterCreatorItems.length > 0 ? filterCreatorItems : todoItems
+        }
         handleTodoDelete={handleTodoDelete}
         handleTodoUpdate={handleTodoUpdate}
         handleTodoPosUpdate={handleTodoPosUpdate}
-        handleFilterd={handleFilterd}
         setSelectFilter={setSelectFilter}
       />
     </Wrapper>

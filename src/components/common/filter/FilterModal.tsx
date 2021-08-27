@@ -10,7 +10,6 @@ interface DropDownProps {
   filterClose: () => void;
   status: string;
   handleTodoCreator: (creators: string[], status: string) => void;
-  handleFilterd: (creators: string[]) => void;
 }
 
 const Modal: React.FC<DropDownProps> = ({
@@ -20,7 +19,6 @@ const Modal: React.FC<DropDownProps> = ({
   closeModal,
   filterClose,
   handleTodoCreator,
-  handleFilterd,
 }) => {
   const creatorFilterTodo = () => {
     handleTodoCreator(selectCreator, status);

@@ -8,6 +8,10 @@ import { sortTodoHandle } from 'utils/sorting';
 type useTodoType = {
   items: TodoTypes[];
   setItems: Dispatch<SetStateAction<TodoTypes[]>>;
+  currentStatus: string;
+  setCurrentStatus: Dispatch<SetStateAction<string>>;
+  filterCreatorItems: TodoTypes[];
+  setFilterCreatorItems: Dispatch<SetStateAction<TodoTypes[]>>;
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
   handleTodoSort: (status: string) => void;
@@ -23,6 +27,8 @@ type useTodoType = {
 
 const useTodo = (): useTodoType => {
   const [items, setItems] = useState<TodoTypes[]>(mockData);
+  const [currentStatus, setCurrentStatus] = useState<string>('');
+  const [filterCreatorItems, setFilterCreatorItems] = useState<TodoTypes[]>(items);
 
   const handleTodoCreate = useCallback((status: string, text: string, creator: string) => {
     setItems((prevItems) => [
@@ -35,10 +41,12 @@ const useTodo = (): useTodoType => {
         createdAt: currentDate(),
       },
     ]);
+    setFilterCreatorItems([]);
   }, []);
 
   const handleTodoDelete = useCallback((taskID: number) => {
     setItems((prevItems) => prevItems.filter(({ id }) => id !== taskID));
+    setFilterCreatorItems([]);
   }, []);
 
   const handleTodoUpdate = useCallback((text: string, id: number) => {
@@ -87,11 +95,11 @@ const useTodo = (): useTodoType => {
   //filter
   const handleTodoSort = useCallback(
     (status: string) => {
-      const result = [
+      const dateList = [
         ...items.filter((item) => item.status === status).sort(sortTodoHandle),
         ...items,
       ];
-      const sorted = result.reduce(
+      const sorted = dateList.reduce(
         (unique: TodoTypes[], item: TodoTypes) =>
           unique.includes(item) ? unique : [...unique, item],
         [],
@@ -107,12 +115,17 @@ const useTodo = (): useTodoType => {
       const data = items.filter((item: any) => item.status === status && item.creator === creator);
       result.push(data);
     });
-    setItems(result.flat());
+    setCurrentStatus(status);
+    setFilterCreatorItems(result.flat());
   }, []);
 
   return {
     items,
     setItems,
+    currentStatus,
+    setCurrentStatus,
+    filterCreatorItems,
+    setFilterCreatorItems,
     handleTodoCreate,
     handleTodoDelete,
     handleTodoUpdate,

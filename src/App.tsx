@@ -8,6 +8,8 @@ const App: React.FC = () => {
   const {
     items,
     setItems,
+    currentStatus,
+    filterCreatorItems,
     handleTodoCreate,
     handleTodoDelete,
     handleTodoUpdate,
@@ -26,6 +28,8 @@ const App: React.FC = () => {
             status={status}
             todoItems={targetItems(status, items)}
             setItems={setItems}
+            currentStatus={currentStatus}
+            filterCreatorItems={filterCreatorItems}
             handleTodoCreate={handleTodoCreate}
             handleTodoDelete={handleTodoDelete}
             handleTodoUpdate={handleTodoUpdate}

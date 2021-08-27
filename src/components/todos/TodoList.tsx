@@ -13,7 +13,6 @@ interface TodoListProps {
     clickedId: string,
     insertPosition?: string,
   ) => void;
-  handleFilterd: (creators: string[]) => void;
   setSelectFilter: Dispatch<SetStateAction<{ date: boolean; creator: boolean }>>;
 }
 
@@ -23,7 +22,6 @@ const TodoList: React.FC<TodoListProps> = ({
   handleTodoDelete,
   handleTodoUpdate,
   handleTodoPosUpdate,
-  handleFilterd,
 }) => {
   const handleDrop = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
@@ -43,7 +41,7 @@ const TodoList: React.FC<TodoListProps> = ({
       onDragOver={handleDragOverOnColumn}
       onDrop={handleDrop}
     >
-      {todoItems.map((todoItem, i) => (
+      {todoItems.map((todoItem: any, i) => (
         <TodoItem
           key={i}
           status={status}

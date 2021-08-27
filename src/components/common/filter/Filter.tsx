@@ -13,7 +13,6 @@ interface DropDownProps {
   creatorChecked: (checked: boolean, value: string) => void;
   handleTodoSort: (status: string) => void;
   handleTodoCreator: (creators: string[], status: string) => void;
-  handleFilterd: (creators: string[]) => void;
   selectFilter: { date: boolean; creator: boolean };
   setSelectFilter: Dispatch<SetStateAction<{ date: boolean; creator: boolean }>>;
 }
@@ -26,13 +25,14 @@ const Filter: React.FC<DropDownProps> = ({
   selectCreator,
   handleTodoSort,
   handleTodoCreator,
-  handleFilterd,
   selectFilter,
   setSelectFilter,
 }) => {
-  const handleSelectColor = () => {
+  const handleSelectColor = (status: string) => {
     if (selectFilter.date || selectFilter.creator) {
-      return 'green';
+      if (status === '할 일') return `rgba(255, 0, 25, 0.414)`;
+      else if (status === '진행 중') return `rgba(234, 167, 0, 0.386)`;
+      else return `rgba(9, 116, 95, 0.469)`;
     } else {
       return 'black';
     }
@@ -40,7 +40,7 @@ const Filter: React.FC<DropDownProps> = ({
 
   return (
     <Wrapper>
-      <MdFilterList size={24} color={handleSelectColor()} onClick={filterOpen} />
+      <MdFilterList size={24} color={handleSelectColor(status)} onClick={filterOpen} />
       {dropOpen && (
         <FilterDropDown
           status={status}
@@ -49,7 +49,6 @@ const Filter: React.FC<DropDownProps> = ({
           handleTodoSort={handleTodoSort}
           filterClose={filterOpen}
           handleTodoCreator={handleTodoCreator}
-          handleFilterd={handleFilterd}
           setSelectFilter={setSelectFilter}
         />
       )}
