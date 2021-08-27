@@ -4,7 +4,9 @@ import TodoItem from './todos/TodoItem';
 import TodoList from './todos/TodoList';
 
 import CreateButton from './common/container/CreateButton';
-import { Filter, FilterDropDown, FilterModal } from './common/filter';
+import Filter from './common/filter/Filter';
+import FilterDropDown from 'components/common/filter/FilterDropDown';
+import FilterModal from './common/filter/FilterModal';
 import CreateForm from './common/form/CreateForm';
 import FormButtons from './common/form/FormButtons';
 import FormTextArea from './common/form/FormTextArea';

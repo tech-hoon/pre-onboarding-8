@@ -5,31 +5,31 @@ import { Filter, CreateButton, TodoTypes } from 'components';
 interface TodoHeaderProps {
   status: string;
   todoItems: TodoTypes[];
-
+  selectCreator: string[];
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: TodoTypes[], status: string) => void;
+  handleFilterd: (creators: string[]) => void;
+  handleTodoCreator: (creators: string[], status: string) => void;
   handleVisibleForm: () => void;
+  onCreatorNameCheckedHandler: (checked: boolean, value: string) => void;
+  selectFilter: { date: boolean; creator: boolean };
+  setSelectFilter: Dispatch<SetStateAction<{ date: boolean; creator: boolean }>>;
 }
 
 const TodoHeader: React.FC<TodoHeaderProps> = ({
   status,
   todoItems,
+  selectCreator,
   handleTodoSort,
   handleTodoCreator,
   handleVisibleForm,
+  onCreatorNameCheckedHandler,
+  handleFilterd,
+  selectFilter,
+  setSelectFilter,
 }) => {
   const [dropOpen, setDropOpen] = useState<boolean>(false);
-  const [selectCreator, setSelectCreator] = useState<any[]>([]);
 
   const onFilterOpenHandler = () => setDropOpen(!dropOpen);
-
-  const onCreatorNameCheckedHandler = (checked: boolean, value: string) => {
-    if (checked) {
-      setSelectCreator([...selectCreator, value]);
-    } else {
-      setSelectCreator(selectCreator.filter((check) => check !== value));
-    }
-  };
 
   return (
     <Wrapper>
@@ -47,7 +47,10 @@ const TodoHeader: React.FC<TodoHeaderProps> = ({
           creatorChecked={onCreatorNameCheckedHandler}
           handleTodoSort={handleTodoSort}
           handleTodoCreator={handleTodoCreator}
+          handleFilterd={handleFilterd}
           todoItems={todoItems}
+          selectFilter={selectFilter}
+          setSelectFilter={setSelectFilter}
         />
       </Right>
     </Wrapper>
@@ -66,7 +69,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media ${({ theme }) => theme.size.mobile} {
+  @media ${({ theme }) => theme.mobile} {
     flex-direction: column;
     align-items: stretch;
   }
@@ -84,11 +87,11 @@ const Right = styled.div`
   display: flex;
   align-items: center;
 
-  @media ${({ theme }) => theme.size.desktop} {
+  @media ${({ theme }) => theme.desktop} {
     gap: 0 4px;
   }
 
-  @media ${({ theme }) => theme.size.mobile} {
+  @media ${({ theme }) => theme.mobile} {
     justify-content: space-between;
     margin-top: 8px;
   }
@@ -96,17 +99,17 @@ const Right = styled.div`
 
 const Title = styled.h2`
   flex: 1;
-  color: ${({ theme }) => theme.color.BLACK};
+  color: ${({ theme }) => theme.BLACK};
   padding: 6px;
   border-radius: 4px;
   background-color: ${(props) => props.color};
 `;
 
 const Count = styled.h2`
-  color: ${({ theme }) => theme.color.GRAY};
+  color: ${({ theme }) => theme.GRAY};
   margin-left: 8px;
 
-  @media ${({ theme }) => theme.size.mobile} {
+  @media ${({ theme }) => theme.mobile} {
     flex-direction: column;
     display: none;
   }

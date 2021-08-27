@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { MdFilterList } from 'react-icons/md';
 import { FilterDropDown } from 'components';
@@ -8,11 +8,14 @@ interface DropDownProps {
   status: string;
   todoItems: TodoTypes[];
   dropOpen: boolean;
-  selectCreator: TodoTypes[];
+  selectCreator: string[];
   filterOpen: () => void;
   creatorChecked: (checked: boolean, value: string) => void;
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: TodoTypes[], status: string) => void;
+  handleTodoCreator: (creators: string[], status: string) => void;
+  handleFilterd: (creators: string[]) => void;
+  selectFilter: { date: boolean; creator: boolean };
+  setSelectFilter: Dispatch<SetStateAction<{ date: boolean; creator: boolean }>>;
 }
 
 const Filter: React.FC<DropDownProps> = ({
@@ -23,10 +26,21 @@ const Filter: React.FC<DropDownProps> = ({
   selectCreator,
   handleTodoSort,
   handleTodoCreator,
+  handleFilterd,
+  selectFilter,
+  setSelectFilter,
 }) => {
+  const handleSelectColor = () => {
+    if (selectFilter.date || selectFilter.creator) {
+      return 'green';
+    } else {
+      return 'black';
+    }
+  };
+
   return (
     <Wrapper>
-      <MdFilterList size={24} onClick={filterOpen} />
+      <MdFilterList size={24} color={handleSelectColor()} onClick={filterOpen} />
       {dropOpen && (
         <FilterDropDown
           status={status}
@@ -35,6 +49,8 @@ const Filter: React.FC<DropDownProps> = ({
           handleTodoSort={handleTodoSort}
           filterClose={filterOpen}
           handleTodoCreator={handleTodoCreator}
+          handleFilterd={handleFilterd}
+          setSelectFilter={setSelectFilter}
         />
       )}
     </Wrapper>
