@@ -37,7 +37,7 @@ const TodoList: React.FC<TodoListProps> = ({
   useEffect(() => {
     if (selectFilter.creator) {
       const filtered = handleFilterdCreator(selectCreator);
-      setViewItems(filtered);
+      setViewItems(filtered.length > 0 ? filtered : todoItems);
     }
   }, [selectFilter]);
 

@@ -1,6 +1,7 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import FilterModal from './FilterModal';
+import { STATUS } from 'utils/config';
 interface DropDownProps {
   status: string;
   creatorChecked: (checked: boolean, value: string) => void;
@@ -27,14 +28,26 @@ const DropDown: React.FC<DropDownProps> = ({
     filterClose();
   };
 
+  const valueColor = (status: string): string => {
+    if (status === STATUS.Todo) return `rgba(255, 0, 26, 0.2)`;
+    else if (status === STATUS.InProgress) return `rgba(233, 167, 0, 0.318)`;
+    else return `rgba(0, 135, 108, 0.318)`;
+  };
+
   return (
     <FilterOptions>
-      <Value onClick={sortEvent}>생성일</Value>
-      <Value onClick={handleModalClick}>생성자</Value>
+      <Value color={valueColor(status)} onClick={sortEvent}>
+        생성일
+      </Value>
+      <Value color={valueColor(status)} onClick={handleModalClick}>
+        생성자
+      </Value>
       {modalOpen && (
         <FilterModal
           {...{ creatorChecked, setSelectFilter, selectCreator, filterClose }}
           closeModal={handleModalClick}
+          filterClose={filterClose}
+          status={status}
         />
       )}
     </FilterOptions>
@@ -60,7 +73,7 @@ const Value = styled.span`
   padding: 5px 0;
 
   :hover {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: ${(props) => props.color};
     color: #fff;
   }
 `;

@@ -85,11 +85,11 @@ const useTodo = (): useTodoType => {
 
   const handleTodoSort = useCallback(
     (status: string) => {
-      const result = [
+      const dateList = [
         ...items.filter((item) => item.status === status).sort(sortTodoHandle),
         ...items,
       ];
-      const sorted = result.reduce(
+      const sorted = dateList.reduce(
         (unique: TodoTypes[], item: TodoTypes) =>
           unique.includes(item) ? unique : [...unique, item],
         [],

@@ -123,7 +123,6 @@ const Top = styled.div`
   width: 100%;
   margin-left: 97%;
   padding-top: 3%;
-
   @media ${({ theme }) => theme.size.mobile} {
     margin-left: 95%;
     padding-top: 5%;
@@ -138,15 +137,12 @@ const Bottom = styled.div`
   width: 100%;
   display: flex;
   gap: 8px;
-
   @media ${({ theme }) => theme.size.desktop} {
     justify-content: space-between;
   }
-
   @media ${({ theme }) => theme.size.tablet} {
     flex-direction: column;
   }
-
   @media ${({ theme }) => theme.size.mobile} {
     flex-direction: column;
   }
@@ -163,7 +159,6 @@ const TaskName = styled.h3`
     font-size: 1.3em;
     line-height: 1.5;
   }
-
   @media ${({ theme }) => theme.size.mobile} {
     font-size: 1.1em;
     line-height: 1.3;
@@ -178,11 +173,9 @@ const Creator = styled.h3`
 const Date = styled.p`
   color: ${({ theme }) => theme.color.GRAY};
   margin-top: 4px;
-
   @media ${({ theme }) => theme.size.desktop} {
     font-size: 0.7em;
   }
-
   @media ${({ theme }) => theme.size.mobile} {
     font-size: 0.3em;
   }

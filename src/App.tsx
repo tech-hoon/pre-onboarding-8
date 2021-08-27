@@ -7,6 +7,7 @@ import { Header, TodoContainer, TodoTypes } from 'components';
 const App: React.FC = () => {
   const {
     items,
+    setItems,
     handleTodoCreate,
     handleTodoDelete,
     handleTodoUpdate,

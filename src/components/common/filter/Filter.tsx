@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { MdFilterList } from 'react-icons/md';
 import { FilterDropDown } from 'components';
 import { TodoTypes } from 'components/todos/TodoTypes';
+import { STATUS } from 'utils/config';
 
 interface DropDownProps {
   status: string;
@@ -26,9 +27,11 @@ const Filter: React.FC<DropDownProps> = ({
   selectFilter,
   setSelectFilter,
 }) => {
-  const handleSelectColor = () => {
+  const handleSelectColor = (status: string) => {
     if (selectFilter.date || selectFilter.creator) {
-      return 'green';
+      if (status === STATUS.Todo) return `rgba(255, 0, 25, 0.414)`;
+      else if (status === STATUS.InProgress) return `rgba(234, 167, 0, 0.386)`;
+      else return `rgba(9, 116, 95, 0.469)`;
     } else {
       return 'black';
     }
@@ -37,12 +40,13 @@ const Filter: React.FC<DropDownProps> = ({
   return (
     <Wrapper>
       <Button onClick={filterOpen}>
-        <MdFilterList size={24} color={handleSelectColor()} />
+        <MdFilterList size={24} color={handleSelectColor(status)} />
       </Button>
       {dropOpen && (
         <FilterDropDown
           {...{ status, creatorChecked, selectCreator, handleTodoSort, setSelectFilter }}
           filterClose={filterOpen}
+          setSelectFilter={setSelectFilter}
         />
       )}
     </Wrapper>

@@ -8,6 +8,7 @@ interface DropDownProps {
   selectCreator: string[];
   closeModal: () => void;
   filterClose: () => void;
+  status: string;
   setSelectFilter: Dispatch<SetStateAction<{ date: boolean; creator: boolean }>>;
 }
 
