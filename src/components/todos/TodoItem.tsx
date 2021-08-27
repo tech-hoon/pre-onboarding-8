@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { DeleteButton, TodoTypes } from 'components';
 interface TodoItemProps {
@@ -6,6 +6,7 @@ interface TodoItemProps {
   todoItem: TodoTypes;
   handleTodoUpdate: () => void;
   handleTodoDelete: (taskID: number) => void;
+  isAfterElement: Element | undefined;
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({
@@ -13,13 +14,21 @@ const TodoItem: React.FC<TodoItemProps> = ({
   handleTodoUpdate,
   handleTodoDelete,
 }) => {
+  const [dragStart, setDragStart] = useState(false);
   const handleDragStart = (e: React.DragEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
+    console.log(target.parentElement);
+    console.log(target.parentNode);
     e.dataTransfer.setData('card', target.id);
+    setDragStart(true);
   };
 
   const handleDragOverOnCard = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
+  };
+
+  const handleDragEnd = (e: React.DragEvent<HTMLElement>) => {
+    setDragStart(false);
   };
 
   return (
@@ -28,8 +37,10 @@ const TodoItem: React.FC<TodoItemProps> = ({
         id={`card${id}`}
         className="card"
         draggable={true}
+        dragStart={dragStart}
         onDragStart={handleDragStart}
         onDragOver={handleDragOverOnCard}
+        onDragEnd={handleDragEnd}
       >
         <TaskName>{taskName}</TaskName>
         <DeleteButton taskID={id} handleTodoDelete={handleTodoDelete} />
@@ -40,8 +51,12 @@ const TodoItem: React.FC<TodoItemProps> = ({
     </>
   );
 };
-const Wrapper = styled.li`
+interface WrapperProp {
+  dragStart: boolean;
+}
+const Wrapper = styled.li<WrapperProp>`
   border: 1px solid blue;
+  opacity: ${(props) => (props.dragStart ? 0.5 : 1)};
 `;
 
 const TaskName = styled.h3`

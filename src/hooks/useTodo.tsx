@@ -1,10 +1,11 @@
 import { TodoTypes } from 'components';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, Dispatch, SetStateAction } from 'react';
 import { currentDate } from 'utils/date';
 import mockData from 'utils/data.json';
 
 type useTodoType = {
   items: TodoTypes[];
+  setItems: Dispatch<SetStateAction<TodoTypes[]>>;
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: () => void;
@@ -34,7 +35,7 @@ const useTodo = (): useTodoType => {
     // 드래그앤 드랍 등 todoItem 변경하는 함수
   };
 
-  return { items, handleTodoCreate, handleTodoDelete, handleTodoUpdate };
+  return { items, setItems, handleTodoCreate, handleTodoDelete, handleTodoUpdate };
 };
 
 export default useTodo;

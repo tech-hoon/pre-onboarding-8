@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { TodoItem, TodoTypes } from 'components';
 interface TodoListProps {
   status: string;
+  items: TodoTypes[];
+  setItems: Dispatch<SetStateAction<TodoTypes[]>>;
   todoItems: TodoTypes[];
   handleTodoUpdate: () => void;
   handleTodoDelete: (taskID: number) => void;
 }
+interface afterElement {
+  offset: number;
+  element?: Element;
+}
 
 const TodoList: React.FC<TodoListProps> = ({
   status,
+  items,
   todoItems,
   handleTodoDelete,
   handleTodoUpdate,
 }) => {
+  useEffect(() => console.log(items), [items]);
+  const [isAfterElement, setAfterElement] = useState<Element | undefined>();
+  const currentColumnRef = useRef<HTMLUListElement>(null);
   const handleDrop = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
     const target = e.target as HTMLElement;
@@ -24,12 +34,35 @@ const TodoList: React.FC<TodoListProps> = ({
     const clickedCard = card_id ? document.getElementById(card_id) : null;
 
     if (!clickedCard) return;
+    console.log(clickedCard, target, currentColumn);
     if (target === currentColumn) currentColumn.appendChild(clickedCard);
     else currentCard?.insertAdjacentElement(getInsertPlace(e), clickedCard);
   };
+  /*
+  const getDragAfterElement = (currentColumnItemsArray: Element[], y: number): afterElement => {
+    const nextItem = currentColumnItemsArray.reduce(
+      (closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      },
+      { offset: Number.NEGATIVE_INFINITY },
+    );
+    return nextItem;
+  };*/
 
   const handleDragOverOnColumn = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
+    /*
+    const currentColumnItems = currentColumnRef?.current?.children;
+    const currentColumnItemsArray = Array.prototype.slice.call(currentColumnItems);
+    const afterElement = getDragAfterElement(currentColumnItemsArray, e.clientY).element;
+
+    setAfterElement(afterElement);*/
   };
 
   const getInsertPlace = (e: React.DragEvent<HTMLElement>) => {
@@ -45,7 +78,12 @@ const TodoList: React.FC<TodoListProps> = ({
     return insertPlace;
   };
   return (
-    <Wrapper className="cardlist" onDragOver={handleDragOverOnColumn} onDrop={handleDrop}>
+    <Wrapper
+      ref={currentColumnRef}
+      className="cardlist"
+      onDragOver={handleDragOverOnColumn}
+      onDrop={handleDrop}
+    >
       {todoItems.map((todoItem, i) => (
         <TodoItem
           key={i}
@@ -53,6 +91,7 @@ const TodoList: React.FC<TodoListProps> = ({
           todoItem={todoItem}
           handleTodoUpdate={handleTodoUpdate}
           handleTodoDelete={handleTodoDelete}
+          isAfterElement={isAfterElement}
         />
       ))}
     </Wrapper>
