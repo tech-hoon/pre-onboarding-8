@@ -59,7 +59,7 @@ $ npm run start
 
 ## 스크린샷
 
-<img src="https://user-images.githubusercontent.com/19265753/131162233-9dbfa9fd-b9f9-46ca-84f0-7dd4eb88e069.gif"/>
+<img src="https://user-images.githubusercontent.com/19265753/131162233-9dbfa9fd-b9f9-46ca-84f0-7dd4eb88e069.gif" width="1000px"/>
 <div style={display: flex;}>
    <img src="https://user-images.githubusercontent.com/19265753/131162733-ab35bbe8-1680-4d44-b2a0-89e7ac485280.png" width="700px"/>
    <img src="https://user-images.githubusercontent.com/19265753/131162327-c8352ca3-28cd-4ac4-9ea7-f6905e1ce1b5.png" width="240px"/>
