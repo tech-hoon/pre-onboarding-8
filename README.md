@@ -9,6 +9,7 @@
 - 스크롤시 Header가 사라지지 않고 화면 상단에 고정
 - Drag and Drop => Task의 순서 및 task 상태 변경.
 - 정렬, 필터링 기능: todo 생성일기준 정렬, todo생성자 기준 필터링 가능
+- 반응형 스타일링
 
 
 <br>
@@ -29,7 +30,7 @@
 ## 💙Who Did What
 
 - 🐥 김남주 : 드래그 앤 드롭 구현
-- 🐷 남택훈 : 
+- 🐷 남택훈 : 아이템 추가/삭제, 스타일링
 - 🐺 백진수 :
 - 🐭 이삭 : 
 
@@ -50,7 +51,7 @@ $ npm run start
 
 ## ☀Project Link
 
-데모 사이트: 
+데모 사이트: https://tech-hoon.github.io/pre-onboarding-8/
 
 
 <br>
