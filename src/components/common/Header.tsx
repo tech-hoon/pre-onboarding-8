@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Header: React.FC = () => {
+const Header: React.FC = (): JSX.Element => {
   return (
     <>
       <HeaderWrapper>Todo List</HeaderWrapper>

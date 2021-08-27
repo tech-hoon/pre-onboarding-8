@@ -1,4 +1,4 @@
-export const getInsertPlace = (currentCard: Element | null, y: number) => {
+export const getInsertPlace = (currentCard: Element | null, y: number): string => {
   if (!currentCard) return 'afterend';
   const placeInfo = currentCard.getBoundingClientRect();
   const placeY = placeInfo.bottom - y;

@@ -8,7 +8,9 @@ interface FormTextArea {
 }
 
 const FormTextArea: React.FC<FormTextArea> = ({ placeholder, text, handleTextAreaChange }) => {
-  return <TextArea placeholder={placeholder} value={text} onChange={handleTextAreaChange} />;
+  return (
+    <TextArea placeholder={placeholder} value={text} onChange={handleTextAreaChange} autoFocus />
+  );
 };
 
 const TextArea = styled.textarea`
