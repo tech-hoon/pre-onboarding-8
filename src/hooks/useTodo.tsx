@@ -15,7 +15,6 @@ type useTodoType = {
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: string[], status: string) => void;
   handleTodoUpdate: (text: string, id: number) => void;
   handleTodoPosUpdate: (
     status: string,
@@ -86,7 +85,6 @@ const useTodo = (): useTodoType => {
 
         const start = excludeTargetCardItems.slice(0, index);
         const end = excludeTargetCardItems.slice(index);
-
         return [...start, targetCard, ...end];
       };
     },
@@ -130,7 +128,6 @@ const useTodo = (): useTodoType => {
     handleTodoDelete,
     handleTodoUpdate,
     handleTodoSort,
-    handleTodoCreator,
     handleTodoPosUpdate,
   };
 };

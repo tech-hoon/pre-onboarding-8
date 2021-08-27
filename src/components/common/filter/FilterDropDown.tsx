@@ -1,37 +1,31 @@
 import { TodoTypes } from 'components/todos/TodoTypes';
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import CreatorModal from './FilterModal';
+import FilterModal from './FilterModal';
 interface DropDownProps {
   status: string;
   creatorChecked: (checked: boolean, value: string) => void;
   selectCreator: string[];
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: string[], status: string) => void;
   filterClose: () => void;
   setSelectFilter: Dispatch<SetStateAction<{ date: boolean; creator: boolean }>>;
 }
 
 const DropDown: React.FC<DropDownProps> = ({
+  status,
   creatorChecked,
   selectCreator,
   handleTodoSort,
-  handleTodoCreator,
   filterClose,
-  status,
   setSelectFilter,
 }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const handleModalClick = () => {
-    setModalOpen(!modalOpen);
-    setSelectFilter({ date: true, creator: false });
-  };
+  const handleModalClick = () => setModalOpen(!modalOpen);
 
   const sortEvent = () => {
     handleTodoSort(status);
     filterClose();
-    setSelectFilter({ date: true, creator: false });
   };
 
   const valueColor = (status: string): string => {
@@ -49,11 +43,9 @@ const DropDown: React.FC<DropDownProps> = ({
         생성자
       </Value>
       {modalOpen && (
-        <CreatorModal
-          creatorChecked={creatorChecked}
-          selectCreator={selectCreator}
+        <FilterModal
+          {...{ creatorChecked, setSelectFilter, selectCreator, filterClose }}
           closeModal={handleModalClick}
-          handleTodoCreator={handleTodoCreator}
           filterClose={filterClose}
           status={status}
         />

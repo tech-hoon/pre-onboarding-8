@@ -7,7 +7,6 @@ interface TodoHeaderProps {
   todoItems: TodoTypes[];
   selectCreator: string[];
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: string[], status: string) => void;
   handleVisibleForm: () => void;
   onCreatorNameCheckedHandler: (checked: boolean, value: string) => void;
   selectFilter: { date: boolean; creator: boolean };
@@ -19,14 +18,12 @@ const TodoHeader: React.FC<TodoHeaderProps> = ({
   todoItems,
   selectCreator,
   handleTodoSort,
-  handleTodoCreator,
   handleVisibleForm,
   onCreatorNameCheckedHandler,
   selectFilter,
   setSelectFilter,
 }) => {
   const [dropOpen, setDropOpen] = useState<boolean>(false);
-
   const onFilterOpenHandler = () => setDropOpen(!dropOpen);
 
   return (
@@ -38,13 +35,18 @@ const TodoHeader: React.FC<TodoHeaderProps> = ({
       <Right>
         <CreateButton handleVisibleForm={handleVisibleForm} />
         <Filter
-          status={status}
-          dropOpen={dropOpen}
+          {...{
+            status,
+            dropOpen,
+            selectCreator,
+            handleTodoSort,
+            todoItems,
+            selectFilter,
+            setSelectFilter,
+          }}
           filterOpen={onFilterOpenHandler}
-          selectCreator={selectCreator}
           creatorChecked={onCreatorNameCheckedHandler}
           handleTodoSort={handleTodoSort}
-          handleTodoCreator={handleTodoCreator}
           todoItems={todoItems}
           selectFilter={selectFilter}
           setSelectFilter={setSelectFilter}
@@ -102,6 +104,7 @@ const Title = styled.h2`
 const Count = styled.h2`
   color: ${({ theme }) => theme.color.GRAY};
   margin-left: 8px;
+
   @media ${({ theme }) => theme.size.mobile} {
     flex-direction: column;
     display: none;
