@@ -6,20 +6,20 @@ interface TodoItemProps {
   todoItem: TodoTypes;
   handleTodoUpdate: () => void;
   handleTodoDelete: (taskID: number) => void;
-  isAfterElement: Element | undefined;
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({
-  todoItem: { id, taskName, creator, createdAt, updatedAt },
+  todoItem: { id, taskName, status, creator, createdAt, updatedAt },
   handleTodoUpdate,
   handleTodoDelete,
 }) => {
   const [dragStart, setDragStart] = useState(false);
   const handleDragStart = (e: React.DragEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
-    console.log(target.parentElement);
-    console.log(target.parentNode);
-    e.dataTransfer.setData('card', target.id);
+    e.dataTransfer.setData(
+      'card',
+      JSON.stringify({ id, taskName, status, creator, createdAt, updatedAt }),
+    );
     setDragStart(true);
   };
 
@@ -42,7 +42,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
         onDragOver={handleDragOverOnCard}
         onDragEnd={handleDragEnd}
       >
-        <TaskName>{taskName}</TaskName>
+        <TaskName>{taskName + id}</TaskName>
         <DeleteButton taskID={id} handleTodoDelete={handleTodoDelete} />
         <p>{creator}</p>
         <p>생성일 {createdAt}</p>

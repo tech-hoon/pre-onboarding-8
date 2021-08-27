@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { TodoItem, TodoTypes } from 'components';
+import { getInsertPlace, appendChild, insertChild } from 'utils/dragNdrop';
 interface TodoListProps {
   status: string;
   items: TodoTypes[];
@@ -9,88 +10,40 @@ interface TodoListProps {
   handleTodoUpdate: () => void;
   handleTodoDelete: (taskID: number) => void;
 }
-interface afterElement {
-  offset: number;
-  element?: Element;
-}
 
 const TodoList: React.FC<TodoListProps> = ({
   status,
   items,
+  setItems,
   todoItems,
   handleTodoDelete,
   handleTodoUpdate,
 }) => {
   useEffect(() => console.log(items), [items]);
-  const [isAfterElement, setAfterElement] = useState<Element | undefined>();
-  const currentColumnRef = useRef<HTMLUListElement>(null);
   const handleDrop = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
     const target = e.target as HTMLElement;
-    const card_id = e.dataTransfer.getData('card');
-
-    const currentCard = target.closest('.card');
-    const currentColumn = target.closest('.cardlist');
-    const clickedCard = card_id ? document.getElementById(card_id) : null;
-
+    //기존클릭한카드
+    const card = JSON.parse(e.dataTransfer.getData('card'));
+    const clickedCard = card ? document.getElementById(`card${card.id}`) : null;
     if (!clickedCard) return;
-    console.log(clickedCard, target, currentColumn);
-    if (target === currentColumn) currentColumn.appendChild(clickedCard);
-    else currentCard?.insertAdjacentElement(getInsertPlace(e), clickedCard);
+    //새로운 position
+    const currentCard = target.closest('.card');
+    const currentCardID = Number(currentCard?.id.replace(/[a-zA-Z]/g, ''));
 
-    // const clickedCard = JSON.parse(card_id);
-    // console.log(target);
-    // if (!clickedCard) return;
-    // if (target === currentColumn) {
-    //   const movedItems = (item: TodoTypes[]) =>
-    //     item.filter((el: TodoTypes) => el.id !== clickedCard.id).concat(clickedCard);
-    //   setItems((item) => movedItems(item.slice()));
-    //   console.log('?');
-    // } else currentCard?.insertAdjacentElement(getInsertPlace(e), clickedCard);
-  };
-  /*
-  const getDragAfterElement = (currentColumnItemsArray: Element[], y: number): afterElement => {
-    const nextItem = currentColumnItemsArray.reduce(
-      (closest, child) => {
-        const box = child.getBoundingClientRect();
-        const offset = y - box.top - box.height / 2;
-        if (offset < 0 && offset > closest.offset) {
-          return { offset: offset, element: child };
-        } else {
-          return closest;
-        }
-      },
-      { offset: Number.NEGATIVE_INFINITY },
-    );
-    return nextItem;
-  };*/
-
-  const handleDragOverOnColumn = (e: React.DragEvent<HTMLElement>) => {
-    e.preventDefault();
-    /*
-    const currentColumnItems = currentColumnRef?.current?.children;
-    const currentColumnItemsArray = Array.prototype.slice.call(currentColumnItems);
-    const afterElement = getDragAfterElement(currentColumnItemsArray, e.clientY).element;
-
-    setAfterElement(afterElement);*/
+    //새로운 position 이동
+    const insertPosition = getInsertPlace(e);
+    if (target === target.closest('.cardlist'))
+      setItems((items) => appendChild(items.slice(), status, card));
+    else
+      setItems((items) => insertChild(items.slice(), status, card, insertPosition, currentCardID));
   };
 
-  const getInsertPlace = (e: React.DragEvent<HTMLElement>) => {
-    const target = e.target as HTMLElement;
-    const itemCard = target.closest('.card');
-    if (!itemCard) return 'afterend';
+  const handleDragOverOnColumn = (e: React.DragEvent<HTMLElement>) => e.preventDefault();
 
-    const placeInfo = itemCard?.getBoundingClientRect();
-    const placeY = placeInfo.bottom - e.clientY;
-    const targetHeight = placeInfo.bottom - placeInfo.top;
-    const insertPlace = placeY > targetHeight / 2 ? 'beforebegin' : 'afterend';
-
-    return insertPlace;
-  };
   return (
     <Wrapper
-      ref={currentColumnRef}
-      className="cardlist"
+      className={`cardlist ${status}`}
       onDragOver={handleDragOverOnColumn}
       onDrop={handleDrop}
     >
@@ -101,7 +54,6 @@ const TodoList: React.FC<TodoListProps> = ({
           todoItem={todoItem}
           handleTodoUpdate={handleTodoUpdate}
           handleTodoDelete={handleTodoDelete}
-          isAfterElement={isAfterElement}
         />
       ))}
     </Wrapper>
