@@ -2,16 +2,19 @@ import React, { useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { TodoTypes } from './TodoTypes';
 import { Filter, CreateButton } from 'components';
+import TodoItem from './TodoItem';
 
 interface TodoHeaderProps {
   status: string;
+  todoItems: TodoTypes[];
   setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: TodoTypes[]) => void;
+  handleTodoCreator: (creators: TodoTypes[], status: string) => void;
 }
 
 const TodoHeader: React.FC<TodoHeaderProps> = ({
   status,
+  todoItems,
   setIsVisibleForm,
   handleTodoSort,
   handleTodoCreator,
@@ -42,6 +45,7 @@ const TodoHeader: React.FC<TodoHeaderProps> = ({
         creatorChecked={onCreatorNameCheckedHandler}
         handleTodoSort={handleTodoSort}
         handleTodoCreator={handleTodoCreator}
+        todoItems={todoItems}
       />
     </Wrapper>
   );

@@ -1,6 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { TodoHeader, TodoList, Form, TodoTypes } from 'components';
+import { TodoHeader, TodoList, InputForm, TodoTypes } from 'components';
 
 interface TodoContainerProps {
   status: string;
@@ -10,7 +10,7 @@ interface TodoContainerProps {
   handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: () => void;
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: TodoTypes[]) => void;
+  handleTodoCreator: (creators: TodoTypes[], status: string) => void;
 }
 
 const TodoContainer: React.FC<TodoContainerProps> = ({
@@ -22,6 +22,7 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
   handleTodoSort,
   handleTodoCreator,
 }) => {
+  //인풋창visible
   const [isVisibleForm, setIsVisibleForm] = useState(false);
 
   // const filterList = (value: TodoTypes[]) => {
@@ -37,12 +38,13 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
     <Wrapper>
       <TodoHeader
         status={status}
+        todoItems={todoItems}
         setIsVisibleForm={setIsVisibleForm}
         handleTodoSort={handleTodoSort}
         handleTodoCreator={handleTodoCreator}
       />
       {isVisibleForm && (
-        <Form
+        <InputForm
           status={status}
           setIsVisibleForm={setIsVisibleForm}
           handleTodoCreate={handleTodoCreate}

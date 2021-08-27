@@ -6,15 +6,18 @@ import { TodoTypes } from 'components/todos/TodoTypes';
 
 interface DropDownProps {
   status: string;
+  todoItems: TodoTypes[];
   dropOpen: boolean;
   selectCreator: TodoTypes[];
   filterOpen: () => void;
   creatorChecked: (checked: boolean, value: string) => void;
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: TodoTypes[]) => void;
+  handleTodoCreator: (creators: TodoTypes[], status: string) => void;
 }
 
 const Filter: React.FC<DropDownProps> = ({
+  status,
+  todoItems,
   dropOpen,
   filterOpen,
   creatorChecked,

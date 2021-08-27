@@ -5,13 +5,13 @@ import { CREATOR_NAME } from 'utils/config';
 
 import { RadioBox } from 'components';
 
-interface FormProps {
+interface InputFormProps {
   status: string;
   setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
   handleTodoCreate: (status: string, text: string, creator: string) => void;
 }
 
-const Form: React.FC<FormProps> = ({ status, setIsVisibleForm, handleTodoCreate }) => {
+const InputForm: React.FC<InputFormProps> = ({ status, setIsVisibleForm, handleTodoCreate }) => {
   const [text, setText] = useState('');
   const [creator, setCreator] = useState('');
 
@@ -37,7 +37,7 @@ const Form: React.FC<FormProps> = ({ status, setIsVisibleForm, handleTodoCreate 
 
   return (
     <Wrapper>
-      <FormStyled onSubmit={handleFormSubmit}>
+      <InputFormStyled onSubmit={handleFormSubmit}>
         <TextArea placeholder="Enter a note" value={text} onChange={handleTextAreaChange} />
         <RadioBox values={CREATOR_NAME} handleRadioChange={handleRadioChange} status={status} />
         <ButtonBox>
@@ -48,7 +48,7 @@ const Form: React.FC<FormProps> = ({ status, setIsVisibleForm, handleTodoCreate 
             Cancel
           </CancelButton>
         </ButtonBox>
-      </FormStyled>
+      </InputFormStyled>
     </Wrapper>
   );
 };
@@ -60,7 +60,7 @@ const Wrapper = styled.div`
   border-radius: 10px;
 `;
 
-const FormStyled = styled.form``;
+const InputFormStyled = styled.form``;
 
 const TextArea = styled.textarea`
   width: 100%;
@@ -98,4 +98,4 @@ const CancelButton = styled.button`
   background-color: #fafbfd;
 `;
 
-export default Form;
+export default InputForm;

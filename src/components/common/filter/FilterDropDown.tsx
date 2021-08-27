@@ -8,7 +8,7 @@ interface DropDownProps {
   creatorChecked: (checked: boolean, value: string) => void;
   selectCreator: TodoTypes[];
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: TodoTypes[]) => void;
+  handleTodoCreator: (creators: TodoTypes[], status: string) => void;
   filterClose: () => void;
 }
 

@@ -4,7 +4,7 @@ import TodoItem from './todos/TodoItem';
 import TodoList from './todos/TodoList';
 import CreateButton from './common/CreateButton';
 import { Filter, FilterDropDown, FilterModal } from './common/filter';
-import Form from './common/Form';
+import InputForm from './common/InputForm';
 import Header from './common/Header';
 import Radio from './common/Radio';
 import RadioBox from './common/RadioBox';
@@ -20,7 +20,7 @@ export {
   Filter,
   FilterDropDown,
   FilterModal,
-  Form,
+  InputForm,
   Header,
   Radio,
   RadioBox,

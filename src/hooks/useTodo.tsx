@@ -11,7 +11,7 @@ type useTodoType = {
   handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: () => void;
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: TodoTypes[]) => void;
+  handleTodoCreator: (creators: TodoTypes[], status: string) => void;
 };
 
 const useTodo = (): useTodoType => {
@@ -39,22 +39,37 @@ const useTodo = (): useTodoType => {
   };
 
   //filter
-  const handleTodoSort = useCallback((status: string) => {
-    setItems((prevItems) =>
-      prevItems.filter((item) => item.status !== status).sort(sortTodoHandle),
-    );
-  }, []);
+  const handleTodoSort = useCallback(
+    (status: string) => {
+      const result = [
+        ...items.filter((item) => item.status === status).sort(sortTodoHandle),
+        ...items,
+      ];
+      const sorted = result.reduce(
+        (unique: TodoTypes[], item: TodoTypes) =>
+          unique.includes(item) ? unique : [...unique, item],
+        [],
+      );
+      setItems(sorted);
+    },
+    [items],
+  );
 
-  const handleTodoCreator = useCallback((creators: TodoTypes[]) => {
-    const result = creators
-      .map((creator: TodoTypes) =>
-        setItems((prev) => prev.filter((item: any) => item.creator === creator)),
-      )
-      .flat();
+  const handleTodoCreator = useCallback(
+    (creators: TodoTypes[], status: string) => {
+      const result: TodoTypes[][] = [];
+      creators.forEach((creator) => {
+        const data = items.filter(
+          (item: any) => item.status === status && item.creator === creator,
+        );
+        result.push(data);
+      });
+      console.log(result.flat());
+      setItems((prev) => [...result.flat(), ...prev]);
+    },
 
-    console.log('Creator', creators);
-    console.log('result', result);
-  }, []);
+    [],
+  );
 
   return {
     items,
