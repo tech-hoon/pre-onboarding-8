@@ -37,6 +37,16 @@ const TodoList: React.FC<TodoListProps> = ({
     console.log(clickedCard, target, currentColumn);
     if (target === currentColumn) currentColumn.appendChild(clickedCard);
     else currentCard?.insertAdjacentElement(getInsertPlace(e), clickedCard);
+
+    // const clickedCard = JSON.parse(card_id);
+    // console.log(target);
+    // if (!clickedCard) return;
+    // if (target === currentColumn) {
+    //   const movedItems = (item: TodoTypes[]) =>
+    //     item.filter((el: TodoTypes) => el.id !== clickedCard.id).concat(clickedCard);
+    //   setItems((item) => movedItems(item.slice()));
+    //   console.log('?');
+    // } else currentCard?.insertAdjacentElement(getInsertPlace(e), clickedCard);
   };
   /*
   const getDragAfterElement = (currentColumnItemsArray: Element[], y: number): afterElement => {
