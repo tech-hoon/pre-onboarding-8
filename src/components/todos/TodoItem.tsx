@@ -15,7 +15,6 @@ const TodoItem: React.FC<TodoItemProps> = ({
   handleTodoUpdate,
   handleTodoDelete,
 }) => {
-  const [dragStart, setDragStart] = useState(false);
   const [dragEnter, setEnterDrag] = useState(false);
   const [onEffect, setEffect] = useState({ up: false, down: false });
   const [isClicked, setIsClicked] = useState(false);
@@ -29,7 +28,6 @@ const TodoItem: React.FC<TodoItemProps> = ({
       'card',
       JSON.stringify({ id, taskName, status, creator, createdAt, updatedAt }),
     );
-    setDragStart(true);
   };
 
   const handleDragOverOnCard = (e: React.DragEvent<HTMLElement>) => {
@@ -39,19 +37,19 @@ const TodoItem: React.FC<TodoItemProps> = ({
     getInsertPlace(target.closest('.card'), e.clientY) === 'beforebegin'
       ? setEffect({ up: true, down: false })
       : setEffect({ up: false, down: true });
-    setDragStart(false);
   };
 
   const handleDragLeave = () => setEnterDrag(false);
 
-  const handleDragDrop = () => setEffect({ up: false, down: false });
+  const handleDragDrop = () => {
+    setEffect({ up: false, down: false });
+  };
 
   return (
     <Wrapper
       id={`${id}`}
       className="card"
       draggable={true}
-      dragStart={dragStart}
       dragEnter={dragEnter}
       onEffect={onEffect}
       onDragStart={handleDragStart}
@@ -99,13 +97,11 @@ interface Effect {
   down: boolean;
 }
 interface WrapperProp {
-  dragStart: boolean;
   dragEnter: boolean;
   onEffect: Effect;
 }
 
 const Wrapper = styled.div<WrapperProp>`
-  opacity: ${(props) => (props.dragStart ? 0.5 : 1)};
   border: 5px solid transparent;
   border-top: ${(props) =>
     props.dragEnter && props.onEffect.up && `5px solid ${props.theme.color.SKYBLUE}`};

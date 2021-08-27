@@ -7,8 +7,6 @@ interface TodoHeaderProps {
   todoItems: TodoTypes[];
   selectCreator: string[];
   handleTodoSort: (status: string) => void;
-  handleFilterd: (creators: string[]) => void;
-  handleTodoCreator: (creators: string[], status: string) => void;
   handleVisibleForm: () => void;
   onCreatorNameCheckedHandler: (checked: boolean, value: string) => void;
   selectFilter: { date: boolean; creator: boolean };
@@ -20,15 +18,12 @@ const TodoHeader: React.FC<TodoHeaderProps> = ({
   todoItems,
   selectCreator,
   handleTodoSort,
-  handleTodoCreator,
   handleVisibleForm,
   onCreatorNameCheckedHandler,
-  handleFilterd,
   selectFilter,
   setSelectFilter,
 }) => {
   const [dropOpen, setDropOpen] = useState<boolean>(false);
-
   const onFilterOpenHandler = () => setDropOpen(!dropOpen);
 
   return (
@@ -40,17 +35,17 @@ const TodoHeader: React.FC<TodoHeaderProps> = ({
       <Right>
         <CreateButton handleVisibleForm={handleVisibleForm} />
         <Filter
-          status={status}
-          dropOpen={dropOpen}
+          {...{
+            status,
+            dropOpen,
+            selectCreator,
+            handleTodoSort,
+            todoItems,
+            selectFilter,
+            setSelectFilter,
+          }}
           filterOpen={onFilterOpenHandler}
-          selectCreator={selectCreator}
           creatorChecked={onCreatorNameCheckedHandler}
-          handleTodoSort={handleTodoSort}
-          handleTodoCreator={handleTodoCreator}
-          handleFilterd={handleFilterd}
-          todoItems={todoItems}
-          selectFilter={selectFilter}
-          setSelectFilter={setSelectFilter}
         />
       </Right>
     </Wrapper>

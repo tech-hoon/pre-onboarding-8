@@ -12,8 +12,6 @@ interface DropDownProps {
   filterOpen: () => void;
   creatorChecked: (checked: boolean, value: string) => void;
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: string[], status: string) => void;
-  handleFilterd: (creators: string[]) => void;
   selectFilter: { date: boolean; creator: boolean };
   setSelectFilter: Dispatch<SetStateAction<{ date: boolean; creator: boolean }>>;
 }
@@ -25,14 +23,12 @@ const Filter: React.FC<DropDownProps> = ({
   creatorChecked,
   selectCreator,
   handleTodoSort,
-  handleTodoCreator,
-  handleFilterd,
   selectFilter,
   setSelectFilter,
 }) => {
   const handleSelectColor = () => {
     if (selectFilter.date || selectFilter.creator) {
-      return 'red';
+      return 'green';
     } else {
       return 'black';
     }
@@ -45,14 +41,8 @@ const Filter: React.FC<DropDownProps> = ({
       </Button>
       {dropOpen && (
         <FilterDropDown
-          status={status}
-          creatorChecked={creatorChecked}
-          selectCreator={selectCreator}
-          handleTodoSort={handleTodoSort}
+          {...{ status, creatorChecked, selectCreator, handleTodoSort, setSelectFilter }}
           filterClose={filterOpen}
-          handleTodoCreator={handleTodoCreator}
-          handleFilterd={handleFilterd}
-          setSelectFilter={setSelectFilter}
         />
       )}
     </Wrapper>

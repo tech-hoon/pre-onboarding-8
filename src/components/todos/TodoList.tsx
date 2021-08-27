@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { TodoItem, TodoTypes } from 'components';
 import { getInsertPlace } from 'utils/dragNdrop';
@@ -13,6 +13,9 @@ interface TodoListProps {
     clickedId: string,
     insertPosition?: string,
   ) => void;
+  handleFilterdCreator: (creators: string[]) => TodoTypes[];
+  selectFilter: { date: boolean; creator: boolean };
+  selectCreator: string[];
 }
 
 const TodoList: React.FC<TodoListProps> = ({
@@ -21,7 +24,22 @@ const TodoList: React.FC<TodoListProps> = ({
   handleTodoDelete,
   handleTodoUpdate,
   handleTodoPosUpdate,
+  handleFilterdCreator,
+  selectFilter,
+  selectCreator,
 }) => {
+  const [viewItem, setViewItems] = useState(todoItems);
+  useEffect(() => {
+    setViewItems(todoItems);
+  }, [todoItems]);
+
+  useEffect(() => {
+    if (selectFilter.creator) {
+      const filtered = handleFilterdCreator(selectCreator);
+      setViewItems(filtered);
+    }
+  }, [selectFilter]);
+
   const handleDrop = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
     const target = e.target as HTMLElement;
@@ -40,7 +58,7 @@ const TodoList: React.FC<TodoListProps> = ({
       onDragOver={handleDragOverOnColumn}
       onDrop={handleDrop}
     >
-      {todoItems.map((todoItem, i) => (
+      {viewItem.map((todoItem, i) => (
         <TodoItem
           key={i}
           status={status}

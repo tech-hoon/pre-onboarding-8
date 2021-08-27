@@ -11,7 +11,6 @@ type useTodoType = {
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: string[], status: string) => void;
   handleTodoUpdate: (text: string, id: number) => void;
   handleTodoPosUpdate: (
     status: string,
@@ -78,7 +77,6 @@ const useTodo = (): useTodoType => {
 
         const start = excludeTargetCardItems.slice(0, index);
         const end = excludeTargetCardItems.slice(index);
-
         return [...start, targetCard, ...end];
       };
     },
@@ -101,15 +99,6 @@ const useTodo = (): useTodoType => {
     [items],
   );
 
-  const handleTodoCreator = useCallback((creators: string[], status: string) => {
-    const result: TodoTypes[][] = [];
-    creators.forEach((creator) => {
-      const data = items.filter((item: any) => item.status === status && item.creator === creator);
-      result.push(data);
-    });
-    setItems(result.flat());
-  }, []);
-
   return {
     items,
     setItems,
@@ -117,7 +106,6 @@ const useTodo = (): useTodoType => {
     handleTodoDelete,
     handleTodoUpdate,
     handleTodoSort,
-    handleTodoCreator,
     handleTodoPosUpdate,
   };
 };
