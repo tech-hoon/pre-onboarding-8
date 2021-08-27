@@ -18,7 +18,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ taskID, handleTodoDelete })
 const Button = styled.button`
   font-size: 0.8em;
 
-  color: ${({ theme }) => theme.ICON_COLOR};
+  color: ${({ theme }) => theme.color.ICON_COLOR};
 `;
 
 export default DeleteButton;
