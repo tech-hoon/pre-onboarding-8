@@ -16,7 +16,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
   handleTodoDelete,
 }) => {
   const [dragEnter, setEnterDrag] = useState(false);
-  const [onEffect, setEffect] = useState({ up: false, down: false });
+  const [effect, setEffect] = useState({ up: false, down: false });
   const [isClicked, setIsClicked] = useState(false);
 
   const handleVisibleForm = () => {
@@ -51,7 +51,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
       className="card"
       draggable={true}
       dragEnter={dragEnter}
-      onEffect={onEffect}
+      effect={effect}
       onDragStart={handleDragStart}
       onDragOver={handleDragOverOnCard}
       onDragLeave={handleDragLeave}
@@ -98,15 +98,15 @@ interface Effect {
 }
 interface WrapperProp {
   dragEnter: boolean;
-  onEffect: Effect;
+  effect: Effect;
 }
 
 const Wrapper = styled.div<WrapperProp>`
   border: 5px solid transparent;
   border-top: ${(props) =>
-    props.dragEnter && props.onEffect.up && `5px solid ${props.theme.color.SKYBLUE}`};
+    props.dragEnter && props.effect.up && `5px solid ${props.theme.color.SKYBLUE}`};
   border-bottom: ${(props) =>
-    props.dragEnter && props.onEffect.down && `5px solid ${props.theme.color.SKYBLUE}`};
+    props.dragEnter && props.effect.down && `5px solid ${props.theme.color.SKYBLUE}`};
 `;
 
 const Item = styled.li`
