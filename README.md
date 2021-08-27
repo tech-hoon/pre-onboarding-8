@@ -2,7 +2,6 @@
 
 ## ☁Basic requirements
 
-
 - Task 목록 조회
 - 새로운 Task 추가/삭제
 - Task 내용 및 상태 변경
@@ -10,6 +9,7 @@
 - Drag and Drop => Task의 순서 및 task 상태 변경, drag 효과 반영
 - 정렬, 필터링 기능: todo 생성일기준 정렬, todo생성자 기준 필터링 가능
 - 반응형 스타일링
+
 
 
 <br>
@@ -29,10 +29,12 @@
 
 ## 💙Who Did What
 
+
 - 🐥 김남주 : 드래그 앤 드롭
 - 🐷 남택훈 : 아이템 추가/삭제, 스타일링
 - 🐺 백진수 : 아이템 입력폼, 아이템 수정
 - 🐭 이삭 : 필터링
+
 
 
 <br>
@@ -44,13 +46,13 @@
 $ npm install
 # serve with hot reload at localhost:3000
 $ npm run start
-
 ```
 
 <br>
 
 
 ## ☀Project Link
+
 
 데모 링크: https://tech-hoon.github.io/pre-onboarding-8/
 
