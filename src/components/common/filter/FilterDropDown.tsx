@@ -56,7 +56,8 @@ const FilterOptions = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  border: 1px solid #333;
+  box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+  border-radius: 5px;
   width: 100px;
   right: 0;
   gap: 10px 0;

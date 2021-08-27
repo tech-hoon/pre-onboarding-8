@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { CREATOR_NAME } from 'utils/config';
+import { WRITER_LIST } from 'utils/config';
 import { MdClose } from 'react-icons/md';
 import { TodoTypes } from 'components';
 interface DropDownProps {
@@ -40,7 +40,7 @@ const Modal: React.FC<DropDownProps> = ({
           <MdClose onClick={closeModal} />
         </Header>
         <Content>
-          {CREATOR_NAME.map((name: string | any, index) => (
+          {WRITER_LIST.map((name: string | any, index) => (
             <div key={index}>
               <Input
                 type="checkbox"
@@ -115,6 +115,9 @@ const ResultButton = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+  color: #24272a;
+  border: 1px solid #dfdfdf;
+  background-color: #fafbfd;
   padding: 0.6rem 2.6rem;
 
   :hover {

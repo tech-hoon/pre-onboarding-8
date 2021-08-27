@@ -2,17 +2,18 @@ import TodoContainer from './todos/TodoContainer';
 import TodoHeader from './todos/TodoHeader';
 import TodoItem from './todos/TodoItem';
 import TodoList from './todos/TodoList';
-import CreateButton from './common/CreateButton';
+
+import CreateButton from './common/container/CreateButton';
 import { Filter, FilterDropDown, FilterModal } from './common/filter';
+import CreateForm from './common/form/CreateForm';
+import FormButtons from './common/form/FormButtons';
+import FormTextArea from './common/form/FormTextArea';
+import UpdateForm from './common/form/UpdateForm';
+import Header from './common/header/Header';
+import Radio from './common/form/Radio';
+import RadioBox from './common/form/RadioBox';
+import DeleteButton from './common/container/DeleteButton';
 import InputForm from './common/InputForm';
-import Header from './common/Header';
-import Radio from './common/Radio';
-import RadioBox from './common/RadioBox';
-import DeleteButton from './common/DeleteButton';
-import CreateForm from './common/CreateForm';
-import FormButtons from './common/FormButtons';
-import FormTextArea from './common/FormTextArea';
-import UpdateForm from './common/UpdateForm';
 
 export {
   TodoContainer,

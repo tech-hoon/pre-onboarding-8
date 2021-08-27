@@ -15,9 +15,4 @@ export const STATUS: Status = {
   Done: '완료',
 };
 
-export const filter: FilterOption = {
-  createDate: '생성일',
-  creator: '생성자',
-};
-
-export const CREATOR_NAME = ['남주', '택훈', '진수', '삭'];
+export const WRITER_LIST = ['남주', '택훈', '진수', '삭'];

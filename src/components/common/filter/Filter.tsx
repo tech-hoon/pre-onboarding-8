@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { MdFilterList } from 'react-icons/md';
 import { FilterDropDown } from 'components';
@@ -17,7 +17,6 @@ interface DropDownProps {
 
 const Filter: React.FC<DropDownProps> = ({
   status,
-  todoItems,
   dropOpen,
   filterOpen,
   creatorChecked,

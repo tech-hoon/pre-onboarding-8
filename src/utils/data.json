@@ -44,71 +44,71 @@
     "taskName": "자소서 쓰기",
     "status": "할 일",
     "creator": "진수",
-    "createdAt": "2021-01-11",
-    "updatedAt": "2021-07-07"
+    "createdAt": "2021.01.11",
+    "updatedAt": "2021.07.07"
   },
   {
     "id": 7,
     "taskName": "할일 7",
     "status": "할 일",
     "creator": "택훈",
-    "createdAt": "2021-02-09",
-    "updatedAt": "2021-07-07"
+    "createdAt": "2021.02.09",
+    "updatedAt": "2021.07.07"
   },
   {
     "id": 8,
     "taskName": "자소서 쓰기",
     "status": "진행 중",
     "creator": "진수",
-    "createdAt": "2021-07-11",
-    "updatedAt": "2021-07-07"
+    "createdAt": "2021.07.11",
+    "updatedAt": "2021.07.07"
   },
   {
     "id": 9,
     "taskName": "자소서 쓰기",
     "status": "진행 중",
     "creator": "진수",
-    "createdAt": "2021-06-11",
-    "updatedAt": "2021-07-07"
+    "createdAt": "2021.06.11",
+    "updatedAt": "2021.07.07"
   },
   {
     "id": 10,
     "status": "완료",
     "taskName": "자소서 쓰기",
     "creator": "삭",
-    "createdAt": "2021-02-03",
-    "updatedAt": "2021-07-04"
+    "createdAt": "2021.02.03",
+    "updatedAt": "2021.07.04"
   },
   {
     "id": 11,
     "status": "할 일",
     "taskName": "자소서 쓰기",
     "creator": "삭",
-    "createdAt": "2021-12-03",
-    "updatedAt": "2021-07-04"
+    "createdAt": "2021.12.03",
+    "updatedAt": "2021.07.04"
   },
   {
     "id": 12,
     "status": "할 일",
     "taskName": "자소서 쓰기",
     "creator": "진수",
-    "createdAt": "2021-02-21",
-    "updatedAt": "2021-07-04"
+    "createdAt": "2021.02.21",
+    "updatedAt": "2021.07.04"
   },
   {
     "id": 13,
     "status": "할 일",
     "taskName": "자소서 쓰기",
     "creator": "진수",
-    "createdAt": "2021-08-21",
-    "updatedAt": "2021-07-04"
+    "createdAt": "2021.08.21",
+    "updatedAt": "2021.07.04"
   },
   {
     "id": 14,
     "status": "할 일",
     "taskName": "자소서 쓰기",
     "creator": "택훈",
-    "createdAt": "2021-03-21",
-    "updatedAt": "2021-07-04"
+    "createdAt": "2021.03.21",
+    "updatedAt": "2021.07.04"
   }
 ]

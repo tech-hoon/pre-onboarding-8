@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
-import { CREATOR_NAME } from 'utils/config';
+import { WRITER_LIST } from 'utils/config';
 
 import { RadioBox } from 'components';
 
@@ -39,7 +39,7 @@ const InputForm: React.FC<InputFormProps> = ({ status, setIsVisibleForm, handleT
     <Wrapper>
       <InputFormStyled onSubmit={handleFormSubmit}>
         <TextArea placeholder="Enter a note" value={text} onChange={handleTextAreaChange} />
-        <RadioBox values={CREATOR_NAME} handleRadioChange={handleRadioChange} status={status} />
+        <RadioBox values={WRITER_LIST} handleRadioChange={handleRadioChange} status={status} />
         <ButtonBox>
           <AddButton type="submit" disabled={!text || !creator} transparent={!text || !creator}>
             Add
