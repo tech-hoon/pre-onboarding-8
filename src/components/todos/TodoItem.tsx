@@ -18,7 +18,6 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const [isDoubleClicked, setIsDoubleClicked] = useState(false);
 
   const handleDragStart = (e: React.DragEvent<HTMLElement>) => {
-    const target = e.target as HTMLElement;
     e.dataTransfer.setData(
       'card',
       JSON.stringify({ id, taskName, status, creator, createdAt, updatedAt }),
@@ -28,6 +27,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
 
   const handleDragOverOnCard = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
+    setDragStart(false);
   };
 
   const handleDoubleClick = () => {
@@ -51,7 +51,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
         />
       ) : (
         <Item onDoubleClick={handleDoubleClick}>
-          <TaskName>{taskName}</TaskName>
+          <TaskName>{taskName + id}</TaskName>
           <DeleteButton taskID={id} handleTodoDelete={handleTodoDelete} />
           <p>{creator}</p>
           <p>생성일 {createdAt}</p>

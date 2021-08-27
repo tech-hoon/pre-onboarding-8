@@ -1,76 +1,44 @@
-<<<<<<< HEAD
 import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { TodoItem, TodoTypes } from 'components';
-import { getInsertPlace, appendChild, insertChild } from 'utils/dragNdrop';
-=======
-import React, { Dispatch, SetStateAction } from 'react';
-import styled from 'styled-components';
-import { TodoItem, TodoTypes } from 'components';
-
-// interface ChildNodeId extends ChildNode {
-//   id: string;
-// }
->>>>>>> bb887eb70e30cd0c216aabeecf3e3be7237be29d
+import { getInsertPlace } from 'utils/dragNdrop';
 interface TodoListProps {
   status: string;
   items: TodoTypes[];
-  setItems: Dispatch<SetStateAction<TodoTypes[]>>;
   todoItems: TodoTypes[];
   handleTodoUpdate: (text: string, id: number) => void;
   handleTodoDelete: (taskID: number) => void;
-  handleTodoPosUpdate: (status: string, currentId: string | undefined, clickedId: string) => void;
+  handleTodoPosUpdate: (
+    status: string,
+    currentId: string | undefined,
+    clickedId: string,
+    insertPosition?: string,
+  ) => void;
 }
 
 const TodoList: React.FC<TodoListProps> = ({
   status,
   items,
-  setItems,
   todoItems,
   handleTodoDelete,
   handleTodoUpdate,
   handleTodoPosUpdate,
 }) => {
-  useEffect(() => console.log(items), [items]);
   const handleDrop = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
     const target = e.target as HTMLElement;
-<<<<<<< HEAD
-    //기존클릭한카드
-    const card = JSON.parse(e.dataTransfer.getData('card'));
-    const clickedCard = card ? document.getElementById(`card${card.id}`) : null;
-    if (!clickedCard) return;
-    //새로운 position
+    const clickedCardID = JSON.parse(e.dataTransfer.getData('card')).id;
     const currentCard = target.closest('.card');
-    const currentCardID = Number(currentCard?.id.replace(/[a-zA-Z]/g, ''));
+    const insertPosition = getInsertPlace(currentCard, e.clientY);
 
-    //새로운 position 이동
-    const insertPosition = getInsertPlace(e);
-    if (target === target.closest('.cardlist'))
-      setItems((items) => appendChild(items.slice(), status, card));
-    else
-      setItems((items) => insertChild(items.slice(), status, card, insertPosition, currentCardID));
-=======
-    const card_id = e.dataTransfer.getData('card');
-    const currentCard = target.closest('.card');
-    const clickedCard = card_id ? document.getElementById(card_id) : null;
-
-    if (clickedCard) {
-      handleTodoPosUpdate(status, currentCard?.id, clickedCard.id);
-    }
->>>>>>> bb887eb70e30cd0c216aabeecf3e3be7237be29d
+    handleTodoPosUpdate(status, currentCard?.id, clickedCardID, insertPosition);
   };
 
   const handleDragOverOnColumn = (e: React.DragEvent<HTMLElement>) => e.preventDefault();
 
   return (
     <Wrapper
-<<<<<<< HEAD
       className={`cardlist ${status}`}
-=======
-      id={status}
-      className="cardlist"
->>>>>>> bb887eb70e30cd0c216aabeecf3e3be7237be29d
       onDragOver={handleDragOverOnColumn}
       onDrop={handleDrop}
     >
