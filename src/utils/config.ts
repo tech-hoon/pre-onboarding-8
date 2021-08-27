@@ -9,3 +9,5 @@ export const STATUS: Status = {
   InProgress: '진행 중',
   Done: '완료',
 };
+
+export const WRITER_LIST = ['남주', '택훈', '진수', '삭'];

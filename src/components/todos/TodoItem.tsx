@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { DeleteButton, TodoTypes, UpdateForm } from 'components';
+import { getInsertPlace } from 'utils/dragNdrop';
 
 interface TodoItemProps {
   status: string;
@@ -15,6 +16,8 @@ const TodoItem: React.FC<TodoItemProps> = ({
   handleTodoDelete,
 }) => {
   const [dragStart, setDragStart] = useState(false);
+  const [dragEnter, setEnterDrag] = useState(false);
+  const [onEffect, setEffect] = useState({ up: false, down: false });
   const [isClicked, setIsClicked] = useState(false);
 
   const handleVisibleForm = () => {
@@ -31,8 +34,17 @@ const TodoItem: React.FC<TodoItemProps> = ({
 
   const handleDragOverOnCard = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
+    const target = e.target as HTMLElement;
+    setEnterDrag(true);
+    getInsertPlace(target.closest('.card'), e.clientY) === 'beforebegin'
+      ? setEffect({ up: true, down: false })
+      : setEffect({ up: false, down: true });
     setDragStart(false);
   };
+
+  const handleDragLeave = () => setEnterDrag(false);
+
+  const handleDragDrop = () => setEffect({ up: false, down: false });
 
   return (
     <Wrapper
@@ -40,8 +52,12 @@ const TodoItem: React.FC<TodoItemProps> = ({
       className="card"
       draggable={true}
       dragStart={dragStart}
+      dragEnter={dragEnter}
+      onEffect={onEffect}
       onDragStart={handleDragStart}
       onDragOver={handleDragOverOnCard}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDragDrop}
     >
       {isClicked ? (
         <UpdateForm
@@ -78,12 +94,23 @@ const TodoItem: React.FC<TodoItemProps> = ({
     </Wrapper>
   );
 };
-
+interface Effect {
+  up: boolean;
+  down: boolean;
+}
 interface WrapperProp {
   dragStart: boolean;
+  dragEnter: boolean;
+  onEffect: Effect;
 }
+
 const Wrapper = styled.div<WrapperProp>`
   opacity: ${(props) => (props.dragStart ? 0.5 : 1)};
+  border: 5px solid transparent;
+  border-top: ${(props) =>
+    props.dragEnter && props.onEffect.up && `5px solid ${props.theme.color.SKYBLUE}`};
+  border-bottom: ${(props) =>
+    props.dragEnter && props.onEffect.down && `5px solid ${props.theme.color.SKYBLUE}`};
 `;
 
 const Item = styled.li`
@@ -94,7 +121,6 @@ const Item = styled.li`
   }
   padding: 0px 18px 18px;
   border-radius: 4px;
-  margin: 12px 0;
 `;
 
 const Top = styled.div`
@@ -102,7 +128,7 @@ const Top = styled.div`
   margin-left: 97%;
   padding-top: 3%;
 
-  @media ${({ theme }) => theme.mobile} {
+  @media ${({ theme }) => theme.size.mobile} {
     margin-left: 95%;
     padding-top: 5%;
   }
@@ -117,15 +143,15 @@ const Bottom = styled.div`
   display: flex;
   gap: 8px;
 
-  @media ${({ theme }) => theme.desktop} {
+  @media ${({ theme }) => theme.size.desktop} {
     justify-content: space-between;
   }
 
-  @media ${({ theme }) => theme.tablet} {
+  @media ${({ theme }) => theme.size.tablet} {
     flex-direction: column;
   }
 
-  @media ${({ theme }) => theme.mobile} {
+  @media ${({ theme }) => theme.size.mobile} {
     flex-direction: column;
   }
 `;
@@ -133,41 +159,41 @@ const Bottom = styled.div`
 const BottomRight = styled.div``;
 
 const TaskName = styled.h3`
-  color: ${({ theme }) => theme.BLACK};
+  color: ${({ theme }) => theme.color.BLACK};
   width: 100%;
   font-weight: 500;
   margin-bottom: 12px;
-  @media ${({ theme }) => theme.desktop} {
+  @media ${({ theme }) => theme.size.desktop} {
     font-size: 1.3em;
     line-height: 1.5;
   }
 
-  @media ${({ theme }) => theme.mobile} {
+  @media ${({ theme }) => theme.size.mobile} {
     font-size: 1.1em;
     line-height: 1.3;
   }
 `;
 
 const Creator = styled.h3`
-  color: ${({ theme }) => theme.SKYBLUE};
+  color: ${({ theme }) => theme.color.SKYBLUE};
   font-size: 1em;
 `;
 
 const Date = styled.p`
-  color: ${({ theme }) => theme.GRAY};
+  color: ${({ theme }) => theme.color.GRAY};
   margin-top: 4px;
 
-  @media ${({ theme }) => theme.desktop} {
+  @media ${({ theme }) => theme.size.desktop} {
     font-size: 0.7em;
   }
 
-  @media ${({ theme }) => theme.mobile} {
+  @media ${({ theme }) => theme.size.mobile} {
     font-size: 0.3em;
   }
 `;
 
 const DateLabel = styled.label`
-  @media ${({ theme }) => theme.mobile} {
+  @media ${({ theme }) => theme.size.mobile} {
     display: none;
   }
 `;

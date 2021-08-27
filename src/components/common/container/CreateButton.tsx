@@ -7,9 +7,7 @@ interface CreateButtonProps {
 }
 
 const CreateButton: React.FC<CreateButtonProps> = ({ handleVisibleForm }): JSX.Element => {
-  const handleButtonClick = () => {
-    handleVisibleForm();
-  };
+  const handleButtonClick = () => handleVisibleForm();
 
   return (
     <ButtonStyled onClick={handleButtonClick}>
@@ -24,7 +22,7 @@ const ButtonStyled = styled.button`
   display: flex;
   align-items: center;
 
-  color: ${({ theme }) => theme.ICON_COLOR};
+  color: ${({ theme }) => theme.color.ICON_COLOR};
 `;
 
 export default CreateButton;
