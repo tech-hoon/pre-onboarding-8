@@ -5,7 +5,9 @@ import { STATUS } from './utils/config';
 import { Header, TodoContainer, TodoTypes } from 'components';
 
 const App: React.FC = () => {
-  const { items, handleTodoCreate, handleTodoDelete, handleTodoUpdate } = useTodo();
+  const { items, handleTodoCreate, handleTodoDelete, handleTodoUpdate, handleTodoPosUpdate } =
+    useTodo();
+  console.log(items);
 
   return (
     <Wrapper>
@@ -19,6 +21,7 @@ const App: React.FC = () => {
             handleTodoCreate={handleTodoCreate}
             handleTodoDelete={handleTodoDelete}
             handleTodoUpdate={handleTodoUpdate}
+            handleTodoPosUpdate={handleTodoPosUpdate}
           />
         ))}
       </ContainerWrapper>
