@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import TodoList from './TodoList';
-import TodoHeader from './TodoHeader';
-import Form from 'components/common/Form';
-import { TodoTypes } from 'components/todos/TodoTypes';
+import { TodoHeader, TodoList, Form, TodoTypes } from 'components';
 
 interface TodoContainerProps {
   status: string;
   todoItems: TodoTypes[];
-  handleTodoCreate: () => void;
-  handleTodoDelete: () => void;
+  setItems: Dispatch<SetStateAction<TodoTypes[]>>;
+  handleTodoCreate: (status: string, text: string, creator: string) => void;
+  handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: () => void;
+  handleTodoSort: (status: string) => void;
+  handleTodoCreator: (creators: TodoTypes[]) => void;
 }
 
 const TodoContainer: React.FC<TodoContainerProps> = ({
@@ -19,36 +19,27 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
   handleTodoCreate,
   handleTodoDelete,
   handleTodoUpdate,
+  handleTodoSort,
+  handleTodoCreator,
 }) => {
   const [isVisibleForm, setIsVisibleForm] = useState(false);
 
-  const sortTodoHandle = (
-    a: { createdAt: string | number | Date },
-    b: { createdAt: string | number | Date },
-  ) => {
-    const dateA = new Date(a.createdAt).getTime();
-    const dateB = new Date(b.createdAt).getTime();
-    return dateB > dateA ? 1 : -1;
-  };
-
-  const filterList = (value: any) => {
-    console.log(todoItems.sort(sortTodoHandle));
-    let res;
-    for (const name of value) {
-      res = todoItems.filter((item) => item.creator === name);
-      console.log('value', res);
-    }
-    console.log('res', res);
-  };
+  // const filterList = (value: TodoTypes[]) => {
+  //   const result = value.map((val: TodoTypes) =>
+  //     setItems((prev) => [
+  //       ...prev.filter((todo: any) => todo.creator === val),
+  //     ]),
+  //   );
+  //   return result.flat();
+  // };
 
   return (
     <Wrapper>
       <TodoHeader
         status={status}
         setIsVisibleForm={setIsVisibleForm}
-        todoItems={todoItems}
-        val={filterList}
-        sortTodo={sortTodoHandle}
+        handleTodoSort={handleTodoSort}
+        handleTodoCreator={handleTodoCreator}
       />
       {isVisibleForm && (
         <Form
@@ -62,7 +53,6 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
         todoItems={todoItems}
         handleTodoDelete={handleTodoDelete}
         handleTodoUpdate={handleTodoUpdate}
-        val={filterList}
       />
     </Wrapper>
   );

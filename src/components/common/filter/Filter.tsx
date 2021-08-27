@@ -1,20 +1,17 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { MdFilterList } from 'react-icons/md';
-import FilterDropDown from './FilterDropDown';
+import { FilterDropDown } from 'components';
 import { TodoTypes } from 'components/todos/TodoTypes';
 
 interface DropDownProps {
+  status: string;
   dropOpen: boolean;
-  selectCreator: (string | number)[];
+  selectCreator: TodoTypes[];
   filterOpen: () => void;
   creatorChecked: (checked: boolean, value: string) => void;
-  todoItems: TodoTypes[];
-  val: (value: any) => void;
-  sortTodo: (
-    a: { createdAt: string | number | Date },
-    b: { createdAt: string | number | Date },
-  ) => number;
+  handleTodoSort: (status: string) => void;
+  handleTodoCreator: (creators: TodoTypes[]) => void;
 }
 
 const Filter: React.FC<DropDownProps> = ({
@@ -22,20 +19,20 @@ const Filter: React.FC<DropDownProps> = ({
   filterOpen,
   creatorChecked,
   selectCreator,
-  todoItems,
-  val,
-  sortTodo,
+  handleTodoSort,
+  handleTodoCreator,
 }) => {
   return (
     <Wrapper>
       <MdFilterList size={24} onClick={filterOpen} />
       {dropOpen && (
         <FilterDropDown
+          status={status}
           creatorChecked={creatorChecked}
           selectCreator={selectCreator}
-          todoItems={todoItems}
-          val={val}
-          sortTodo={sortTodo}
+          handleTodoSort={handleTodoSort}
+          filterClose={filterOpen}
+          handleTodoCreator={handleTodoCreator}
         />
       )}
     </Wrapper>

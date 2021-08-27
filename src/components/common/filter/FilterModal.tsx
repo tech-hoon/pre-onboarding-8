@@ -1,19 +1,34 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { CREATOR_NAME } from 'utils/config';
 import { MdClose } from 'react-icons/md';
+import { TodoTypes } from 'components';
 interface DropDownProps {
   creatorChecked: (checked: boolean, value: string) => void;
-  selectCreator: (string | number)[];
-  close: () => void;
-  val: (value: any) => void;
+  selectCreator: TodoTypes[];
+  closeModal: () => void;
+
+  filterClose: () => void;
+  status: string;
+  handleTodoCreator: (creators: TodoTypes[]) => void;
 }
 
-const Modal: React.FC<DropDownProps> = ({ creatorChecked, selectCreator, close, val }) => {
+const Modal: React.FC<DropDownProps> = ({
+  creatorChecked,
+  selectCreator,
+  closeModal,
+  filterClose,
+  handleTodoCreator,
+}) => {
+  const creatorFilterTodo = () => {
+    handleTodoCreator(selectCreator);
+    closeModal();
+    filterClose();
+  };
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //close();
-    val(selectCreator);
+    creatorFilterTodo();
   };
 
   return (
@@ -21,10 +36,10 @@ const Modal: React.FC<DropDownProps> = ({ creatorChecked, selectCreator, close, 
       <Container onSubmit={onSubmit}>
         <Header>
           <h2>생성자 필터 선택</h2>
-          <MdClose onClick={close} />
+          <MdClose onClick={closeModal} />
         </Header>
         <Content>
-          {CREATOR_NAME.map((name, index) => (
+          {CREATOR_NAME.map((name: string | any, index) => (
             <div key={index}>
               <Input
                 type="checkbox"
@@ -100,4 +115,9 @@ const ResultButton = styled.button`
   border: none;
   cursor: pointer;
   padding: 0.6rem 2.6rem;
+
+  :hover {
+    background-color: #8dc997;
+    color: #fff;
+  }
 `;

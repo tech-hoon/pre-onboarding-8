@@ -1,29 +1,23 @@
-import CreateButton from 'components/common/CreateButton';
-import Filter from 'components/common/filter/Filter';
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { TodoTypes } from './TodoTypes';
+import { Filter, CreateButton } from 'components';
 
 interface TodoHeaderProps {
   status: string;
   setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
-  todoItems: TodoTypes[];
-  val: (value: any) => void;
-  sortTodo: (
-    a: { createdAt: string | number | Date },
-    b: { createdAt: string | number | Date },
-  ) => number;
+  handleTodoSort: (status: string) => void;
+  handleTodoCreator: (creators: TodoTypes[]) => void;
 }
 
 const TodoHeader: React.FC<TodoHeaderProps> = ({
   status,
   setIsVisibleForm,
-  todoItems,
-  val,
-  sortTodo,
+  handleTodoSort,
+  handleTodoCreator,
 }) => {
   const [dropOpen, setDropOpen] = useState<boolean>(false);
-  const [selectCreator, setSelectCreator] = useState<(string | number)[]>([]);
+  const [selectCreator, setSelectCreator] = useState<any[]>([]);
 
   const onFilterOpenHandler = () => setDropOpen(!dropOpen);
 
@@ -38,15 +32,16 @@ const TodoHeader: React.FC<TodoHeaderProps> = ({
   return (
     <Wrapper>
       <Title>{status}</Title>
-      <CreateButton status={status} setIsVisibleForm={setIsVisibleForm} />
+
+      <CreateButton setIsVisibleForm={setIsVisibleForm} />
       <Filter
+        status={status}
         dropOpen={dropOpen}
         filterOpen={onFilterOpenHandler}
-        creatorChecked={onCreatorNameCheckedHandler}
         selectCreator={selectCreator}
-        todoItems={todoItems}
-        val={val}
-        sortTodo={sortTodo}
+        creatorChecked={onCreatorNameCheckedHandler}
+        handleTodoSort={handleTodoSort}
+        handleTodoCreator={handleTodoCreator}
       />
     </Wrapper>
   );

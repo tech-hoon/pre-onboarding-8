@@ -1,44 +1,49 @@
 import { TodoTypes } from 'components/todos/TodoTypes';
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import CreatorModal from './FilterModal';
-
+import { sortTodoHandle } from 'utils/sorting';
 interface DropDownProps {
+  status: string;
   creatorChecked: (checked: boolean, value: string) => void;
-  selectCreator: (string | number)[];
-  todoItems: TodoTypes[];
-  val: (value: any) => void;
-  sortTodo: (
-    a: { createdAt: string | number | Date },
-    b: { createdAt: string | number | Date },
-  ) => number;
+  selectCreator: TodoTypes[];
+  handleTodoSort: (status: string) => void;
+  handleTodoCreator: (creators: TodoTypes[]) => void;
+  filterClose: () => void;
 }
 
 const DropDown: React.FC<DropDownProps> = ({
   creatorChecked,
   selectCreator,
-  todoItems,
-  val,
-  sortTodo,
+
+  handleTodoSort,
+  handleTodoCreator,
+  filterClose,
+  status,
 }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const handleModalClick = () => setModalOpen(!modalOpen);
+  const handleModalClick = () => {
+    setModalOpen(!modalOpen);
+  };
 
-  const handleSortClick = () => {
-    todoItems.sort(sortTodo);
+  const sortEvent = () => {
+    handleTodoSort(status);
+    filterClose();
   };
 
   return (
     <FilterOptions>
-      <Value onClick={handleSortClick}>생성일</Value>
+      <Value onClick={sortEvent}>생성일</Value>
       <Value onClick={handleModalClick}>생성자</Value>
       {modalOpen && (
         <CreatorModal
           creatorChecked={creatorChecked}
           selectCreator={selectCreator}
-          close={handleModalClick}
-          val={val}
+          closeModal={handleModalClick}
+          handleTodoCreator={handleTodoCreator}
+          filterClose={filterClose}
+          status={status}
         />
       )}
     </FilterOptions>
@@ -52,7 +57,6 @@ const FilterOptions = styled.div`
   flex-direction: column;
   position: absolute;
   border: 1px solid #333;
-  margin-top: 12px;
   width: 100px;
   right: 0;
   gap: 10px 0;

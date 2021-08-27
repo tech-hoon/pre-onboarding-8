@@ -1,14 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import TodoItem from './TodoItem';
-import { TodoTypes } from './TodoTypes';
+import { TodoItem, TodoTypes } from 'components';
 
 interface TodoListProps {
   status: string;
   todoItems: TodoTypes[];
   handleTodoUpdate: () => void;
-  handleTodoDelete: () => void;
-  val: (value: any) => void;
+  handleTodoDelete: (taskID: number) => void;
 }
 
 const TodoList: React.FC<TodoListProps> = ({
@@ -16,7 +14,6 @@ const TodoList: React.FC<TodoListProps> = ({
   todoItems,
   handleTodoDelete,
   handleTodoUpdate,
-  val,
 }) => {
   return (
     <Wrapper>
@@ -33,6 +30,6 @@ const TodoList: React.FC<TodoListProps> = ({
   );
 };
 
-export default TodoList;
+export default React.memo(TodoList);
 
 const Wrapper = styled.ul``;

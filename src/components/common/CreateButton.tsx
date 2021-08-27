@@ -2,11 +2,10 @@ import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface CreateButtonProps {
-  status: string;
   setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
 }
 
-const CreateButton: React.FC<CreateButtonProps> = ({ status, setIsVisibleForm }) => {
+const CreateButton: React.FC<CreateButtonProps> = ({ setIsVisibleForm }) => {
   const handleButtonClick = () => {
     setIsVisibleForm((prevVisible) => !prevVisible);
   };
