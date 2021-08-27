@@ -10,7 +10,6 @@ interface TodoContainerProps {
   handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: (text: string, id: number) => void;
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: string[], status: string) => void;
   handleTodoPosUpdate: (
     status: string,
     currentId: string | undefined,
@@ -26,7 +25,6 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
   handleTodoDelete,
   handleTodoUpdate,
   handleTodoSort,
-  handleTodoCreator,
   handleTodoPosUpdate,
 }) => {
   const [isVisibleForm, setIsVisibleForm] = useState(false);
@@ -37,35 +35,33 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
   };
 
   const onCreatorNameCheckedHandler = (checked: boolean, value: string) => {
-    if (checked) {
-      setSelectCreator([...selectCreator, value]);
-    } else {
-      setSelectCreator(selectCreator.filter((check) => check !== value));
-    }
+    checked
+      ? setSelectCreator([...selectCreator, value])
+      : setSelectCreator(selectCreator.filter((check) => check !== value));
   };
 
-  const handleFilterd = (creators: string[]) => {
+  const handleFilterdCreator = (creators: string[]) => {
     const result: TodoTypes[][] = [];
     creators.forEach((creator) => {
-      const data = todoItems.filter((item: any) => item.creator === creator);
+      const data = todoItems.filter((item: TodoTypes) => item.creator === creator);
       result.push(data);
     });
-    console.log('result', result.flat());
+    return result.flat();
   };
 
   return (
     <Wrapper>
       <TodoHeader
-        todoItems={todoItems}
-        status={status}
-        selectCreator={selectCreator}
-        handleVisibleForm={handleVisibleForm}
-        handleTodoSort={handleTodoSort}
-        handleFilterd={handleFilterd}
-        handleTodoCreator={handleTodoCreator}
-        onCreatorNameCheckedHandler={onCreatorNameCheckedHandler}
-        setSelectFilter={setSelectFilter}
-        selectFilter={selectFilter}
+        {...{
+          status,
+          todoItems,
+          selectCreator,
+          handleVisibleForm,
+          handleTodoSort,
+          onCreatorNameCheckedHandler,
+          setSelectFilter,
+          selectFilter,
+        }}
       />
       {isVisibleForm && (
         <CreateForm
@@ -75,13 +71,16 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
         />
       )}
       <TodoList
-        status={status}
-        todoItems={todoItems}
-        handleTodoDelete={handleTodoDelete}
-        handleTodoUpdate={handleTodoUpdate}
-        handleTodoPosUpdate={handleTodoPosUpdate}
-        handleFilterd={handleFilterd}
-        setSelectFilter={setSelectFilter}
+        {...{
+          status,
+          todoItems,
+          selectCreator,
+          handleTodoDelete,
+          handleTodoUpdate,
+          handleTodoPosUpdate,
+          handleFilterdCreator,
+          selectFilter,
+        }}
       />
     </Wrapper>
   );

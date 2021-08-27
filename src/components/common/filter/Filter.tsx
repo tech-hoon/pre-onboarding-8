@@ -12,8 +12,6 @@ interface DropDownProps {
   filterOpen: () => void;
   creatorChecked: (checked: boolean, value: string) => void;
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: string[], status: string) => void;
-  handleFilterd: (creators: string[]) => void;
   selectFilter: { date: boolean; creator: boolean };
   setSelectFilter: Dispatch<SetStateAction<{ date: boolean; creator: boolean }>>;
 }
@@ -25,8 +23,6 @@ const Filter: React.FC<DropDownProps> = ({
   creatorChecked,
   selectCreator,
   handleTodoSort,
-  handleTodoCreator,
-  handleFilterd,
   selectFilter,
   setSelectFilter,
 }) => {
@@ -43,14 +39,8 @@ const Filter: React.FC<DropDownProps> = ({
       <MdFilterList size={24} color={handleSelectColor()} onClick={filterOpen} />
       {dropOpen && (
         <FilterDropDown
-          status={status}
-          creatorChecked={creatorChecked}
-          selectCreator={selectCreator}
-          handleTodoSort={handleTodoSort}
+          {...{ status, creatorChecked, selectCreator, handleTodoSort, setSelectFilter }}
           filterClose={filterOpen}
-          handleTodoCreator={handleTodoCreator}
-          handleFilterd={handleFilterd}
-          setSelectFilter={setSelectFilter}
         />
       )}
     </Wrapper>
