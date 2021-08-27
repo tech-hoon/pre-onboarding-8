@@ -29,10 +29,10 @@
 
 ## 💙Who Did What
 
-- 🐥 김남주 : 드래그 앤 드롭 구현
+- 🐥 김남주 : 드래그 앤 드롭
 - 🐷 남택훈 : 아이템 추가/삭제, 스타일링
-- 🐺 백진수 :
-- 🐭 이삭 : 
+- 🐺 백진수 : 아이템 입력폼, 아이템 수정
+- 🐭 이삭 : 필터링
 
 
 <br>
@@ -44,6 +44,7 @@
 $ npm install
 # serve with hot reload at localhost:3000
 $ npm run start
+
 ```
 
 <br>
@@ -51,15 +52,15 @@ $ npm run start
 
 ## ☀Project Link
 
-데모 사이트: https://tech-hoon.github.io/pre-onboarding-8/
-
+데모 링크: https://tech-hoon.github.io/pre-onboarding-8/
 
 <br>
 
-### 화면 스크린샷
 
+## 스크린샷
+
+<img src="https://user-images.githubusercontent.com/19265753/131162233-9dbfa9fd-b9f9-46ca-84f0-7dd4eb88e069.gif"/>
 <div style={display: flex;}>
-   
-<img src="https://lh3.googleusercontent.com/SZzsEhMqItg6XwoNPCnVVkY1SJDMnF4Nz1PG6AEwxpXntoEmRSqb0szNrvYcitjYy6_2xHNg4-VqbapqKJRRpWBnd_g1Kj686F2X6aagI2DStFXj6JRaEVGC6jA1Y7dbIpYAS0yd9mqOrZD6QpaYzIYZagkr9yqPkSXXJ0BovuMZHzb8JrL7E6O3YSZrudNj1KgRhrn-bCJQTlni7ZGTp5MxFFryqs4PiwnfM8fuyz4oQnGyIDa8lXB2GCnbRBrvmf4qJEJcXOzOFzvfWN3PqTJmrSRpjg7LleyTpNX11Cpc1iOaVXMMW8LQfqiifmfbzQrU9tZVuYnomPsIFZrBC1v1buna8sboqST2Lw46W6zZ8-_0XSCPhCvr1Fp4W9NeKeI95DWbS1jTvxqhy815TzOCsowmpGUXaNbmZuVYUrmjFP8QpFgaYhl1CJqMpLl3NVbd3gLXj7HKkH7xN2vC14RNC5uKlw-HVRl1e9CsoEzwG80uRkmndm1Jh3P4AbDG7J8HLyVCcM2FhpLidcQzEDBW5O6Re_drtE2oFf5UvEhX6ZcvS9ENA15JPDSZO6h6uKDO8FuP4zBmiRfTW_fLsQioZNWfgIlJ9ds20OgjesCb70LSvnqJTmhyuCNsDB1whm8l1XCNN1_HpWC08e024nU1OHw11c8WUwgp2j8b8Rq-9gJh_aS8OAjfyTKadBdaupO2WBK1_U6XLJy1usM2JcM=w1448-h952-no?authuser=0" alt="drawing" width="1200"/>
-
+   <img src="https://user-images.githubusercontent.com/19265753/131162733-ab35bbe8-1680-4d44-b2a0-89e7ac485280.png" width="700px"/>
+   <img src="https://user-images.githubusercontent.com/19265753/131162327-c8352ca3-28cd-4ac4-9ea7-f6905e1ce1b5.png" width="240px"/>
 </div>  
