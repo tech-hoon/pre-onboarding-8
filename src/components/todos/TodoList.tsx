@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { TodoItem, TodoTypes } from 'components';
 import { getInsertPlace } from 'utils/dragNdrop';
@@ -13,8 +13,6 @@ interface TodoListProps {
     clickedId: string,
     insertPosition?: string,
   ) => void;
-  handleFilterd: (creators: string[]) => void;
-  setSelectFilter: Dispatch<SetStateAction<{ date: boolean; creator: boolean }>>;
 }
 
 const TodoList: React.FC<TodoListProps> = ({
@@ -23,7 +21,6 @@ const TodoList: React.FC<TodoListProps> = ({
   handleTodoDelete,
   handleTodoUpdate,
   handleTodoPosUpdate,
-  handleFilterd,
 }) => {
   const handleDrop = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();

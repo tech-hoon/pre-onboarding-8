@@ -17,11 +17,11 @@ const HeaderWrapper = styled.h1`
   font-weight: 400;
   box-shadow: rgb(55 53 47 / 16%) 0px 1px 0px;
 
-  @media ${({ theme }) => theme.color.tablet} {
+  @media ${({ theme }) => theme.size.tablet} {
     font-size: 2em;
   }
 
-  @media ${({ theme }) => theme.color.mobile} {
+  @media ${({ theme }) => theme.size.mobile} {
     font-size: 2em;
   }
 `;

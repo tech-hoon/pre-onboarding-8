@@ -1,10 +1,9 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { TodoHeader, TodoList, CreateForm, TodoTypes } from 'components';
 
 interface TodoContainerProps {
   status: string;
-  setItems: Dispatch<SetStateAction<TodoTypes[]>>;
   todoItems: TodoTypes[];
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
@@ -80,8 +79,6 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
         handleTodoDelete={handleTodoDelete}
         handleTodoUpdate={handleTodoUpdate}
         handleTodoPosUpdate={handleTodoPosUpdate}
-        handleFilterd={handleFilterd}
-        setSelectFilter={setSelectFilter}
       />
     </Wrapper>
   );

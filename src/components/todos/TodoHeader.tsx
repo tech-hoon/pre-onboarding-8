@@ -69,7 +69,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media ${({ theme }) => theme.mobile} {
+  @media ${({ theme }) => theme.size.mobile} {
     flex-direction: column;
     align-items: stretch;
   }
@@ -87,11 +87,11 @@ const Right = styled.div`
   display: flex;
   align-items: center;
 
-  @media ${({ theme }) => theme.desktop} {
+  @media ${({ theme }) => theme.size.desktop} {
     gap: 0 4px;
   }
 
-  @media ${({ theme }) => theme.mobile} {
+  @media ${({ theme }) => theme.size.mobile} {
     justify-content: space-between;
     margin-top: 8px;
   }
@@ -99,17 +99,17 @@ const Right = styled.div`
 
 const Title = styled.h2`
   flex: 1;
-  color: ${({ theme }) => theme.BLACK};
+  color: ${({ theme }) => theme.color.BLACK};
   padding: 6px;
   border-radius: 4px;
   background-color: ${(props) => props.color};
 `;
 
 const Count = styled.h2`
-  color: ${({ theme }) => theme.GRAY};
+  color: ${({ theme }) => theme.color.GRAY};
   margin-left: 8px;
 
-  @media ${({ theme }) => theme.mobile} {
+  @media ${({ theme }) => theme.size.mobile} {
     flex-direction: column;
     display: none;
   }

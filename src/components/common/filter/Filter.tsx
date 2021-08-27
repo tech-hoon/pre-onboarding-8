@@ -32,7 +32,7 @@ const Filter: React.FC<DropDownProps> = ({
 }) => {
   const handleSelectColor = () => {
     if (selectFilter.date || selectFilter.creator) {
-      return 'green';
+      return 'red';
     } else {
       return 'black';
     }
@@ -40,7 +40,9 @@ const Filter: React.FC<DropDownProps> = ({
 
   return (
     <Wrapper>
-      <MdFilterList size={24} color={handleSelectColor()} onClick={filterOpen} />
+      <Button onClick={filterOpen}>
+        <MdFilterList size={24} color={handleSelectColor()} />
+      </Button>
       {dropOpen && (
         <FilterDropDown
           status={status}
@@ -63,4 +65,10 @@ const Wrapper = styled.div`
   text-align: right;
   cursor: pointer;
   position: relative;
+`;
+
+const Button = styled.button`
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
