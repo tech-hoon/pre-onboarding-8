@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { TodoHeader, TodoList, CreateForm, TodoTypes } from 'components';
 
@@ -8,7 +8,12 @@ interface TodoContainerProps {
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: (text: string, id: number) => void;
-  handleTodoPosUpdate: (status: string, currentId: string | undefined, clickedId: string) => void;
+  handleTodoPosUpdate: (
+    status: string,
+    currentId: string | undefined,
+    clickedId: string,
+    insertPosition?: string,
+  ) => void;
 }
 
 const TodoContainer: React.FC<TodoContainerProps> = ({
@@ -27,7 +32,7 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
 
   return (
     <Wrapper>
-      <TodoHeader status={status} handleVisibleForm={handleVisibleForm} />
+      <TodoHeader todoItems={todoItems} status={status} handleVisibleForm={handleVisibleForm} />
       {isVisibleForm && (
         <CreateForm
           status={status}

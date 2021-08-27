@@ -7,7 +7,6 @@ import { Header, TodoContainer, TodoTypes } from 'components';
 const App: React.FC = () => {
   const { items, handleTodoCreate, handleTodoDelete, handleTodoUpdate, handleTodoPosUpdate } =
     useTodo();
-  console.log(items);
 
   return (
     <Wrapper>
@@ -40,8 +39,8 @@ const ContainerWrapper = styled.div`
   width: 90%;
   display: flex;
   justify-content: center;
-  gap: 4px 30px;
-  margin: 50px auto;
+  gap: 4px 2%;
+  margin: 38px auto;
 `;
 
 export default App;
