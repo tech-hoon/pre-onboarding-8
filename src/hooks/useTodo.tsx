@@ -47,7 +47,6 @@ const useTodo = (): useTodoType => {
 
   const handleTodoPosUpdate = useCallback(
     (status: string, currentId: string | undefined, clickedId: string, insertPosition?: string) => {
-      console.log(status, currentId, clickedId, insertPosition);
       setItems((prevItems) => updatePosition(prevItems));
 
       const updatePosition = (prevItems: any) => {

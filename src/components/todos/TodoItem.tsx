@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { DeleteButton, TodoTypes, UpdateForm } from 'components';
 import { getInsertPlace } from 'utils/dragNdrop';
@@ -18,7 +18,11 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const [dragStart, setDragStart] = useState(false);
   const [dragEnter, setEnterDrag] = useState(false);
   const [onEffect, setEffect] = useState({ up: false, down: false });
-  const [isDoubleClicked, setIsDoubleClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleVisibleForm = () => {
+    setIsClicked((prevVisible) => !prevVisible);
+  };
 
   const handleDragStart = (e: React.DragEvent<HTMLElement>) => {
     e.dataTransfer.setData(
@@ -30,24 +34,18 @@ const TodoItem: React.FC<TodoItemProps> = ({
 
   const handleDragOverOnCard = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
-    setEnterDrag(true);
     const target = e.target as HTMLElement;
+    setEnterDrag(true);
     getInsertPlace(target.closest('.card'), e.clientY) === 'beforebegin'
       ? setEffect({ up: true, down: false })
       : setEffect({ up: false, down: true });
     setDragStart(false);
   };
 
-  const handleDoubleClick = () => {
-    setIsDoubleClicked((prev) => !prev);
-  };
+  const handleDragLeave = () => setEnterDrag(false);
 
-  const handleDragLeave = () => {
-    setEnterDrag(false);
-  };
-  const handleDragDrop = () => {
-    setEffect({ up: false, down: false });
-  };
+  const handleDragDrop = () => setEffect({ up: false, down: false });
+
   return (
     <Wrapper
       id={`${id}`}
@@ -61,14 +59,15 @@ const TodoItem: React.FC<TodoItemProps> = ({
       onDragLeave={handleDragLeave}
       onDrop={handleDragDrop}
     >
-      {isDoubleClicked ? (
+      {isClicked ? (
         <UpdateForm
-          setIsVisibleForm={setIsDoubleClicked}
+          handleVisibleForm={handleVisibleForm}
           handleTodoUpdate={handleTodoUpdate}
           itemId={id}
+          taskName={taskName}
         />
       ) : (
-        <Item onDoubleClick={handleDoubleClick}>
+        <Item onClick={handleVisibleForm}>
           <Top>
             <DeleteButton taskID={id} handleTodoDelete={handleTodoDelete} />
           </Top>
@@ -199,4 +198,4 @@ const DateLabel = styled.label`
   }
 `;
 
-export default TodoItem;
+export default React.memo(TodoItem);

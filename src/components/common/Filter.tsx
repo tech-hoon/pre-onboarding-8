@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Filter: React.FC = () => {
+const Filter: React.FC = (): JSX.Element => {
   return <div>필터</div>;
 };
 
