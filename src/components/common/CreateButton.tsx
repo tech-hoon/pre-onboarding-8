@@ -1,14 +1,14 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { BsPlus } from 'react-icons/bs';
 
 interface CreateButtonProps {
-  setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
+  handleVisibleForm: () => void;
 }
 
-const CreateButton: React.FC<CreateButtonProps> = ({ setIsVisibleForm }) => {
+const CreateButton: React.FC<CreateButtonProps> = ({ handleVisibleForm }): JSX.Element => {
   const handleButtonClick = () => {
-    setIsVisibleForm((prevVisible) => !prevVisible);
+    handleVisibleForm();
   };
 
   return (

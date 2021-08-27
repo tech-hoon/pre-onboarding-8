@@ -11,9 +11,9 @@ const App: React.FC = () => {
     handleTodoCreate,
     handleTodoDelete,
     handleTodoUpdate,
+    handleTodoPosUpdate,
     handleTodoSort,
     handleTodoCreator,
-    handleTodoPosUpdate
   } = useTodo();
 
   return (
@@ -24,7 +24,6 @@ const App: React.FC = () => {
           <TodoContainer
             key={index}
             status={status}
-            items={items}
             todoItems={targetItems(status, items)}
             setItems={setItems}
             handleTodoCreate={handleTodoCreate}
@@ -33,7 +32,6 @@ const App: React.FC = () => {
             handleTodoSort={handleTodoSort}
             handleTodoCreator={handleTodoCreator}
             handleTodoPosUpdate={handleTodoPosUpdate}
-
           />
         ))}
       </ContainerWrapper>

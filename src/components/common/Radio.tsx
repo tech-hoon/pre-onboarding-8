@@ -7,7 +7,7 @@ interface RadioProps {
   handleRadioChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Radio: React.FC<RadioProps> = ({ value, status, handleRadioChange }) => {
+const Radio: React.FC<RadioProps> = ({ value, status, handleRadioChange }): JSX.Element => {
   return (
     <RadioWrapper>
       <InputStyled

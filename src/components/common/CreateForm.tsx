@@ -1,27 +1,27 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { RadioBox, FormButtons, FormTextArea } from 'components';
 import { useForm } from 'hooks/useForm';
 
 interface CreateFormProps {
   status: string;
-  setIsVisibleForm: Dispatch<SetStateAction<boolean>>;
+  handleVisibleForm: () => void;
   handleTodoCreate: (status: string, text: string, creator: string) => void;
 }
 
-const CreateForm: React.FC<CreateFormProps> = ({ status, setIsVisibleForm, handleTodoCreate }) => {
+const CreateForm: React.FC<CreateFormProps> = ({
+  status,
+  handleVisibleForm,
+  handleTodoCreate,
+}): JSX.Element => {
   const { text, creator, handleRadioChange, handleTextAreaChange } = useForm();
-
-  const handleButtonClick = () => {
-    setIsVisibleForm((prevVisible) => !prevVisible);
-  };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     handleTodoCreate(status, text, creator);
 
-    setIsVisibleForm((prevVisible) => !prevVisible);
+    handleVisibleForm();
   };
 
   return (
@@ -37,7 +37,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ status, setIsVisibleForm, handl
           handleRadioChange={handleRadioChange}
           status={status}
         />
-        <FormButtons text={text} creator={creator} handleButtonClick={handleButtonClick} />
+        <FormButtons text={text} creator={creator} handleButtonClick={handleVisibleForm} />
       </FormStyled>
     </Wrapper>
   );

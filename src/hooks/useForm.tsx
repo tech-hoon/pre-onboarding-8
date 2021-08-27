@@ -1,6 +1,13 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 
-export const useForm = () => {
+interface useFormType {
+  text: string;
+  creator: string;
+  handleRadioChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleTextAreaChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+export const useForm = (): useFormType => {
   const [text, setText] = useState('');
   const [creator, setCreator] = useState('');
 
@@ -11,10 +18,6 @@ export const useForm = () => {
   const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
   };
-
-  //   const handleButtonClick = (setIsVisibleForm: Dispatch<SetStateAction<boolean>>) => {
-  //     setIsVisibleForm((prevVisible) => !prevVisible);
-  //   };
 
   return { text, creator, handleRadioChange, handleTextAreaChange };
 };

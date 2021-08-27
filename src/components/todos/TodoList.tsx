@@ -4,7 +4,6 @@ import { TodoItem, TodoTypes } from 'components';
 import { getInsertPlace } from 'utils/dragNdrop';
 interface TodoListProps {
   status: string;
-  items: TodoTypes[];
   todoItems: TodoTypes[];
   handleTodoUpdate: (text: string, id: number) => void;
   handleTodoDelete: (taskID: number) => void;
@@ -18,7 +17,6 @@ interface TodoListProps {
 
 const TodoList: React.FC<TodoListProps> = ({
   status,
-  items,
   todoItems,
   handleTodoDelete,
   handleTodoUpdate,

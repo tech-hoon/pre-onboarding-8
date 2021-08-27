@@ -8,7 +8,7 @@ interface RadioBoxProps {
   handleRadioChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const RadioBox: React.FC<RadioBoxProps> = ({ values, status, handleRadioChange }) => {
+const RadioBox: React.FC<RadioBoxProps> = ({ values, status, handleRadioChange }): JSX.Element => {
   return (
     <RadioBoxWrapper>
       {values.map((value: string, index: number) => (

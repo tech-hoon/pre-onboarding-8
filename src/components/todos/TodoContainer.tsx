@@ -4,9 +4,8 @@ import { TodoHeader, TodoList, CreateForm, TodoTypes } from 'components';
 
 interface TodoContainerProps {
   status: string;
-  items: TodoTypes[];
-  todoItems: TodoTypes[];
   setItems: Dispatch<SetStateAction<TodoTypes[]>>;
+  todoItems: TodoTypes[];
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: (text: string, id: number) => void;
@@ -22,7 +21,6 @@ interface TodoContainerProps {
 
 const TodoContainer: React.FC<TodoContainerProps> = ({
   status,
-  items,
   todoItems,
   handleTodoCreate,
   handleTodoDelete,
@@ -34,34 +32,28 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
 }) => {
   const [isVisibleForm, setIsVisibleForm] = useState(false);
 
-  // const filterList = (value: TodoTypes[]) => {
-  //   const result = value.map((val: TodoTypes) =>
-  //     setItems((prev) => [
-  //       ...prev.filter((todo: any) => todo.creator === val),
-  //     ]),
-  //   );
-  //   return result.flat();
-  // };
+  const handleVisibleForm = () => {
+    setIsVisibleForm((prevVisible) => !prevVisible);
+  };
 
   return (
     <Wrapper>
       <TodoHeader
         todoItems={todoItems}
         status={status}
-        setIsVisibleForm={setIsVisibleForm}
+        handleVisibleForm={handleVisibleForm}
         handleTodoSort={handleTodoSort}
         handleTodoCreator={handleTodoCreator}
       />
       {isVisibleForm && (
         <CreateForm
           status={status}
-          setIsVisibleForm={setIsVisibleForm}
+          handleVisibleForm={handleVisibleForm}
           handleTodoCreate={handleTodoCreate}
         />
       )}
       <TodoList
         status={status}
-        items={items}
         todoItems={todoItems}
         handleTodoDelete={handleTodoDelete}
         handleTodoUpdate={handleTodoUpdate}
