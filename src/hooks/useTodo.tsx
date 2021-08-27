@@ -82,7 +82,7 @@ const useTodo = (): useTodoType => {
     },
     [],
   );
-  //filter
+
   const handleTodoSort = useCallback(
     (status: string) => {
       const result = [

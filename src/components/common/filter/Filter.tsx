@@ -36,7 +36,9 @@ const Filter: React.FC<DropDownProps> = ({
 
   return (
     <Wrapper>
-      <MdFilterList size={24} color={handleSelectColor()} onClick={filterOpen} />
+      <Button onClick={filterOpen}>
+        <MdFilterList size={24} color={handleSelectColor()} />
+      </Button>
       {dropOpen && (
         <FilterDropDown
           {...{ status, creatorChecked, selectCreator, handleTodoSort, setSelectFilter }}
@@ -53,4 +55,10 @@ const Wrapper = styled.div`
   text-align: right;
   cursor: pointer;
   position: relative;
+`;
+
+const Button = styled.button`
+  &:hover {
+    transform: scale(1.2);
+  }
 `;

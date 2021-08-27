@@ -17,12 +17,14 @@ const CreateButton: React.FC<CreateButtonProps> = ({ handleVisibleForm }): JSX.E
 };
 
 const ButtonStyled = styled.button`
-  font-size: 1.2em;
+  font-size: 1.5em;
   padding: 0px;
   display: flex;
   align-items: center;
-
   color: ${({ theme }) => theme.color.ICON_COLOR};
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 export default CreateButton;
