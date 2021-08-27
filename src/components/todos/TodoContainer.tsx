@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { TodoHeader, TodoList, Form, TodoTypes } from 'components';
+import { TodoHeader, TodoList, InputForm, TodoTypes } from 'components';
 
 interface TodoContainerProps {
   status: string;
@@ -18,12 +18,11 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
   handleTodoUpdate,
 }) => {
   const [isVisibleForm, setIsVisibleForm] = useState(false);
-
   return (
     <Wrapper>
       <TodoHeader todoItems={todoItems} status={status} setIsVisibleForm={setIsVisibleForm} />
       {isVisibleForm && (
-        <Form
+        <InputForm
           status={status}
           setIsVisibleForm={setIsVisibleForm}
           handleTodoCreate={handleTodoCreate}

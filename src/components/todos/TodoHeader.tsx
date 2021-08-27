@@ -34,7 +34,11 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 12px;
+
+  @media ${({ theme }) => theme.mobile} {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 const Left = styled.div`
@@ -45,20 +49,34 @@ const Left = styled.div`
 
 const Right = styled.div`
   display: flex;
-  gap: 0 4px;
+  align-items: center;
+
+  @media ${({ theme }) => theme.desktop} {
+    gap: 0 4px;
+  }
+
+  @media ${({ theme }) => theme.mobile} {
+    justify-content: space-between;
+    margin-top: 8px;
+  }
 `;
 
 const Title = styled.h2`
   flex: 1;
-  color: rgb(55, 53, 47);
+  color: ${({ theme }) => theme.BLACK};
   padding: 6px;
   border-radius: 4px;
   background-color: ${(props) => props.color};
 `;
 
 const Count = styled.h2`
-  color: rgba(55, 53, 47, 0.4);
+  color: ${({ theme }) => theme.GRAY};
   margin-left: 8px;
+
+  @media ${({ theme }) => theme.mobile} {
+    flex-direction: column;
+    display: none;
+  }
 `;
 
 export default TodoHeader;

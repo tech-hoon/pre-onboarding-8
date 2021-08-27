@@ -14,58 +14,131 @@ const TodoItem: React.FC<TodoItemProps> = ({
   handleTodoUpdate,
   handleTodoDelete,
 }) => {
+  const handleDragStart = (e: React.DragEvent<HTMLElement>) => {
+    const target = e.target as HTMLElement;
+    e.dataTransfer.setData('card', target.id);
+  };
+
+  const handleDragOverOnCard = (e: React.DragEvent<HTMLElement>) => {
+    e.preventDefault();
+  };
+
   return (
-    <Wrapper>
+    <Wrapper
+      id={`card${id}`}
+      className="card"
+      draggable={true}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOverOnCard}
+    >
       <Top>
-        <TaskName>{taskName}</TaskName>
         <DeleteButton taskID={id} handleTodoDelete={handleTodoDelete} />
       </Top>
-      <Creator>{creator}</Creator>
+      <Middle>
+        <TaskName>{taskName}</TaskName>
+      </Middle>
       <Bottom>
-        <Date>생성일 {createdAt}</Date>
-        {updatedAt && <Date>수정일 {updatedAt}</Date>}
+        <Creator>{creator}</Creator>
+        <BottomRight>
+          <Date>
+            <DateLabel>생성일 </DateLabel>
+            {createdAt}
+          </Date>
+          {updatedAt && (
+            <Date>
+              <DateLabel>수정일 </DateLabel>
+              {updatedAt}
+            </Date>
+          )}
+        </BottomRight>
       </Bottom>
     </Wrapper>
   );
 };
-
 const Wrapper = styled.li`
   box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
   &:hover {
     background: rgba(55, 53, 47, 0.03);
     cursor: pointer;
   }
-  padding: 14px;
-  margin: 4px 0 10px 0;
+  padding: 0px 18px 18px;
   border-radius: 4px;
+  margin: 12px 0;
 `;
+
 const Top = styled.div`
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
+  margin-left: 97%;
+  padding-top: 3%;
+
+  @media ${({ theme }) => theme.mobile} {
+    margin-left: 95%;
+    padding-top: 5%;
+  }
+`;
+
+const Middle = styled.div`
+  width: 100%;
 `;
 
 const Bottom = styled.div`
   width: 100%;
   display: flex;
-  margin-top: 12px;
+  gap: 8px;
+
+  @media ${({ theme }) => theme.desktop} {
+    justify-content: space-between;
+  }
+
+  @media ${({ theme }) => theme.tablet} {
+    flex-direction: column;
+  }
+
+  @media ${({ theme }) => theme.mobile} {
+    flex-direction: column;
+  }
 `;
 
+const BottomRight = styled.div``;
+
 const TaskName = styled.h3`
-  font-size: 1.2em;
-  line-height: 1.5;
+  color: ${({ theme }) => theme.BLACK};
+  width: 100%;
   font-weight: 500;
-  margin: 6px 0 12px 0;
+  margin-bottom: 12px;
+  @media ${({ theme }) => theme.desktop} {
+    font-size: 1.3em;
+    line-height: 1.5;
+  }
+
+  @media ${({ theme }) => theme.mobile} {
+    font-size: 1.1em;
+    line-height: 1.3;
+  }
 `;
 
 const Creator = styled.h3`
-  color: rgb(101, 171, 218);
-  font-size: 0.8em;
+  color: ${({ theme }) => theme.SKYBLUE};
+  font-size: 1em;
 `;
 
 const Date = styled.p`
-  font-size: 0.7em;
-  color: #999999;
-  margin-left: auto;
+  color: ${({ theme }) => theme.GRAY};
+  margin-top: 4px;
+
+  @media ${({ theme }) => theme.desktop} {
+    font-size: 0.7em;
+  }
+
+  @media ${({ theme }) => theme.mobile} {
+    font-size: 0.3em;
+  }
+`;
+
+const DateLabel = styled.label`
+  @media ${({ theme }) => theme.mobile} {
+    display: none;
+  }
 `;
 
 export default TodoItem;
