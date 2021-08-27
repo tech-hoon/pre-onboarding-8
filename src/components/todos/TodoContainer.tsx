@@ -8,6 +8,7 @@ interface TodoContainerProps {
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: (text: string, id: number) => void;
+  handleTodoPosUpdate: (status: string, currentId: string | undefined, clickedId: string) => void;
 }
 
 const TodoContainer: React.FC<TodoContainerProps> = ({
@@ -16,6 +17,7 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
   handleTodoCreate,
   handleTodoDelete,
   handleTodoUpdate,
+  handleTodoPosUpdate,
 }) => {
   //인풋창visible
   const [isVisibleForm, setIsVisibleForm] = useState(false);
@@ -34,6 +36,7 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
         todoItems={todoItems}
         handleTodoDelete={handleTodoDelete}
         handleTodoUpdate={handleTodoUpdate}
+        handleTodoPosUpdate={handleTodoPosUpdate}
       />
     </Wrapper>
   );

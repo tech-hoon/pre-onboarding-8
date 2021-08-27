@@ -31,7 +31,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
 
   return (
     <Wrapper
-      id={`card${id}`}
+      id={`${id}`}
       className="card"
       draggable={true}
       onDragStart={handleDragStart}
