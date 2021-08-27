@@ -7,7 +7,7 @@ interface FormButtons {
   handleButtonClick: () => void;
 }
 
-const FormButtons: React.FC<FormButtons> = ({ text, creator, handleButtonClick }) => {
+const FormButtons: React.FC<FormButtons> = ({ text, creator, handleButtonClick }): JSX.Element => {
   const isAvailable = creator !== undefined ? !text || !creator : !text;
 
   return (

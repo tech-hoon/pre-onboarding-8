@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { DeleteButton, TodoTypes, UpdateForm } from 'components';
 
@@ -16,6 +16,10 @@ const TodoItem: React.FC<TodoItemProps> = ({
 }) => {
   const [isDoubleClicked, setIsDoubleClicked] = useState(false);
 
+  const handleVisibleForm = () => {
+    setIsDoubleClicked((prevVisible) => !prevVisible);
+  };
+
   const handleDragStart = (e: React.DragEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
     e.dataTransfer.setData('card', target.id);
@@ -23,10 +27,6 @@ const TodoItem: React.FC<TodoItemProps> = ({
 
   const handleDragOverOnCard = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
-  };
-
-  const handleDoubleClick = () => {
-    setIsDoubleClicked((prev) => !prev);
   };
 
   return (
@@ -39,12 +39,13 @@ const TodoItem: React.FC<TodoItemProps> = ({
     >
       {isDoubleClicked ? (
         <UpdateForm
-          setIsVisibleForm={setIsDoubleClicked}
+          handleVisibleForm={handleVisibleForm}
           handleTodoUpdate={handleTodoUpdate}
           itemId={id}
+          taskName={taskName}
         />
       ) : (
-        <Item onDoubleClick={handleDoubleClick}>
+        <Item onDoubleClick={handleVisibleForm}>
           <TaskName>{taskName}</TaskName>
           <DeleteButton taskID={id} handleTodoDelete={handleTodoDelete} />
           <p>{creator}</p>
@@ -67,9 +68,4 @@ const TaskName = styled.h3`
   font-weight: 500;
 `;
 
-const DroppablePlace = styled.div`
-  height: 3px;
-  background-color: aquamarine;
-`;
-
-export default TodoItem;
+export default React.memo(TodoItem);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { TodoHeader, TodoList, CreateForm, TodoTypes } from 'components';
 
@@ -19,15 +19,19 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
   handleTodoUpdate,
   handleTodoPosUpdate,
 }) => {
-  //인풋창visible
   const [isVisibleForm, setIsVisibleForm] = useState(false);
+
+  const handleVisibleForm = () => {
+    setIsVisibleForm((prevVisible) => !prevVisible);
+  };
+
   return (
     <Wrapper>
-      <TodoHeader status={status} setIsVisibleForm={setIsVisibleForm} />
+      <TodoHeader status={status} handleVisibleForm={handleVisibleForm} />
       {isVisibleForm && (
         <CreateForm
           status={status}
-          setIsVisibleForm={setIsVisibleForm}
+          handleVisibleForm={handleVisibleForm}
           handleTodoCreate={handleTodoCreate}
         />
       )}

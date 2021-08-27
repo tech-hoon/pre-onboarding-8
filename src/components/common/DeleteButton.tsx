@@ -6,7 +6,7 @@ interface DeleteButtonProps {
   handleTodoDelete: (taskID: number) => void;
 }
 
-const DeleteButton: React.FC<DeleteButtonProps> = ({ taskID, handleTodoDelete }) => {
+const DeleteButton: React.FC<DeleteButtonProps> = ({ taskID, handleTodoDelete }): JSX.Element => {
   return (
     <Wrapper>
       <Button onClick={() => handleTodoDelete(taskID)}>x</Button>
