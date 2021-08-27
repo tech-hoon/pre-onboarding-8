@@ -7,7 +7,7 @@
 - 새로운 Task 추가/삭제
 - Task 내용 및 상태 변경
 - 스크롤시 Header가 사라지지 않고 화면 상단에 고정
-- Drag and Drop => Task의 순서 및 task 상태 변경.
+- Drag and Drop => Task의 순서 및 task 상태 변경, drag 효과 반영
 - 정렬, 필터링 기능: todo 생성일기준 정렬, todo생성자 기준 필터링 가능
 - 반응형 스타일링
 
