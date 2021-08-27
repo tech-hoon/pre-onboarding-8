@@ -24,7 +24,7 @@ const ButtonStyled = styled.button`
   display: flex;
   align-items: center;
 
-  color: ${({ theme }) => theme.ICON_COLOR};
+  color: ${({ theme }) => theme.color.ICON_COLOR};
 `;
 
 export default CreateButton;
