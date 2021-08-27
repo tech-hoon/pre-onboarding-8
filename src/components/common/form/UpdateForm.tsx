@@ -16,7 +16,7 @@ const UpdateForm: React.FC<UpdateForm> = ({
   itemId,
   taskName,
 }): JSX.Element => {
-  const { text, handleTextAreaChange } = useForm();
+  const { text, handleTextAreaChange } = useForm(taskName);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
