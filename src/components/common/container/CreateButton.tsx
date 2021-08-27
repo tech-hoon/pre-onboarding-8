@@ -7,9 +7,7 @@ interface CreateButtonProps {
 }
 
 const CreateButton: React.FC<CreateButtonProps> = ({ handleVisibleForm }): JSX.Element => {
-  const handleButtonClick = () => {
-    handleVisibleForm();
-  };
+  const handleButtonClick = () => handleVisibleForm();
 
   return (
     <ButtonStyled onClick={handleButtonClick}>

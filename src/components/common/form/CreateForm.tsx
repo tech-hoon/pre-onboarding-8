@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { RadioBox, FormButtons, FormTextArea } from 'components';
 import { useForm } from 'hooks/useForm';
-
+import { WRITER_LIST } from 'utils/config';
 interface CreateFormProps {
   status: string;
   handleVisibleForm: () => void;
@@ -18,9 +18,7 @@ const CreateForm: React.FC<CreateFormProps> = ({
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     handleTodoCreate(status, text, creator);
-
     handleVisibleForm();
   };
 
@@ -32,11 +30,7 @@ const CreateForm: React.FC<CreateFormProps> = ({
           text={text}
           handleTextAreaChange={handleTextAreaChange}
         />
-        <RadioBox
-          values={['남주', '택훈', '진수', '삭']}
-          handleRadioChange={handleRadioChange}
-          status={status}
-        />
+        <RadioBox values={WRITER_LIST} handleRadioChange={handleRadioChange} status={status} />
         <FormButtons text={text} creator={creator} handleButtonClick={handleVisibleForm} />
       </FormStyled>
     </Wrapper>
