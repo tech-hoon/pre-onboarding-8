@@ -14,7 +14,7 @@ const CreateForm: React.FC<CreateFormProps> = ({
   handleVisibleForm,
   handleTodoCreate,
 }): JSX.Element => {
-  const { text, creator, handleRadioChange, handleTextAreaChange } = useForm();
+  const { text, creator, handleRadioChange, handleTextAreaChange } = useForm('');
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

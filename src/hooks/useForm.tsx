@@ -7,8 +7,8 @@ interface useFormType {
   handleTextAreaChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-export const useForm = (): useFormType => {
-  const [text, setText] = useState('');
+export const useForm = (initialText: string): useFormType => {
+  const [text, setText] = useState(initialText);
   const [creator, setCreator] = useState('');
 
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {

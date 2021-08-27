@@ -41,7 +41,7 @@ const Modal: React.FC<DropDownProps> = ({
           <MdClose onClick={closeModal} />
         </Header>
         <Content>
-          {WRITER_LIST.map((name: string | any, index) => (
+          {WRITER_LIST.map((name: string | any, index: number) => (
             <div key={index}>
               <Input
                 type="checkbox"
