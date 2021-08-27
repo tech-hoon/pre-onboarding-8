@@ -35,15 +35,17 @@ const TodoHeader: React.FC<TodoHeaderProps> = ({
       <Right>
         <CreateButton handleVisibleForm={handleVisibleForm} />
         <Filter
-          status={status}
-          dropOpen={dropOpen}
+          {...{
+            status,
+            dropOpen,
+            selectCreator,
+            handleTodoSort,
+            todoItems,
+            selectFilter,
+            setSelectFilter,
+          }}
           filterOpen={onFilterOpenHandler}
-          selectCreator={selectCreator}
           creatorChecked={onCreatorNameCheckedHandler}
-          handleTodoSort={handleTodoSort}
-          todoItems={todoItems}
-          selectFilter={selectFilter}
-          setSelectFilter={setSelectFilter}
         />
       </Right>
     </Wrapper>

@@ -21,15 +21,11 @@ const DropDown: React.FC<DropDownProps> = ({
 }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const handleModalClick = () => {
-    setModalOpen(!modalOpen);
-    // setSelectFilter({ date: true, creator: false });
-  };
+  const handleModalClick = () => setModalOpen(!modalOpen);
 
   const sortEvent = () => {
     handleTodoSort(status);
     filterClose();
-    // setSelectFilter({ date: true, creator: false });
   };
 
   return (
@@ -38,12 +34,8 @@ const DropDown: React.FC<DropDownProps> = ({
       <Value onClick={handleModalClick}>생성자</Value>
       {modalOpen && (
         <FilterModal
-          creatorChecked={creatorChecked}
-          setSelectFilter={setSelectFilter}
-          selectCreator={selectCreator}
+          {...{ creatorChecked, setSelectFilter, selectCreator, filterClose }}
           closeModal={handleModalClick}
-          filterClose={filterClose}
-          status={status}
         />
       )}
     </FilterOptions>

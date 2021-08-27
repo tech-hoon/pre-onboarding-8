@@ -39,12 +39,8 @@ const Filter: React.FC<DropDownProps> = ({
       <MdFilterList size={24} color={handleSelectColor()} onClick={filterOpen} />
       {dropOpen && (
         <FilterDropDown
-          status={status}
-          creatorChecked={creatorChecked}
-          selectCreator={selectCreator}
-          handleTodoSort={handleTodoSort}
+          {...{ status, creatorChecked, selectCreator, handleTodoSort, setSelectFilter }}
           filterClose={filterOpen}
-          setSelectFilter={setSelectFilter}
         />
       )}
     </Wrapper>

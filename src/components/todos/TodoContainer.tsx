@@ -35,12 +35,11 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
   };
 
   const onCreatorNameCheckedHandler = (checked: boolean, value: string) => {
-    if (checked) {
-      setSelectCreator([...selectCreator, value]);
-    } else {
-      setSelectCreator(selectCreator.filter((check) => check !== value));
-    }
+    checked
+      ? setSelectCreator([...selectCreator, value])
+      : setSelectCreator(selectCreator.filter((check) => check !== value));
   };
+
   const handleFilterdCreator = (creators: string[]) => {
     const result: TodoTypes[][] = [];
     creators.forEach((creator) => {
@@ -53,14 +52,16 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
   return (
     <Wrapper>
       <TodoHeader
-        todoItems={todoItems}
-        status={status}
-        selectCreator={selectCreator}
-        handleVisibleForm={handleVisibleForm}
-        handleTodoSort={handleTodoSort}
-        onCreatorNameCheckedHandler={onCreatorNameCheckedHandler}
-        setSelectFilter={setSelectFilter}
-        selectFilter={selectFilter}
+        {...{
+          status,
+          todoItems,
+          selectCreator,
+          handleVisibleForm,
+          handleTodoSort,
+          onCreatorNameCheckedHandler,
+          setSelectFilter,
+          selectFilter,
+        }}
       />
       {isVisibleForm && (
         <CreateForm
@@ -70,15 +71,16 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
         />
       )}
       <TodoList
-        status={status}
-        todoItems={todoItems}
-        handleTodoDelete={handleTodoDelete}
-        handleTodoUpdate={handleTodoUpdate}
-        handleTodoPosUpdate={handleTodoPosUpdate}
-        handleFilterdCreator={handleFilterdCreator}
-        setSelectFilter={setSelectFilter}
-        selectFilter={selectFilter}
-        selectCreator={selectCreator}
+        {...{
+          status,
+          todoItems,
+          selectCreator,
+          handleTodoDelete,
+          handleTodoUpdate,
+          handleTodoPosUpdate,
+          handleFilterdCreator,
+          selectFilter,
+        }}
       />
     </Wrapper>
   );

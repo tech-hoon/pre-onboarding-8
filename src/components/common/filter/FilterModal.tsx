@@ -9,12 +9,10 @@ interface DropDownProps {
   selectCreator: string[];
   closeModal: () => void;
   filterClose: () => void;
-  status: string;
   setSelectFilter: Dispatch<SetStateAction<{ date: boolean; creator: boolean }>>;
 }
 
 const Modal: React.FC<DropDownProps> = ({
-  status,
   creatorChecked,
   selectCreator,
   closeModal,

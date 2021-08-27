@@ -15,7 +15,6 @@ interface TodoListProps {
   ) => void;
   handleFilterdCreator: (creators: string[]) => TodoTypes[];
   selectFilter: { date: boolean; creator: boolean };
-  setSelectFilter: Dispatch<SetStateAction<{ date: boolean; creator: boolean }>>;
   selectCreator: string[];
 }
 
@@ -27,7 +26,6 @@ const TodoList: React.FC<TodoListProps> = ({
   handleTodoPosUpdate,
   handleFilterdCreator,
   selectFilter,
-  setSelectFilter,
   selectCreator,
 }) => {
   const [viewItem, setViewItems] = useState(todoItems);
@@ -42,7 +40,6 @@ const TodoList: React.FC<TodoListProps> = ({
     }
   }, [selectFilter]);
 
-  console.log(todoItems, viewItem);
   const handleDrop = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
     const target = e.target as HTMLElement;
