@@ -60,6 +60,7 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
           onCreatorNameCheckedHandler,
           setSelectFilter,
           selectFilter,
+          handleFilterdCreator,
         }}
       />
       {isVisibleForm && (
