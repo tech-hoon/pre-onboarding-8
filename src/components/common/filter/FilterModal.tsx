@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { WRITER_LIST } from 'utils/config';
 import { MdClose } from 'react-icons/md';
 import { TodoTypes } from 'components';
+
 interface DropDownProps {
   creatorChecked: (checked: boolean, value: string) => void;
   selectCreator: string[];
   closeModal: () => void;
   filterClose: () => void;
   status: string;
-  handleTodoCreator: (creators: string[], status: string) => void;
-  handleFilterd: (creators: string[]) => void;
+  setSelectFilter: Dispatch<SetStateAction<{ date: boolean; creator: boolean }>>;
 }
 
 const Modal: React.FC<DropDownProps> = ({
@@ -19,18 +19,15 @@ const Modal: React.FC<DropDownProps> = ({
   selectCreator,
   closeModal,
   filterClose,
-  handleTodoCreator,
-  handleFilterd,
+  setSelectFilter,
 }) => {
-  const creatorFilterTodo = () => {
-    handleTodoCreator(selectCreator, status);
-    closeModal();
-    filterClose();
-  };
-
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    creatorFilterTodo();
+    if (selectCreator.length === WRITER_LIST.length)
+      setSelectFilter({ date: false, creator: false });
+    else setSelectFilter({ date: false, creator: true });
+    closeModal();
+    filterClose();
   };
 
   return (
@@ -41,7 +38,7 @@ const Modal: React.FC<DropDownProps> = ({
           <MdClose onClick={closeModal} />
         </Header>
         <Content>
-          {WRITER_LIST.map((name: string | any, index: number) => (
+          {WRITER_LIST.map((name: string, index: number) => (
             <div key={index}>
               <Input
                 type="checkbox"

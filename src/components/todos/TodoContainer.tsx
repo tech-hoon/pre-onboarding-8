@@ -10,7 +10,6 @@ interface TodoContainerProps {
   handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: (text: string, id: number) => void;
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: string[], status: string) => void;
   handleTodoPosUpdate: (
     status: string,
     currentId: string | undefined,
@@ -26,7 +25,6 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
   handleTodoDelete,
   handleTodoUpdate,
   handleTodoSort,
-  handleTodoCreator,
   handleTodoPosUpdate,
 }) => {
   const [isVisibleForm, setIsVisibleForm] = useState(false);
@@ -43,14 +41,13 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
       setSelectCreator(selectCreator.filter((check) => check !== value));
     }
   };
-
-  const handleFilterd = (creators: string[]) => {
+  const handleFilterdCreator = (creators: string[]) => {
     const result: TodoTypes[][] = [];
     creators.forEach((creator) => {
-      const data = todoItems.filter((item: any) => item.creator === creator);
+      const data = todoItems.filter((item: TodoTypes) => item.creator === creator);
       result.push(data);
     });
-    console.log('result', result.flat());
+    return result.flat();
   };
 
   return (
@@ -61,8 +58,6 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
         selectCreator={selectCreator}
         handleVisibleForm={handleVisibleForm}
         handleTodoSort={handleTodoSort}
-        handleFilterd={handleFilterd}
-        handleTodoCreator={handleTodoCreator}
         onCreatorNameCheckedHandler={onCreatorNameCheckedHandler}
         setSelectFilter={setSelectFilter}
         selectFilter={selectFilter}
@@ -80,8 +75,10 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
         handleTodoDelete={handleTodoDelete}
         handleTodoUpdate={handleTodoUpdate}
         handleTodoPosUpdate={handleTodoPosUpdate}
-        handleFilterd={handleFilterd}
+        handleFilterdCreator={handleFilterdCreator}
         setSelectFilter={setSelectFilter}
+        selectFilter={selectFilter}
+        selectCreator={selectCreator}
       />
     </Wrapper>
   );
