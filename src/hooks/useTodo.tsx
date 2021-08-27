@@ -11,7 +11,7 @@ type useTodoType = {
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
   handleTodoSort: (status: string) => void;
-  handleTodoCreator: (creators: TodoTypes[], status: string) => void;
+  handleTodoCreator: (creators: string[], status: string) => void;
   handleTodoUpdate: (text: string, id: number) => void;
   handleTodoPosUpdate: (
     status: string,
@@ -101,7 +101,7 @@ const useTodo = (): useTodoType => {
     [items],
   );
 
-  const handleTodoCreator = useCallback((creators: TodoTypes[], status: string) => {
+  const handleTodoCreator = useCallback((creators: string[], status: string) => {
     const result: TodoTypes[][] = [];
     creators.forEach((creator) => {
       const data = items.filter((item: any) => item.status === status && item.creator === creator);
