@@ -23,11 +23,11 @@ const TodoHeader: React.FC<TodoHeaderProps> = ({ status, todoItems, setIsVisible
   );
 };
 
-function titleColor(status: string): string {
+const titleColor = (status: string): string => {
   if (status === '할 일') return `rgba(255, 0, 26, 0.2)`;
   else if (status === '진행 중') return `rgba(233, 168, 0, 0.2)`;
   else return `rgba(0, 135, 107, 0.2)`;
-}
+};
 
 const Wrapper = styled.div`
   width: 100%;
@@ -39,6 +39,8 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: stretch;
   }
+  padding: 0 4px 16px;
+  box-shadow: rgb(55 53 47 / 16%) 0px 0.4px 0px;
 `;
 
 const Left = styled.div`
