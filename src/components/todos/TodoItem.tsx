@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
-import { DeleteButton, TodoTypes } from 'components';
+import { DeleteButton, TodoTypes, UpdateForm } from 'components';
+
 interface TodoItemProps {
   status: string;
   todoItem: TodoTypes;
-  handleTodoUpdate: () => void;
+  handleTodoUpdate: (text: string, id: number) => void;
   handleTodoDelete: (taskID: number) => void;
 }
 
@@ -14,6 +15,8 @@ const TodoItem: React.FC<TodoItemProps> = ({
   handleTodoDelete,
 }) => {
   const [dragStart, setDragStart] = useState(false);
+  const [isDoubleClicked, setIsDoubleClicked] = useState(false);
+
   const handleDragStart = (e: React.DragEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
     e.dataTransfer.setData(
@@ -27,37 +30,46 @@ const TodoItem: React.FC<TodoItemProps> = ({
     e.preventDefault();
   };
 
-  const handleDragEnd = (e: React.DragEvent<HTMLElement>) => {
-    setDragStart(false);
+  const handleDoubleClick = () => {
+    setIsDoubleClicked((prev) => !prev);
   };
 
   return (
-    <>
-      <Wrapper
-        id={`card${id}`}
-        className="card"
-        draggable={true}
-        dragStart={dragStart}
-        onDragStart={handleDragStart}
-        onDragOver={handleDragOverOnCard}
-        onDragEnd={handleDragEnd}
-      >
-        <TaskName>{taskName + id}</TaskName>
-        <DeleteButton taskID={id} handleTodoDelete={handleTodoDelete} />
-        <p>{creator}</p>
-        <p>생성일 {createdAt}</p>
-        <p>수정일 {updatedAt}</p>
-      </Wrapper>
-    </>
+    <Wrapper
+      id={`${id}`}
+      className="card"
+      draggable={true}
+      dragStart={dragStart}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOverOnCard}
+    >
+      {isDoubleClicked ? (
+        <UpdateForm
+          setIsVisibleForm={setIsDoubleClicked}
+          handleTodoUpdate={handleTodoUpdate}
+          itemId={id}
+        />
+      ) : (
+        <Item onDoubleClick={handleDoubleClick}>
+          <TaskName>{taskName}</TaskName>
+          <DeleteButton taskID={id} handleTodoDelete={handleTodoDelete} />
+          <p>{creator}</p>
+          <p>생성일 {createdAt}</p>
+          <p>수정일 {updatedAt}</p>
+        </Item>
+      )}
+    </Wrapper>
   );
 };
 interface WrapperProp {
   dragStart: boolean;
 }
-const Wrapper = styled.li<WrapperProp>`
+const Wrapper = styled.div<WrapperProp>`
   border: 1px solid blue;
   opacity: ${(props) => (props.dragStart ? 0.5 : 1)};
 `;
+
+const Item = styled.li``;
 
 const TaskName = styled.h3`
   font-size: 18px;
