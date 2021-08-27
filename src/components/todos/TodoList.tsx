@@ -53,7 +53,7 @@ const TodoList: React.FC<TodoListProps> = ({
   );
 };
 
-export default TodoList;
+export default React.memo(TodoList);
 
 const Wrapper = styled.ul`
   padding: 4px;

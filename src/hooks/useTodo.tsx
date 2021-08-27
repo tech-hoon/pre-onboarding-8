@@ -1,13 +1,17 @@
+import { useState, useCallback, Dispatch, SetStateAction } from 'react';
 import { TodoTypes } from 'components';
-import { useState, useCallback } from 'react';
 import { currentDate } from 'utils/date';
 import { currentId } from 'utils/Id';
 import mockData from 'utils/data.json';
+import { sortTodoHandle } from 'utils/sorting';
 
 type useTodoType = {
   items: TodoTypes[];
+  setItems: Dispatch<SetStateAction<TodoTypes[]>>;
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
+  handleTodoSort: (status: string) => void;
+  handleTodoCreator: (creators: TodoTypes[], status: string) => void;
   handleTodoUpdate: (text: string, id: number) => void;
   handleTodoPosUpdate: (
     status: string,
@@ -80,8 +84,42 @@ const useTodo = (): useTodoType => {
     },
     [],
   );
+  //filter
+  const handleTodoSort = useCallback(
+    (status: string) => {
+      const result = [
+        ...items.filter((item) => item.status === status).sort(sortTodoHandle),
+        ...items,
+      ];
+      const sorted = result.reduce(
+        (unique: TodoTypes[], item: TodoTypes) =>
+          unique.includes(item) ? unique : [...unique, item],
+        [],
+      );
+      setItems(sorted);
+    },
+    [items],
+  );
 
-  return { items, handleTodoCreate, handleTodoDelete, handleTodoUpdate, handleTodoPosUpdate };
+  const handleTodoCreator = useCallback((creators: TodoTypes[], status: string) => {
+    const result: TodoTypes[][] = [];
+    creators.forEach((creator) => {
+      const data = items.filter((item: any) => item.status === status && item.creator === creator);
+      result.push(data);
+    });
+    setItems(result.flat());
+  }, []);
+
+  return {
+    items,
+    setItems,
+    handleTodoCreate,
+    handleTodoDelete,
+    handleTodoUpdate,
+    handleTodoSort,
+    handleTodoCreator,
+    handleTodoPosUpdate,
+  };
 };
 
 export default useTodo;

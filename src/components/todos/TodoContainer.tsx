@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { TodoHeader, TodoList, CreateForm, TodoTypes } from 'components';
 
 interface TodoContainerProps {
   status: string;
+  setItems: Dispatch<SetStateAction<TodoTypes[]>>;
   todoItems: TodoTypes[];
   handleTodoCreate: (status: string, text: string, creator: string) => void;
   handleTodoDelete: (taskID: number) => void;
   handleTodoUpdate: (text: string, id: number) => void;
+  handleTodoSort: (status: string) => void;
+  handleTodoCreator: (creators: TodoTypes[], status: string) => void;
   handleTodoPosUpdate: (
     status: string,
     currentId: string | undefined,
@@ -22,6 +25,9 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
   handleTodoCreate,
   handleTodoDelete,
   handleTodoUpdate,
+  handleTodoSort,
+  handleTodoCreator,
+
   handleTodoPosUpdate,
 }) => {
   const [isVisibleForm, setIsVisibleForm] = useState(false);
@@ -32,7 +38,13 @@ const TodoContainer: React.FC<TodoContainerProps> = ({
 
   return (
     <Wrapper>
-      <TodoHeader todoItems={todoItems} status={status} handleVisibleForm={handleVisibleForm} />
+      <TodoHeader
+        todoItems={todoItems}
+        status={status}
+        handleVisibleForm={handleVisibleForm}
+        handleTodoSort={handleTodoSort}
+        handleTodoCreator={handleTodoCreator}
+      />
       {isVisibleForm && (
         <CreateForm
           status={status}
