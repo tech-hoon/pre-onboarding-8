@@ -1,43 +1,43 @@
 [
   {
     "id": 1,
-    "taskName": "자소서 쓰기",
+    "taskName": "할일 1",
     "status": "진행 중",
     "creator": "진수",
-    "createdAt": "2021-02-03",
-    "updatedAt": "2021-07-07"
+    "createdAt": "2021.02.03",
+    "updatedAt": "2021.07.07"
   },
   {
     "id": 2,
-    "taskName": "자소서 쓰기",
+    "taskName": "할일 2",
     "status": "진행 중",
     "creator": "택훈",
-    "createdAt": "2021-02-03",
-    "updatedAt": "2021-07-06"
+    "createdAt": "2021.02.03",
+    "updatedAt": "2021.07.06"
   },
   {
     "id": 3,
-    "taskName": "자소서 쓰기",
+    "taskName": "할일 3",
     "status": "할 일",
     "creator": "남주",
-    "createdAt": "2021-02-03",
-    "updatedAt": "2021-07-05"
+    "createdAt": "2021.02.03",
+    "updatedAt": "2021.07.05"
   },
   {
     "id": 4,
-    "taskName": "자소서 쓰기",
+    "taskName": "할일 4",
     "status": "완료",
     "creator": "삭",
-    "createdAt": "2021-02-03",
-    "updatedAt": "2021-07-04"
+    "createdAt": "2021.02.03",
+    "updatedAt": "2021.07.04"
   },
   {
     "id": 5,
-    "taskName": "자소서 쓰기",
+    "taskName": "할일 5",
     "status": "진행 중",
     "creator": "진수",
-    "createdAt": "2021-02-03",
-    "updatedAt": "2021-07-07"
+    "createdAt": "2021.02.03",
+    "updatedAt": "2021.07.07"
   },
   {
     "id": 6,
@@ -49,7 +49,7 @@
   },
   {
     "id": 7,
-    "taskName": "자소서 쓰기",
+    "taskName": "할일 7",
     "status": "할 일",
     "creator": "택훈",
     "createdAt": "2021-02-09",

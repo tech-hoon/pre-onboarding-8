@@ -13,6 +13,7 @@ const App: React.FC = () => {
     handleTodoUpdate,
     handleTodoSort,
     handleTodoCreator,
+    handleTodoPosUpdate
   } = useTodo();
 
   return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
           <TodoContainer
             key={index}
             status={status}
+            items={items}
             todoItems={targetItems(status, items)}
             setItems={setItems}
             handleTodoCreate={handleTodoCreate}
@@ -30,6 +32,8 @@ const App: React.FC = () => {
             handleTodoUpdate={handleTodoUpdate}
             handleTodoSort={handleTodoSort}
             handleTodoCreator={handleTodoCreator}
+            handleTodoPosUpdate={handleTodoPosUpdate}
+
           />
         ))}
       </ContainerWrapper>
@@ -48,8 +52,8 @@ const ContainerWrapper = styled.div`
   width: 90%;
   display: flex;
   justify-content: center;
-  gap: 4px 30px;
-  margin: 50px auto;
+  gap: 4px 2%;
+  margin: 38px auto;
 `;
 
 export default App;

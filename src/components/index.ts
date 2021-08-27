@@ -9,6 +9,10 @@ import Header from './common/Header';
 import Radio from './common/Radio';
 import RadioBox from './common/RadioBox';
 import DeleteButton from './common/DeleteButton';
+import CreateForm from './common/CreateForm';
+import FormButtons from './common/FormButtons';
+import FormTextArea from './common/FormTextArea';
+import UpdateForm from './common/UpdateForm';
 
 export {
   TodoContainer,
@@ -17,6 +21,10 @@ export {
   TodoList,
   CreateButton,
   DeleteButton,
+  FormButtons,
+  FormTextArea,
+  UpdateForm,
+  CreateForm,
   Filter,
   FilterDropDown,
   FilterModal,
