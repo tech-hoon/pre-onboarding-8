@@ -58,8 +58,8 @@ const TodoList: React.FC<TodoListProps> = ({
 export default TodoList;
 
 const Wrapper = styled.ul`
-  background-color: grey;
-  padding: 10px;
+  padding: 4px;
   height: 500px;
   overflow-y: scroll;
+  overflow-x: hidden;
 `;

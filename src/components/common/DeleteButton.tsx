@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { IoMdClose } from 'react-icons/io';
 
 interface DeleteButtonProps {
   taskID: number;
@@ -8,14 +9,16 @@ interface DeleteButtonProps {
 
 const DeleteButton: React.FC<DeleteButtonProps> = ({ taskID, handleTodoDelete }) => {
   return (
-    <Wrapper>
-      <Button onClick={() => handleTodoDelete(taskID)}>x</Button>
-    </Wrapper>
+    <Button onClick={() => handleTodoDelete(taskID)}>
+      <IoMdClose />
+    </Button>
   );
 };
 
-const Wrapper = styled.div``;
+const Button = styled.button`
+  font-size: 0.8em;
 
-const Button = styled.button``;
+  color: ${({ theme }) => theme.ICON_COLOR};
+`;
 
 export default DeleteButton;
